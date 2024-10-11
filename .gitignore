@@ -2,6 +2,7 @@
 *.pot
 *.pyc
 djangoenv/
+djangovenv/
 __pycache__/
 local_settings.py
 *.db
