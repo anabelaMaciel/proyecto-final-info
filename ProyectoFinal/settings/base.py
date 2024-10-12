@@ -14,7 +14,7 @@ from pathlib import Path
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = os.path.dirname( os.path.dirname (os.path.abspath(__file__)) )
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Quick-start development settings - unsuitable for production
@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'ProyectoFinal.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(os.path.dirname(BASE_DIR) , 'db.sqlite3.db'),
+        'NAME': os.path.join(os.path.dirname(BASE_DIR), 'db.sqlite3.db'),
     }
 }
 
@@ -116,11 +116,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 STATIC_URL = 'static/'
-STATICFILE_DIRS = ( os.path.join( os.path.dirname( BASE_DIR), 'static'  ),)
+STATICFILE_DIRS = (os.path.join(os.path.dirname(BASE_DIR), 'static'),)
 
-#Media = imagenes/audios/videos que vayan surgiendo o creciendo a lo largo de la ejecucion.(por formulario)
-MEDIA=  '/media'
-MEDIA_ROOT = ( os.path.join( os.path.dirname( BASE_DIR), 'media'  ))
+# Media = imagenes/audios/videos que vayan surgiendo o creciendo a lo largo de la ejecucion.(por formulario)
+MEDIA = '/media'
+MEDIA_ROOT = (os.path.join(os.path.dirname(BASE_DIR), 'media'))
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
