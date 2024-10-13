@@ -1,0 +1,165 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   XTech
+  </title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #000;
+            color: #fff;
+        }
+        .header-bg {
+            background-color: #1a1a1a;
+        }
+        .btn-transparent {
+            background-color: transparent;
+            border: 2px solid #28a745;
+            color: #28a745;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 10px;
+        }
+        .card-img-top {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+  </style>
+ </head>
+ <body>
+  <header class="header-bg py-3">
+   <div class="container d-flex flex-wrap justify-content-between align-items-center">
+    <div class="text-white h3 font-weight-bold">
+     X TECH
+    </div>
+    <nav class="d-flex flex-wrap align-items-center">
+     <a class="text-white mx-2" href="#">
+      Home
+     </a>
+     <a class="text-white mx-2" href="#">
+      About
+     </a>
+     <a class="text-white mx-2" href="#">
+      Blog
+     </a>
+     <a class="text-white mx-2" href="#">
+      Contacto
+     </a>
+     <a class="text-white mx-2" href="#">
+      Categorías
+     </a>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center">
+     <button class="btn rounded-pill px-4 btn-success mx-2 my-1">
+      INICIAR SESION
+     </button>
+     <button class="btn rounded-pill px-4 btn-transparent mx-2 my-1">
+      REGISTRARSE
+     </button>
+    </div>
+   </div>
+  </header>
+  
+  <main class="container py-5">
+    {% block content %}
+    <!-- Contenido específico de cada página -->
+    {% endblock %}
+  </main>
+
+  <footer class="bg-gray-800 text-gray-400 py-5">
+   <div class="container">
+    <div class="glass-effect p-4">
+     <div class="row">
+      <div class="col-md-4 mb-4 mb-md-0">
+       <div class="text-white h4 font-weight-bold mb-3">
+        X TECH
+       </div>
+       <ul class="list-unstyled">
+        <li>
+         <a class="text-gray-400" href="#">
+          Home
+         </a>
+        </li>
+        <li>
+         <a class="text-gray-400" href="#">
+          About
+         </a>
+        </li>
+        <li>
+         <a class="text-gray-400" href="#">
+          Blog
+         </a>
+        </li>
+        <li>
+         <a class="text-gray-400" href="#">
+          Contacto
+         </a>
+        </li>
+        <li>
+         <a class="text-gray-400" href="#">
+          Categorías
+         </a>
+        </li>
+       </ul>
+      </div>
+      <div class="col-md-4 mb-4 mb-md-0">
+       <div class="d-flex align-items-center mb-2">
+        <i class="fab fa-whatsapp text-white mr-2">
+        </i>
+        <span>
+         WhatsApp: +123 456 7890
+        </span>
+       </div>
+       <div class="d-flex align-items-center mb-2">
+        <i class="fas fa-envelope text-white mr-2">
+        </i>
+        <span>
+         Mail: info@blogsprout.com
+        </span>
+       </div>
+       <div class="d-flex align-items-center">
+        <i class="fas fa-map-marker-alt text-white mr-2">
+        </i>
+        <span>
+         Ubicación: 123 Travel Street, Wanderland
+        </span>
+       </div>
+      </div>
+      <div class="col-md-4 d-flex justify-content-center justify-content-md-end">
+       <a class="text-gray-400 mx-2" href="#">
+        <i class="fab fa-facebook">
+        </i>
+       </a>
+       <a class="text-gray-400 mx-2" href="#">
+        <i class="fab fa-instagram">
+        </i>
+       </a>
+       <a class="text-gray-400 mx-2" href="#">
+        <i class="fab fa-linkedin">
+        </i>
+       </a>
+      </div>
+     </div>
+    </div>
+    <div class="text-center text-gray-600 mt-4">
+     © 2024 BlogTech. All rights reserved.
+    </div>
+   </div>
+  </footer>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
+  </script>
+ </body>
+</html>
