@@ -2,13 +2,21 @@
 {% block content %}
 {% load static %}
 <div class="container-fluid" style="background-color: #000;">
-    <header class="text-white text-start" style="background-image: url('/static/blog/images/portada.png'); background-repeat: no-repeat; background-position: center center; background-size: cover; padding: 60px 0;">
+    <header class="full-screen-header text-white text-start">
+        <div class="overlay"></div>
         <div class="container">
-            <h1 class="display-6 text-black fw-bold text-black" style="font-size: 1.5rem;">BIENVENIDO AL RINCÓN DE </h1>
-            <h1 class="display-6 text-black fw-bold text-black" style="font-size: 1.5rem;">LAS NOTICIAS TECH, QUE DISFRUTES</h1>
-            <p class="lead text-black fw-bold text-black" >Mantente al día con las últimas novedades.</p>
-            <a href="#ring" class="btn btn-primary btn rounded-pill px-4 mx-2 my-1" style="color: black; background-color: #cddc39; border-color: #cddc39;" onmouseover="this.style.backgroundColor='#a4b42b';" onmouseout="this.style.backgroundColor='#cddc39';">Ir alli</a>        </div>
+            <h1 class="display-6 text-black fw-bold" style="font-size: 1.5rem;">BIENVENIDO AL RINCÓN DE</h1>
+            <h1 class="display-6 text-black fw-bold" style="font-size: 1.5rem;">LAS NOTICIAS TECH, QUE DISFRUTES</h1>
+            <p class="lead text-black fw-bold">Mantente al día con las últimas novedades.</p>
+            <a href="#ring" class="btn btn-primary btn rounded-pill px-4 mx-2 my-1" style="color: black; background-color: #cddc39; border-color: #cddc39;" onmouseover="this.style.backgroundColor='#a4b42b';" onmouseout="this.style.backgroundColor='#cddc39';">Ir alli</a>
+        </div>
     </header>
+    <div class="line-with-button">
+        <div class="lime-line left"></div>
+        <a href="#blog" class="btn btn-lime">Todo sobre el mundo tech en un solo lugar</a>
+        <div class="lime-line right"></div>
+    </div>
+      
     <div id="ring" class="container py-5">
         <h2 class="text-center text-white mb-5">Entérate de todo en nuestro Ring</h2>
         <div class="row">
