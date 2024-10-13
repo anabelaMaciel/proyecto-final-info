@@ -5,3 +5,6 @@ def home(request):
 
 def about_us(request):
     return render(request, 'blog/about.html')
+
+def contactanos(request):
+    return render(request, 'blog/contactanos.html')
