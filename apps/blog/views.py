@@ -8,3 +8,6 @@ def about_us(request):
 
 def contactanos(request):
     return render(request, 'blog/contactanos.html')
+
+def login(request):
+    return render(request, 'blog/login.html')
