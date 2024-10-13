@@ -1,7 +1,69 @@
-{% extends 'base.html' %}
-
+{% extends "base.html" %}
 {% block content %}
-<main class="container py-5">
-    Esta es la Home!!
-</main>
+{% load static %}
+<div class="container-fluid" style="background-color: #000;">
+    <header class="text-white text-start" style="background-image: url('/static/blog/images/portada.png'); background-repeat: no-repeat; background-position: center center; background-size: cover; padding: 60px 0;">
+        <div class="container">
+            <h1 class="display-6 text-black fw-bold text-black" style="font-size: 1.5rem;">BIENVENIDO AL RINCÓN DE </h1>
+            <h1 class="display-6 text-black fw-bold text-black" style="font-size: 1.5rem;">LAS NOTICIAS TECH, QUE DISFRUTES</h1>
+            <p class="lead text-black fw-bold text-black" >Mantente al día con las últimas novedades.</p>
+            <a href="#ring" class="btn btn-primary btn rounded-pill px-4 mx-2 my-1" style="color: black; background-color: #cddc39; border-color: #cddc39;" onmouseover="this.style.backgroundColor='#a4b42b';" onmouseout="this.style.backgroundColor='#cddc39';">Ir alli</a>        </div>
+    </header>
+    <div id="ring" class="container py-5">
+        <h2 class="text-center text-white mb-5">Entérate de todo en nuestro Ring</h2>
+        <div class="row">
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card bg-dark text-white h-100">
+                    <img src="{% static 'blog/images/VR.png'%}" alt="Realidad Virtual">
+                    <div class="card-body">
+                        <h5 class="card-title">¡Bienvenidos a la realidad virtual! 👩‍💻</h5>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin laoreet sollicitudin nulla, sed blandit est varius sit amet.</p>
+                        <a href="#" class="btn btn-secondary">Leer más</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card bg-dark text-white h-100">
+                    <img src="{% static 'blog/images/Robotica.png' %}" alt="Robotica">
+                    <div class="card-body">
+                        <h5 class="card-title">Nuevos avances en el mundo de la robótica</h5>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus dapibus justo non neque vestibulum elementum.</p>
+                        <a href="#" class="btn btn-secondary">Leer más</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card bg-dark text-white h-100">
+                    <img src="/static/images/camera.jpg" class="card-img-top" alt="Modelos Análogos">
+                    <div class="card-body">
+                        <h5 class="card-title">Nuevos modelos análogos Keentone</h5>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam erat volutpat. Curabitur id massa justo.</p>
+                        <a href="#" class="btn btn-secondary">Leer más</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container py-5 text-center text-white" style="background-color: #1a1a1a;">
+        <h3>Disfruta de ser parte de nuestro blog</h3>
+        <p class="lead">Únete ahora, haciendo click aquí</p>
+        <a href="#" class="btn btn-outline-success">REGÍSTRATE</a>
+    </div>
+    <div class="container py-5">
+        <h2 class="text-center text-white mb-5">Conoce a nuestro team</h2>
+        <div class="row text-center">
+            {% for member in team_members %}
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="card bg-dark text-white">
+                        <img src="{{ member.image_url }}" class="card-img-top rounded-circle" alt="{{ member.name }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ member.name }}</h5>
+                            <p class="card-text">{{ member.role }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
 {% endblock %}

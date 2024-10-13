@@ -1,25 +1,34 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block content %}
 <main class="container py-5">
-    <section class="text-center mb-5">
+    <section class="text-center text-justify mb-5">
         <h1 class="display-4 font-weight-bold mb-4">
             Sobre XTech
         </h1>
         <p class="text-muted mb-4">
-            Lorem ipsum dolor sit amet consectetur adipiscing elit nostra mattis vitae arcu. Lorem ipsum dolor sit amet
-            consectetur adipiscing elit nostra.
+            Bienvenido a XTech, tu espacio dedicado a descubrir y explorar las últimas tendencias e innovaciones en el
+            mundo de la tecnología. En un entorno donde los avances ocurren a un ritmo vertiginoso, en XTech te
+            ofrecemos un lugar donde mantenerse al día nunca ha sido tan fácil ni emocionante.
         </p>
         <p class="text-muted mb-4">
-            Lorem ipsum dolor sit amet consectetur adipiscing elit nostra mattis vitae arcu. Lorem ipsum dolor sit amet
-            consectetur adipiscing elit nostra.
+            Aquí encontrarás una amplia variedad de blogs cuidadosamente elaborados, que abordan desde los desarrollos
+            más recientes hasta las ideas más visionarias que están marcando el futuro. Nuestro equipo de expertos
+            apasionados por la tecnología trabaja incansablemente para ofrecerte contenido fresco, actualizado y de alta
+            calidad, que no solo te informe, sino que también te inspire a sumergirte en el mundo tecnológico.
         </p>
         <p class="text-muted">
-            Lorem ipsum dolor sit amet consectetur adipiscing elit nostra mattis vitae arcu. Lorem ipsum dolor sit amet
-            consectetur adipiscing elit nostra.
+            Nuestra misión es conectarte con lo más relevante del panorama actual, desglosando conceptos complejos y
+            mostrando cómo la tecnología está transformando industrias, estilos de vida y la sociedad en general. En
+            XTech, podrás explorar diversas categorías que cubren los avances más emocionantes del presente y el futuro.
+
+            Te invitamos a explorar, aprender y ser parte de esta revolución digital. ¡Bienvenido a XTech, donde el
+            futuro se encuentra con el presente para ofrecerte lo mejor de la tecnología!
         </p>
     </section>
-    
+
     <section>
         <h2 class="h2 font-weight-bold mb-5">
             Nuestro team
@@ -28,19 +37,20 @@
             <!-- Team Member 1 -->
             <div class="col-md-6 col-lg-4 mb-4">
                 <div class="card text-center">
-                    <div class="card-body">
-                        <img alt="Anabela Maciel" class="card-img-top rounded-circle mx-auto mt-4"
-                            src="https://storage.googleapis.com/a1aa/image/IPzWKip1InpnNdmb5DMgZ6GTTYd2TvrqLr4qB21VhJneG8yJA.jpg" />
-                        <h5 class="card-title mt-3">
+                    <div class="card-body custom-card">
+                        <img alt="Anabela Maciel" class="card-img-top rounded-circle mx-3 mt-4"
+                            src="{% static 'blog/images/Yo.png' %}">
+                        <div class="d-flex flex-column align-items-start">
+                            <small class="card-title text-dark mt-3 fw-bold">
                             Anabela Maciel
-                        </h5>
-                        <p class="card-text text-muted">
+                        </small>
+                        <p class="card-text text-start text-muted my-4">
                             Lorem ipsum dolor sit amet consectetur
                         </p>
                         <p class="card-text text-muted">
                             Chaco, Argentina
                         </p>
-                        <div class="d-flex justify-content-center">
+                        <div class="d-flex justify-content-center align-self-end">
                             <a class="text-muted mx-2" href="#">
                                 <i class="fab fa-instagram">
                                 </i>
@@ -53,6 +63,7 @@
                                 <i class="fab fa-linkedin">
                                 </i>
                             </a>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -60,19 +71,20 @@
             <!-- Team Member 2 -->
             <div class="col-md-6 col-lg-4 mb-4">
                 <div class="card text-center">
-                    <div class="card-body">
-                        <img alt="Camila Falchini" class="card-img-top rounded-circle mx-auto mt-4"
-                            src="https://storage.googleapis.com/a1aa/image/eeadydogCzvjBEcfh9u4kEO4TwT3K9ffM2l8UAUZJvjTuBvcC.jpg" />
-                        <h5 class="card-title mt-3">
+                    <div class="card-body custom-card">
+                        <img alt="Camila Falchini" class="card-img-top rounded-circle mx-3 mt-4"
+                            src="{% static 'blog/images/Cami.png' %}">
+                        <div class="d-flex flex-column align-items-start">
+                            <small class="card-title text-dark mt-3 fw-bold">
                             Camila Falchini
-                        </h5>
-                        <p class="card-text text-muted">
+                        </small>
+                        <p class="card-text text-start text-muted my-4">
                             Lorem ipsum dolor sit amet consectetur
                         </p>
                         <p class="card-text text-muted">
                             Chaco, Argentina
                         </p>
-                        <div class="d-flex justify-content-center">
+                        <div class="d-flex justify-content-center align-self-end">
                             <a class="text-muted mx-2" href="#">
                                 <i class="fab fa-instagram">
                                 </i>
@@ -85,6 +97,7 @@
                                 <i class="fab fa-linkedin">
                                 </i>
                             </a>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -92,19 +105,20 @@
             <!-- Team Member 3 -->
             <div class="col-md-6 col-lg-4 mb-4">
                 <div class="card text-center">
-                    <div class="card-body">
-                        <img alt="Nicolas Aguirre" class="card-img-top rounded-circle mx-auto mt-4"
-                            src="https://storage.googleapis.com/a1aa/image/RWy4wwelnRwID6a0OLc0DyfxTVGq810DHCEJO0D4ttr3N4lTA.jpg" />
-                        <h5 class="card-title mt-3">
+                    <div class="card-body custom-card">
+                        <img alt="Nicolas Aguirre" class="card-img-top rounded-circle mx-3 mt-4"
+                            src="{% static 'blog/images/Nico.png' %}">
+                        <div class="d-flex flex-column align-items-start">
+                            <small class="card-title text-dark mt-3 fw-bold">
                             Nicolas Aguirre
-                        </h5>
-                        <p class="card-text text-muted">
+                        </small>
+                        <p class="card-text text-start text-muted my-4">
                             Lorem ipsum dolor sit amet consectetur
                         </p>
                         <p class="card-text text-muted">
                             Chaco, Argentina
                         </p>
-                        <div class="d-flex justify-content-center">
+                        <div class="d-flex justify-content-center align-self-end">
                             <a class="text-muted mx-2" href="#">
                                 <i class="fab fa-instagram">
                                 </i>
@@ -117,6 +131,7 @@
                                 <i class="fab fa-linkedin">
                                 </i>
                             </a>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -124,19 +139,20 @@
             <!-- Team Member 4 -->
             <div class="col-md-6 col-lg-4 mb-4">
                 <div class="card text-center">
-                    <div class="card-body">
-                        <img alt="Pablo Sabadini" class="card-img-top rounded-circle mx-auto mt-4"
-                            src="https://storage.googleapis.com/a1aa/image/0FHWeQfHRXpjzUMiocdlMBXMkt3XtVFUrByYvUaFFkr2N4lTA.jpg" />
-                        <h5 class="card-title mt-3">
+                    <div class="card-body custom-card">
+                        <img alt="Pablo Sabadini" class="card-img-top rounded-circle mx-3 mt-4"
+                            src="{% static 'blog/images/Pablo.png' %}">
+                        <div class="d-flex flex-column align-items-start">
+                            <small class="card-title text-dark mt-3 fw-bold">
                             Pablo Sabadini
-                        </h5>
-                        <p class="card-text text-muted">
+                        </small>
+                        <p class="card-text text-start text-muted my-4">
                             Lorem ipsum dolor sit amet consectetur
                         </p>
                         <p class="card-text text-muted">
                             Chaco, Argentina
                         </p>
-                        <div class="d-flex justify-content-center">
+                        <div class="d-flex justify-content-center align-self-end">
                             <a class="text-muted mx-2" href="#">
                                 <i class="fab fa-instagram">
                                 </i>
@@ -149,6 +165,7 @@
                                 <i class="fab fa-linkedin">
                                 </i>
                             </a>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -156,19 +173,20 @@
             <!-- Team Member 5 -->
             <div class="col-md-6 col-lg-4 mb-4">
                 <div class="card text-center">
-                    <div class="card-body">
-                        <img alt="Eduina Dellamea" class="card-img-top rounded-circle mx-auto mt-4"
-                            src="https://storage.googleapis.com/a1aa/image/yfPpeGhYcAsoeIR0tLT3PBtPSNd2IH1DeIZe7Uydbo4HuBvcC.jpg" />
-                        <h5 class="card-title mt-3">
+                    <div class="card-body custom-card">
+                        <img alt="Eduina Dellamea" class="card-img-top rounded-circle mx-3 mt-4"
+                            src="{% static 'blog/images/Inna.png' %}">
+                        <div class="d-flex flex-column align-items-start">
+                            <small class="card-title text-dark mt-3 fw-bold">
                             Eduina Dellamea
-                        </h5>
-                        <p class="card-text text-muted">
+                        </small>
+                        <p class="card-text text-start text-muted my-4">
                             Lorem ipsum dolor sit amet consectetur
                         </p>
                         <p class="card-text text-muted">
                             Chaco, Argentina
                         </p>
-                        <div class="d-flex justify-content-center">
+                        <div class="d-flex justify-content-center align-self-end">
                             <a class="text-muted mx-2" href="#">
                                 <i class="fab fa-instagram">
                                 </i>
@@ -181,6 +199,7 @@
                                 <i class="fab fa-linkedin">
                                 </i>
                             </a>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -188,19 +207,20 @@
             <!-- Team Member 6 -->
             <div class="col-md-6 col-lg-4 mb-4">
                 <div class="card text-center">
-                    <div class="card-body">
-                        <img alt="Dario Galeano" class="card-img-top rounded-circle mx-auto mt-4"
-                            src="https://storage.googleapis.com/a1aa/image/2vmVYOyffwhd5kBkndY4Js0i6eOIKcIfB4p0Hgwg2ozM3gXOB.jpg" />
-                        <h5 class="card-title mt-3">
-                            Dario Galeano
-                        </h5>
-                        <p class="card-text text-muted">
+                    <div class="card-body custom-card">
+                        <img alt="Dario Merentiel " class="card-img-top rounded-circle mx-3 mt-4"
+                            src="{% static 'blog/images/Dario.png' %}">
+                        <div class="d-flex flex-column align-items-start">
+                            <small class="card-title text-dark mt-3 fw-bold">
+                            Dario Merentiel
+                        </small>
+                        <p class="card-text text-start text-muted my-4">
                             Lorem ipsum dolor sit amet consectetur
                         </p>
                         <p class="card-text text-muted">
                             Chaco, Argentina
                         </p>
-                        <div class="d-flex justify-content-center">
+                        <div class="d-flex justify-content-center align-self-end">
                             <a class="text-muted mx-2" href="#">
                                 <i class="fab fa-instagram">
                                 </i>
@@ -213,6 +233,7 @@
                                 <i class="fab fa-linkedin">
                                 </i>
                             </a>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -220,19 +241,20 @@
             <!-- Team Member 7 -->
             <div class="col-md-6 col-lg-4 mb-4">
                 <div class="card text-center">
-                    <div class="card-body">
-                        <img alt="Ileana Fontana" class="card-img-top rounded-circle mx-auto mt-4"
-                            src="https://storage.googleapis.com/a1aa/image/Dd9uVwseYvxhFqG1QrlfmRehOKZl5VgDLaSoavmwJGVobwLnA.jpg" />
-                        <h5 class="card-title mt-3">
+                    <div class="card-body custom-card">
+                        <img alt="Ilena Fontana" class="card-img-top rounded-circle mx-3 mt-4"
+                            src="{% static 'blog/images/Ille.png' %}">
+                        <div class="d-flex flex-column align-items-start">
+                            <small class="card-title text-dark mt-3 fw-bold">
                             Ileana Fontana
-                        </h5>
-                        <p class="card-text text-muted">
+                        </small>
+                        <p class="card-text text-start text-muted my-4">
                             Lorem ipsum dolor sit amet consectetur
                         </p>
                         <p class="card-text text-muted">
                             Chaco, Argentina
                         </p>
-                        <div class="d-flex justify-content-center">
+                        <div class="d-flex justify-content-center align-self-end">
                             <a class="text-muted mx-2" href="#">
                                 <i class="fab fa-instagram">
                                 </i>
@@ -246,25 +268,27 @@
                                 </i>
                             </a>
                         </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <!-- Team Member 8 -->
             <div class="col-md-6 col-lg-4 mb-4">
                 <div class="card text-center">
-                    <div class="card-body">
-                        <img alt="Roberto Soulmist" class="card-img-top rounded-circle mx-auto mt-4"
-                            src="https://storage.googleapis.com/a1aa/image/9z1CP8WJ0rrAEhPni8l8zOeoCpK9bJ6YH6nsED4bmOy8G8yJA.jpg" />
-                        <h5 class="card-title mt-3">
+                    <div class="card-body custom-card">
+                        <img alt="Ilena Fontana" class="card-img-top rounded-circle mx-3 mt-4"
+                            src="{% static 'blog/images/Robert.png' %}">
+                        <div class="d-flex flex-column align-items-start">
+                            <small class="card-title text-dark mt-3 fw-bold">
                             Roberto Soulmist
-                        </h5>
-                        <p class="card-text text-muted">
+                        </small>
+                        <p class="card-text text-start text-muted my-4">
                             Lorem ipsum dolor sit amet consectetur
                         </p>
                         <p class="card-text text-muted">
                             Chaco, Argentina
                         </p>
-                        <div class="d-flex justify-content-center">
+                        <div class="d-flex justify-content-center align-self-end">
                             <a class="text-muted mx-2" href="#">
                                 <i class="fab fa-instagram">
                                 </i>
@@ -277,6 +301,7 @@
                                 <i class="fab fa-linkedin">
                                 </i>
                             </a>
+                        </div>
                         </div>
                     </div>
                 </div>
