@@ -1,6 +1,8 @@
 from typing import Any
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import UserManager
+
 
 # Create your models here.
 #Categorias
@@ -14,6 +16,8 @@ class Categorias(models.Model):
 #Usuario
 class Usuario_personalizado(AbstractUser):
     fecha_registro = models.DateField(auto_now_add=True)
+    
+    objects = UserManager()
     
     class Meta:
         verbose_name = "Usuario"
