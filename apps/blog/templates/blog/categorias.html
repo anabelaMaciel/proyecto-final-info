@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+    body {
+        background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(0,51,0,1) 100%);
+        color: white;
+        font-family: Arial, sans-serif;
+    }
+
+    .category-container {
+        background-color: #222;
+        border-radius: 15px;
+        padding: 20px;
+        margin-top: 50px;
+        max-width: 1200px; 
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .category-title {
+        color: #FFFF;
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .category-card {
+        border-radius: 10px;
+        overflow: hidden;
+        text-align: center;
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 200px; 
+        background-size: cover;
+        background-position: center;
+    }
+
+    .category-card h5 {
+        margin: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+
+    /* Asegura que las tarjetas ocupen el 100% del espacio disponible en pantallas más grandes */
+    @media (min-width: 768px) {
+        .category-card {
+            height: 250px;
+        }
+    }
+</style>
+
+
+<div class="text-center mt-5">
+    <h1>Categorías disponibles</h1>
+</div>
+<div class="category-container">
+    <div class="text-center mb-4">
+        <h2 class="category-title">Explorar categorías</h2>
+    </div>
+    <div class="row g-3">
+        <div class="col-md-4">
+            <div class="category-card" style="background-image: url('https://placehold.co/300x200');">
+                <h5>Startups y Emprendimiento</h5>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="category-card" style="background-image: url('https://placehold.co/300x200');">
+                <h5>Realidad Aumentada y Virtual</h5>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="category-card" style="background-image: url('https://placehold.co/300x200');">
+                <h5>Desarrollo de Software</h5>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="category-card" style="background-image: url('https://placehold.co/300x200');">
+                <h5>Ciberseguridad</h5>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="category-card" style="background-image: url('https://placehold.co/300x200');">
+                <h5>Tendencias Futuras</h5>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="category-card" style="background-image: url('https://placehold.co/300x200');">
+                <h5>Inteligencia Artificial</h5>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="category-card" style="background-image: url('https://placehold.co/300x200');">
+                <h5>Gadgets y Dispositivos</h5>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="category-card" style="background-image: url('https://placehold.co/300x200');">
+                <h5>Tecnología Verde</h5>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="category-card" style="background-image: url('https://placehold.co/300x200');">
+                <h5>Novedades Tecnológicas</h5>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

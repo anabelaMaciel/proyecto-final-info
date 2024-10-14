@@ -11,6 +11,3 @@ def contactanos(request):
 
 def login(request):
     return render(request, 'blog/login.html')
-
-def register(request):
-    return render(request, 'blog/register.html')
