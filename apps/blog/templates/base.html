@@ -37,6 +37,13 @@
 
         .verde-lima {
             background-color: #88B702 !important;
+            color: #000 !important;
+        }
+
+        .verde-lima:hover {
+            background-color: #9bce4a !important;
+            color: #FFFFFF !important;
+            border-color: #88B702 !important;
         }
 
         .verde-lima-transparent {
@@ -179,12 +186,12 @@
                 <a class="text-white mx-3" href="{% url 'contactanos' %}">
                     <small>Contáctanos</small>
                 </a>
-                <a class="text-white mx-3" href="#">
+                <a class="text-white mx-3" href="{% url 'categorias' %}">
                     <small>Categorías</small>
                 </a>
             </nav>
             <div class="d-flex flex-wrap align-items-center">
-                <a class="btn rounded-pill verde-lima px-4 btn-success mx-2 my-1 text-white !important" href="{% url 'login' %}">
+                <a class="btn rounded-pill verde-lima px-4 btn-success mx-2 my-1 text-black" href="{% url 'login' %}">
                     INICIAR SESION
                 </a>
                 <a class="btn rounded-pill verde-lima-transparent px-4 btn-transparent mx-2 my-1" href="{% url 'register' %}">

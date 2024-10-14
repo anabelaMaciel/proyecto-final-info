@@ -1,41 +1,96 @@
 {% extends "base.html" %}
 {% block content %}
 {% load static %}
-
 <style>
+    html, body {
+        height: 100%; 
+        margin: 0;
+    }
 
     body {
         background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(0,51,0,1) 100%);
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
     }
-</style>    
 
-<div class="container d-flex flex-column align-items-center justify-content-center" style="height: 100vh;">
-    <!-- El logo X TECH -->
-    <div class="text-center mb-4">
-        <h1>X TECH</h1>
-    </div>
+    .main-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-grow: 1;
+        text-align: center;
+    }
 
-    <!-- El título de Iniciar sesión -->
-    <div class="text-center mb-4">
-        <h2>Iniciar sesión</h2>
-    </div>
+    .login-container {
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        padding: 20px;
+        width: 400px;
+        color: #000;
+    }
 
-    <!-- Contenedor que envuelve el formulario para centrarlo bien -->
-    <div class="login-container bg-light p-4 rounded shadow-sm" style="width: 400px; color: black;">
-        <form>
-            <div class="mb-3">
-                <label for="email" class="form-label">Correo:</label>
-                <input type="email" class="form-control" id="email" placeholder="Correo">
+    .login-container .form-control {
+        color: #000;
+    }
+
+    .btn-primary {
+        background-color: #8bc34a;
+        color: white;
+        border: none;
+        border-radius: 20px;
+        padding: 10px 20px;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .btn-primary:hover {
+        background-color: #7cb342;
+    }
+
+    .logo {
+        font-size: 2em;
+        margin-bottom: 10px;
+        color: white;
+    }
+
+    .title {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+        color: white;
+    }
+
+    footer {
+        flex-shrink: 0; 
+        text-align: center;
+        padding: 10px;
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
+        position: relative;
+        width: 100%;
+    }
+</style>
+
+<div class="main-content">
+    <div class="container">
+        <div class="logo">X TECH</div>
+        <div class="title">Iniciar sesión</div>
+        <div class="login-container mx-auto">
+            <form>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Correo:</label>
+                    <input type="email" class="form-control" id="email" placeholder="Correo" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Contraseña:</label>
+                    <input type="password" class="form-control" id="password" placeholder="Contraseña" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+            </form>
+            <div class="mt-3">
+                <p>¿Haz olvidado tu contraseña?</p>
+                <a href="#" class="btn rounded-pill verde-lima-transparent px-4 btn-transparent mx-2 my-1 text-black"> Recuperar contraseña </a>
             </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Contraseña:</label>
-                <input type="password" class="form-control" id="password" placeholder="Contraseña">
-            </div>
-            <button type="submit" class="btn btn-primary w-100">Iniciar sesión</button>
-        </form>
-        <div class="mt-3 text-center">
-            <p>¿Haz olvidado tu contraseña?</p>
-            <a href="#">Recuperar contraseña</a>
         </div>
     </div>
 </div>

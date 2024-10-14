@@ -14,3 +14,6 @@ def login(request):
 
 def register(request):
     return render(request, 'blog/register.html')
+
+def categorias(request):
+    return render(request, 'blog/categorias.html')

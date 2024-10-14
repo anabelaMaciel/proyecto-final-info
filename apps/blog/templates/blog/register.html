@@ -3,7 +3,7 @@
 {% load static %}
 <style>
     html, body {
-        height: 100%; /* Aseguramos que el html y body ocupen toda la altura */
+        height: 100%; 
         margin: 0;
     }
 
@@ -71,7 +71,7 @@
     }
 
     footer {
-        flex-shrink: 0; /* Aseguramos que el footer no se encoge */
+        flex-shrink: 0; 
         text-align: center;
         padding: 10px;
         background-color: rgba(0, 0, 0, 0.8);
@@ -83,22 +83,22 @@
 
 <div class="main-content">
     <div class="container">
-        <div class="logo">XTECH</div>
+        <div class="logo">X TECH</div>
         <div class="title">Crear cuenta</div>
         <div class="card mx-auto">
             <form method="POST" action="{% url 'register' %}">
                 {% csrf_token %}
                 <div class="mb-3">
                     <label for="email" class="form-label">Correo:</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Correo" required>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Contraseña:</label>
-                    <input type="password" class="form-control" id="password" name="password" required>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña" required>
                 </div>
                 <div class="mb-3">
                     <label for="confirm-password" class="form-label">Confirmar contraseña:</label>
-                    <input type="password" class="form-control" id="confirm-password" name="confirm_password" required>
+                    <input type="password" class="form-control" id="confirm-password" name="confirm_password" placeholder="Contraseña" required>
                 </div>
                 <button type="submit" class="btn btn-custom">Crear cuenta</button>
             </form>
