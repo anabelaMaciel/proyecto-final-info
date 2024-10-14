@@ -59,19 +59,98 @@
     </div>
     <div class="container py-5">
         <h2 class="text-center text-white mb-5">Conoce a nuestro team</h2>
-        <div class="row text-center">
-            {% for member in team_members %}
-                <div class="col-md-3 col-6 mb-4">
-                    <div class="card bg-dark text-white">
-                        <img src="{{ member.image_url }}" class="card-img-top rounded-circle" alt="{{ member.name }}">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ member.name }}</h5>
-                            <p class="card-text">{{ member.role }}</p>
-                        </div>
-                    </div>
+        <html>
+            <head>
+                <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet"/>
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+              
+                <style>
+                  body {
+                    background-color: #0d0d0d;
+                    color: white;
+                    font-family: Arial, sans-serif;
+                  }
+                  .header {
+                    background-color: white;
+                    color: black;
+                    text-align: center;
+                    padding: 20px;
+                    border-top: 5px solid #d4ff00;
+                    border-bottom: 5px solid #d4ff00;
+                  }
+                  .header h1 {
+                    font-size: 24px;
+                    margin: 0;
+                  }
+                  .header p {
+                    font-size: 18px;
+                    margin: 10px 0;
+                  }
+                  .header .btn {
+                    background-color: #d4ff00;
+                    color: black;
+                    border: 1px solid #d4ff00;
+                    padding: 5px 10px;
+                    font-size: 16px;
+                    border-radius: 5px;
+                  }
+                  .team-section {
+                    text-align: center;
+                    padding: 50px 0;
+                  }
+                  .team-section h2 {
+                    font-size: 20px;
+                    margin-bottom: 30px;
+                  }
+                  .team-section .team-member {
+                    display: inline-block;
+                    margin: 10px;
+                  }
+                  .team-section .team-member img {
+                    border-radius: 50%;
+                    width: 150px;
+                    height: 150px;
+                  }
+                  .team-section .btn {
+                    background-color: transparent;
+                    color: #d4ff00;
+                    border: 1px solid #d4ff00;
+                    padding: 5px 20px;
+                    font-size: 16px;
+                    border-radius: 5px;
+                    margin-top: 20px;
+                  }
+                </style>
+              </head>
+              <body>
+                <div class="team-section">
+                  <div class="team-member">
+                    <img src="https://storage.googleapis.com/a1aa/image/W4wTHBmrM8pxEl3nQmeZq2HdmOsZujuebtXmXfC2xFWFUdNnA.jpg" alt="Team member 1" data-bs-toggle="tooltip" title="Nombre del miembro 1">
+                  </div>
+                  <div class="team-member">
+                    <img src="https://storage.googleapis.com/a1aa/image/CAYsHzYrVb6lJ5BJQ3UeYtsbpcYaSebKexy2fZGrVbfAR11cC.jpg" alt="Team member 2" data-bs-toggle="tooltip" title="Nombre del miembro 2">
+                  </div>
+                  <div class="team-member">
+                    <img src="https://storage.googleapis.com/a1aa/image/4nD7uNU5BoKEGBx9Ndep9tTHFy9a0GDMXlKJNDvLeBjBqumTA.jpg" alt="Team member 3" data-bs-toggle="tooltip" title="Nombre del miembro 3">
+                  </div>
+                  <div class="team-member">
+                    <img src="https://storage.googleapis.com/a1aa/image/FsGahWEhet01YqxpxrMwFDEEbdXnisSvOGCi71cWN7eEqumTA.jpg" alt="Team member 4" data-bs-toggle="tooltip" title="Nombre del miembro 4">
+                  </div>
+                  <div class="team-member">
+                    <img src="https://storage.googleapis.com/a1aa/image/KfLJ7Jg0AIQ6fkcUSb45cXsvjRq5UAlvbeAqY1C7SRDOUdNnA.jpg" alt="Team member 5" data-bs-toggle="tooltip" title="Nombre del miembro 5">
+                  </div>
+                  <div class="team-member">
+                    <img src="https://storage.googleapis.com/a1aa/image/VpjVjXWsd2IiGVmR4pbH0TTT6ziRyCtpQcJef31v7AfXUdNnA.jpg" alt="Team member 6" data-bs-toggle="tooltip" title="Nombre del miembro 6">
+                  </div>
+                  <div class="team-member">
+                    <img src="https://storage.googleapis.com/a1aa/image/QcnomexE6T1oVabkTweR99PnRfrxljjOKLyvXeqG9Glpo6aOB.jpg" alt="Team member 7" data-bs-toggle="tooltip" title="Nombre del miembro 7">
+                  </div>
+                  <div class="team-member">
+                    <img src="https://storage.googleapis.com/a1aa/image/as4Na7e51h37VyLcruIzbXPYRl20cakNwfQAwdOEMJRFqumTA.jpg" alt="Team member 8" data-bs-toggle="tooltip" title="Nombre del miembro 8">
+                  </div>
+                  <button class="btn">CONOCER</button>
                 </div>
-            {% endfor %}
-        </div>
-    </div>
-</div>
+              </body>
+              </html>
+              
 {% endblock %}
