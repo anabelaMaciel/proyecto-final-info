@@ -27,12 +27,13 @@ class Usuario_personalizado(AbstractUser):
 
 #Post
 class Posts(models.Model):
+    slug = models.CharField(max_length=40, null=True)
     titulo = models.CharField(max_length=40, null=False)
     subtitulo = models.CharField(max_length=100, null=True, blank=True)
     cuerpo = models.TextField(null=False)
     categorias = models.ForeignKey(Categorias, on_delete=models.SET_NULL, null=True, default='sin categoria')
     usuario = models.ForeignKey(Usuario_personalizado, on_delete=models.CASCADE)
-    imagen = models.ImageField(null=True, blank=True, upload_to='media', default='static/post_default.png')
+    imagen = models.ImageField(null=True, blank=True, upload_to='news', default='static/post_default.png')
     fecha_creacion = models.DateField(auto_now_add=True)
     fecha_actualizacion = models.DateTimeField(auto_now=True)
     

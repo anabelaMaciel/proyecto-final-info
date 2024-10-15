@@ -15,12 +15,12 @@
     <style>
         a {
             color: whitesmoke;
-            text-decoration: none;
+            text-decoration: none !important;
         }
 
         a:hover {
             color: #88B702 !important;
-            text-decoration: underline;
+            text-decoration: underline !important;
         }
 
         hr {
@@ -36,6 +36,7 @@
         }
 
         .verde-lima {
+            border-color: #88B702 !important;
             background-color: #88B702 !important;
         }
         
@@ -45,7 +46,7 @@
         }
 
         .header-bg {
-            background-color: #0000;
+            background-color: #000000b0;
         }
 
         .custom-card {
@@ -88,37 +89,6 @@
             padding: 0;
             height: 100%;
             overflow-x: hidden;
-        }
-
-        .full-screen-header {
-            background-image: url('{% static "blog/images/portada.png" %}');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            height: 100vh;/*  el header ocupe toda la altura de la pantalla */
-            width: 100%;/* Asegura que ocupe todo el ancho */
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-align: center;
-        }
-
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1;
-        }
-
-        .full-screen-header .container {
-            position: relative;
-            z-index: 2;
-            /* Asegúrate de que el texto esté sobre la superposición */
         }
 
         /*linea verde lima del html*/
@@ -167,34 +137,6 @@
             font-family: Arial, sans-serif;
         }
 
-        .header {
-            background-color: white;
-            color: black;
-            text-align: center;
-            padding: 20px;
-            border-top: 5px solid #d4ff00;
-            border-bottom: 5px solid #d4ff00;
-        }
-
-        .header h1 {
-            font-size: 24px;
-            margin: 0;
-        }
-
-        .header p {
-            font-size: 18px;
-            margin: 10px 0;
-        }
-
-        .header .btn {
-            background-color: #d4ff00;
-            color: black;
-            border: 1px solid #d4ff00;
-            padding: 5px 10px;
-            font-size: 16px;
-            border-radius: 5px;
-        }
-
          .team-section {
             display: flex;
             flex-direction: column; 
@@ -217,7 +159,6 @@
             margin-right: 30px;
             margin-left: 30px;
         }
-
        
         .row {
             margin-bottom: 40px; 
@@ -227,34 +168,6 @@
             background-color: #0d0d0d;
             color: white;
             font-family: Arial, sans-serif;
-        }
-
-        .header {
-            background-color: white;
-            color: black;
-            text-align: center;
-            padding: 20px;
-            border-top: 5px solid #d4ff00;
-            border-bottom: 5px solid #d4ff00;
-        }
-
-        .header h1 {
-            font-size: 24px;
-            margin: 0;
-        }
-
-        .header p {
-            font-size: 18px;
-            margin: 10px 0;
-        }
-
-        .header .btn {
-            background-color: #d4ff00;
-            color: black;
-            border: 1px solid #d4ff00;
-            padding: 5px 10px;
-            font-size: 16px;
-            border-radius: 5px;
         }
 
         .team-section {
@@ -270,6 +183,17 @@
         .team-section .team-member {
             display: inline-block;
             margin: 10px;
+        }
+        
+        
+        footer {
+            flex-shrink: 0; 
+            text-align: center;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            position: relative;
+            width: 100%;
         }
 
         .team-section .team-member img {
@@ -291,30 +215,39 @@
 
 <body>
 
-    <header class="header-bg py-3">
+    <header class="header-bg">
         <div class="container d-flex flex-wrap justify-content-between align-items-center">
             <div class="text-white h3 font-weight-bold">
-                <a href="/" >
-                    <img src="{% static 'blog/images/Tecnofilos_horizontal.png' %}" alt="Logo de TECNOFILOS" width="200" height="auto">
-                </a>
+                <img class="mt-3" src="{% static 'blog/images/Icono_TF_blanco.ico' %}" alt="Logo de X TECH" width="65" height="auto">
             </div>
-            <nav class="d-flex flex-wrap align-items-center">
-                <a class="btn rounded-pill verde-lima px-4 btn-success mx-2 my-1 text-black !important" href="/">Home</a>
-                <a class="btn rounded-pill verde-lima px-4 btn-success mx-2 my-1 text-black !important" href="{% url 'about-us' %}">Conócenos</a>
-                <a class="btn rounded-pill verde-lima px-4 btn-success mx-2 my-1 text-black !important" href="#">Blog</a>
-                <a class="btn rounded-pill verde-lima px-4 btn-success mx-2 my-1 text-black !important" href="{% url 'contactanos' %}">Contáctanos</a>
-                <a class="btn rounded-pill verde-lima px-4 btn-success mx-2 my-1 text-black !important" href="{% url 'categorias' %}">Categorías</a>
+            <nav class="d-flex small flex-wrap align-items-center">
+                <a class="text-white mx-3" href="/">
+                    <small>Home</small>
+                </a>
+                <a class="text-white mx-3" href="/about">
+                    <small>Conocenos</small>
+                </a>
+                <a class="text-white mx-3" href="/blog">
+                    <small>Blog</small>
+                </a>
+                <a class="text-white mx-3" href="/contactanos">
+                    <small>Contacto</small>
+                </a>
+                <a class="text-white mx-3" href="/categorias">
+                    <small>Categorías</small>
+                </a>
             </nav>
             <div class="d-flex flex-wrap align-items-center">
-                <a class="btn rounded-pill verde-lima px-4 btn-success mx-2 my-1 text-black !important" href="{% url 'login' %}">
-                    INICIAR SESION
-                </a>
-                <a class="btn rounded-pill verde-lima-transparent px-4 btn-transparent mx-2 my-1" href="{% url 'register' %}">
-                    REGISTRARSE
+                <button class="btn rounded-pill verde-lima px-4 btn-success mx-2 my-1">
+                    <b class="small">INICIAR SESION</b>
+                </button>
+                <a href="{% url 'register' %}" class="btn rounded-pill verde-lima-transparent px-4 btn-transparent mx-2 my-1">
+                    <b class="small">REGISTRARSE</b>
                 </a>
             </div>
         </div>
     </header>
+
 
 
     <main class="container py-5">
@@ -332,15 +265,14 @@
             <div class="glass-effect p-5">
                 <div class="col-md-12">
 
-                    <div class="row mb-4 mb-md-0">
+                    <div class="row mb-0 mb-md-0">
                         <div class="text-white h4 font-weight-bold mb-3">
-                            <img src="{% static 'blog/images/logo.png' %}" alt="Logo de X TECH" width="90"
-                                height="auto">
+                        <img class="mt-3" src="{% static 'blog/images/Logo_TF_blanco.png' %}" alt="Logo de X TECH" width="130" height="auto">
                         </div>
                     </div>
 
-                    <div class="row mb-4 mb-md-0">
-                        <div class="col-md-3 mt-5">
+                    <div class="row mb-4 mb-md-0 small">
+                        <div class="col-md-3 mt-3">
                             <small><b>MENU</b></small>
                             <hr class="my-4" />
                             <ul class="list-unstyled row">
@@ -356,19 +288,19 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="text-gray-400" href="categorias">
+                                        <a class="text-gray-400" href="/categorias">
                                             Categorías
                                         </a>
                                     </li>
                                 </div>
                                 <div class="col-md-6">
                                     <li>
-                                        <a class="text-gray-400" href="#">
+                                        <a class="text-gray-400" href="/blog">
                                             Blog
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="text-gray-400" href="contactanos">
+                                        <a class="text-gray-400" href="/contactanos">
                                             Contacto
                                         </a>
                                     </li>

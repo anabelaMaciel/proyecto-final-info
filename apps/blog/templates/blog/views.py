@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Posts, Comentarios
+from .models import Posts
 
 def home(request):
     return render(request, 'blog/home.html')
@@ -11,22 +11,19 @@ def about_us(request):
 
 
 
+def blog_home(request):
+    # Pass the blog post to the template
+    posts = get_object_or_404(Posts)
+    return render(request, 'blog/blogs.html', {'posts': posts})
 
 
+def blog(request, url):
+    # Search for the blog post by its name
+    post = get_object_or_404(Posts, slug=url)  # Adjust 'title' to your model's field
 
+    # Pass the blog post to the template
+    return render(request, 'blog/blog.html', {'post': post})
 
-def blog(request):
-    posts = Posts.objects.all()
-    return render(request, 'blog/blog.html', {'posts': posts})
-
-
-def noticia(request, url):
-    post = get_object_or_404(Posts, slug=url)
-    coms = Comentarios.objects.filter(post=post)
-    return render(request, 'blog/noticia.html', {
-        'post': post, 
-        'comentarios': coms
-    })
 
 
 
