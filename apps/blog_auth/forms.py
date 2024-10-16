@@ -6,13 +6,17 @@ from django.contrib.auth.models import User
 
 class SignUpForm(UserCreationForm):
     class Meta:
-        model = Userfields = ('username',
-                              'email',
-                              'password1',
-                              'password2'
-                              )
+        model = User
+        fields = ('username',
+                  'email',
+                  'password1',
+                  'password2'
+        )
 
-    def clean(self):
+
+
+
+   """ def clean(self):
         data = super().clean()
         password1 = data['password1']
         password2 = data['password2']
@@ -20,4 +24,4 @@ class SignUpForm(UserCreationForm):
         if password1 != password2:
             raise forms.ValidationError('Las contraseñas no coinciden')
 
-        return data
+        return data"""

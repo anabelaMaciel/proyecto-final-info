@@ -30,8 +30,4 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('categorias/', views.categorias, name='categorias'),
 
-    path('like_post/<int:post_id>/', views.like_post, name='like_post'),
-    path('like_comentario/<int:comentario_id>/',
-         views.like_comentario, name='like_comentario'),
-    path('post/<int:post_id>/', views.post_detail, name='post_detail'),
 ]
