@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest
 from django.http import HttpResponse
+from django.http import JsonResponse
 from .models import Posts, Comentarios, Like_comentario, Like_post, Usuario_personalizado
 
 
@@ -72,4 +73,7 @@ def like_comentario(request, comentario_id):
     if not created:
         # Si ya existe un like del usuario, eliminarlo (deshacer el like)
         like.delete()
-    return redirect('post_detail', post_id=comentario.post.id)
+        liked = False
+    else:
+        liked = True
+    return Jsonresponse({'liked': liked, 'total_likes': comentario.likes.count()})
