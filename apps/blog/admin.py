@@ -1,5 +1,4 @@
 from django.contrib import admin
-
 from .models import Categorias, Usuario_personalizado, Posts, Like_post, Comentarios, Like_comentario
 
 class CategoriasAdmin(admin.ModelAdmin):
@@ -20,4 +19,3 @@ admin.site.register(Posts, PostAdmin)
 admin.site.register(Like_post)
 admin.site.register(Comentarios, ComentariosAdmin)
 admin.site.register(Like_comentario)
-
