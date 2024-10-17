@@ -15,7 +15,7 @@
 
 <!-- Botón de like para el post -->
 <div class="my-3">
-    <form action="{% url 'like_post' post.id %}" method="post">
+    <form action="{% url 'Like_post' post.id %}" method="post">
         {% csrf_token %}
         <button type="submit" class="btn btn-outline-primary">
             {% if user.is_authenticated and user in post.like_post_set.all %}
