@@ -1,5 +1,6 @@
 from typing import Any
 from django import class Form
+from .models import Eventos
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -25,3 +26,11 @@ class SignUpForm(UserCreationForm):
             raise forms.ValidationError('Las contraseñas no coinciden')
 
         return data"""
+        
+class EventoForm(forms.ModelForm):
+    
+    class Meta:
+        model = Eventos
+        fields = ['titulo','descripcion','fecha','ubicacion']
+        widgets = {'fecha': forms.DateInput(attrs={'type':'date'}),}
+
