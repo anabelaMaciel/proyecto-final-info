@@ -17,7 +17,7 @@ class SignUpForm(UserCreationForm):
 
 
 
-   """ def clean(self):
+    """ def clean(self):
         data = super().clean()
         password1 = data['password1']
         password2 = data['password2']
