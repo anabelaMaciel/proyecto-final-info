@@ -31,7 +31,7 @@ class Usuario_personalizado(AbstractUser):
 
 # Post
 class Posts(models.Model):
-    slug = models.CharField(max_length=40, null=True)
+    slug = models.CharField(max_length=40, null=True, unique=True)
     titulo = models.CharField(max_length=40, null=False)
     subtitulo = models.CharField(max_length=100, null=True, blank=True)
     cuerpo = models.TextField(null=False)

@@ -14,16 +14,16 @@
 <div>{{ post.cuerpo|safe }}</div>
 
 <!-- Botón de like para el post -->
-<div class="my-3">
-    <form action="{% url 'like_post' post.id %}" method="post">
+<div class="my-3" id="like_post">
+    <form href="#like_post" action="{% url 'like_post' post.id %}" method="post">
         {% csrf_token %}
         <button type="submit" class="btn btn-outline-primary">
-            {% if user.is_authenticated and user in post.like_post_set.all %}
-                Deshacer Me gusta
+            {% if is_like_post %}
+                <i class="fa fa-heart text-danger" aria-hidden="true"></i>
             {% else %}
-                Me gusta
+                <i class="fa fa-heart text-secondary" aria-hidden="true"></i>
             {% endif %}
-            ({{ post.total_likes }})
+            ( {{ total_likes }} )
         </button>
     </form>
 </div>
