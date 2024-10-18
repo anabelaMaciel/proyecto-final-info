@@ -28,7 +28,20 @@ def noticia(request, url):
         'comentarios': coms
     })
 
+# def listar_noticias(request):
+#     category = categorias.GET.get('categoria')
+#     if category:
+#         noticias = Posts.objects.filter(categoria_nombre = category)
+#     else:
+#         noticias = Posts.objects.all()    
 
+#     return render(request, 'blog/listar_noticias.html', {"noticias":noticias})   
+
+#--------------
+
+# <h5><a href="{% url 'apps.blog:listar_noticias?categoria=startups' %}">Startups y Emprendimiento</a></h5> esto va arriba de cada categoria en categorias.html, solo cambia el nombre de la cat
+
+#esto es el query para filtrar
 
 
 
