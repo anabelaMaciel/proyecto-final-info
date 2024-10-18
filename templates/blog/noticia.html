@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h1>Noticias - {{ post.titulo }}</h1>
+
+<div class="d-flex justify-content-center align-items-center w-100 my-5">
+    {% if post.imagen %}
+        <img class="img-fluid rounded" src="{{ post.imagen.url }}" alt="..." height="auto">
+    {% else %}
+        <img class="img-fluid rounded" src="{% static 'post_default.png' %}" alt="..." height="auto">
+    {% endif %}
+</div>
+
+<div>{{ post.cuerpo|safe }}</div>
+
+<!-- Botón de like para el post -->
+<div class="my-3">
+    <form action="{% url 'Like_post' post.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-outline-primary">
+            {% if user.is_authenticated and user in post.like_post_set.all %}
+                Deshacer Me gusta
+            {% else %}
+                Me gusta
+            {% endif %}
+            ({{ post.total_likes }})
+        </button>
+    </form>
+</div>
+
+<hr>
+
+<div class="max-w-4xl mx-auto p-4">
+    <h2 class="text-xl font-semibold mb-4">Seccion de comentarios</h2>
+    {% for comentario in comentarios %}
+        <div class="mb-8">
+            <div class="flex items-start mb-4">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-user-circle text-3xl text-blue-600 mr-2"></i>
+                    <div class="text-sm text-gray-600 ms-2">{{ comentario.usuario.username }} - {{ comentario.fecha_comentario }}</div>
+                </div>
+                <div class="mt-3">
+                    <small class="text-base mt-3">
+                        {{ comentario.contenido }}
+                    </small>
+                </div>
+            </div>
+            
+            <!-- Botón de like para el comentario -->
+            <div class="my-2">
+                <form action="{% url 'like_comentario' comentario.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-secondary">
+                        {% if user.is_authenticated and user in comentario.like_comentario_set.all %}
+                            Deshacer Me gusta
+                        {% else %}
+                            Me gusta
+                        {% endif %}
+                        ({{ comentario.total_likes }})
+                    </button>
+                </form>
+            </div>
+
+            <div class="flex items-center text-gray-600">
+                <i class="mx-1 far fa-heart mr-2"></i>
+                <i class="mx-1 far fa-comment"></i>
+            </div>
+        </div>
+        <hr>
+    {% endfor %}
+</div>
+{% endblock %}
