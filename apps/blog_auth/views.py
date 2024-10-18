@@ -15,7 +15,6 @@ class SignUpView(FormView):
     success_url = reverse_lazy("apps.blog_auth:login")
 
     def form_valid(self, form):
-
         form.save()
         return super().form_valid(form)
 
