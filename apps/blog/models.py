@@ -2,6 +2,7 @@ from typing import Any
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import UserManager
+from django.urls import reverse
 
 
 # Create your models here.
@@ -10,9 +11,11 @@ class Categorias(models.Model):
     nombre = models.CharField(max_length=40, null=False)
     imagen = models.ImageField(upload_to='imagenes/', null=False, blank=False, default='static/post_default.png')
     
-
     def __str__(self):
         return self.nombre
+    
+    def get_absolute_url(self):
+        return reverse('categorias')
 
 
 # Usuario

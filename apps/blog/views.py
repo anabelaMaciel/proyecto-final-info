@@ -84,13 +84,11 @@ class DetalleCategoriasView(DetailView):
     template_name = 'categorias/detalle_categorias.html'
 
 # Editar Categoría
-
-
-class ActualizarCategoriasView(UpdateView):
+class CategoriasUpdateView(UpdateView):
     model = Categorias
-    form_class = CategoriaForm
-    template_name = "categorias/form_categorias.html"
-    success_url = reverse_lazy("lista_categorias")
+    fields = ['nombre']
+    template_categorias = "categorias_form.html"
+    redireccion = reverse_lazy("categorias")
 
 # Eliminar Categoría
 

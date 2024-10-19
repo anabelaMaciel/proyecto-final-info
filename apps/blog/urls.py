@@ -21,7 +21,7 @@ from . import views
 urlpatterns = [
     path('', views.home, name='blog-home'),
     path('about/', views.about_us, name='about-us'),
-    path('like/<int:post_id>/', views.Like_post, name='like_post'),
+    path('like/<int:post_id>/', views.Like_post, name='Like_post'),
     path('like/<int:comentario_id>/',views.Like_comentario, name='like_comentario'),
 
     path('blog/', views.blog, name='blog'),
@@ -31,6 +31,6 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     path('register/', views.register, name='register'),
     path('categorias/', views.categorias, name='categorias'),
- 
+    path('categorias/<int:pk>/editar/', views.CategoriasUpdateView.as_view(), name='editar_categorias'),
 
 ]

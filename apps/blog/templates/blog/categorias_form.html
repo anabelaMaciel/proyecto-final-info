@@ -1,0 +1,16 @@
+
+<!-- #template provisional de formulario de editar categorias -->
+
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2>Editar Categoría</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }} <!-- Esto renderiza los campos del formulario -->
+    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+  </form>
+  <a href="{% url 'categorias' %}" class="btn btn-secondary mt-2">Cancelar</a>
+</div>
+{% endblock %}
