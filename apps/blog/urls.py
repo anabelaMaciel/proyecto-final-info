@@ -22,6 +22,7 @@ urlpatterns = [
     path('', views.home, name='blog-home'),
     path('about/', views.about_us, name='about-us'),
     path('like/<int:post_id>/', views.Like_post, name='like_post'),
+    path('like/<int:comentario_id>/',views.Like_comentario, name='like_comentario'),
 
     path('blog/', views.blog, name='blog'),
     path('blog/<str:url>/', views.noticia, name='noticia'),
@@ -30,5 +31,6 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     path('register/', views.register, name='register'),
     path('categorias/', views.categorias, name='categorias'),
+ 
 
 ]
