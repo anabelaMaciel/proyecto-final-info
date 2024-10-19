@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from . import views
-from .views import LeerCategoriasView, ListarCategoriasView, CrearCategoriasView
+from .views import EditarCategoriasView, CrearCategoriasView, EliminarCategoriasView
 
 urlpatterns = [
     path('', views.home, name='blog-home'),
@@ -33,13 +33,19 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     path('register/', views.register, name='register'),
     path('categorias/', views.categorias, name='categorias'),
-    # Listar Categorias
-    path('categorias/lista', ListarCategoriasView.as_view(),
-         name='listar_categorias'),
-    # Leer Categorias
-    path('<int:pk>/', LeerCategoriasView.as_view(), name='leer_categoria'),
-    # Crear Categorias
-    path('crear/', CrearCategoriasView.as_view(), name='crear_categoria'),
+
+
+
+    # CREAR Categoria
+    path('categorias/crear/', CrearCategoriasView.as_view(), name='crear_categoria'),
+
+    # EDITAR categoria
+    path('categorias/editar/<int:pk>',
+         EditarCategoriasView.as_view(), name='editar_categoria'),
+
+    # ELIMINAR Categoria
+    path('categorias/eliminar/<int:pk>', EliminarCategoriasView.as_view(),
+         name='eliminar_categoria'),
 
 
 ]

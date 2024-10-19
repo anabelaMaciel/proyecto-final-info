@@ -107,6 +107,22 @@
                 <h5>Novedades Tecnológicas</h5>
             </div>
         </div>
+        <div class="btnCrearCategoria">
+            <a class="btn btn-success" href="{% url 'crear_categoria' %}">CREAR</a>
+        </div>
+        {% for categoria in categorias %}
+        <div class="col-md-4">
+            <div class="category-card" style="background-image: url('{{categoria.imagen.url}}');">
+                <h5>{{ categoria.nombre }}</h5>
+            </div>
+            <div class="btnEditarCategoria">
+                <a class="btn btn-success" href="{% url 'editar_categoria' categoria.id %}">EDITAR</a>
+            </div>
+            <div class="btnEliminarCategoria">
+                <a class="btn btn-success" href="{% url 'eliminar_categoria' categoria.id %}">ELIMINAR</a>
+            </div>
+        </div>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}

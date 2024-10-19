@@ -3,8 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.db.models.query import QuerySet
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
-from .models import Posts, Categorias, Comentarios, Like_comentario, Like_post, Usuario_personalizado
-from .forms import CategoriaForm, PostForm, ComentForm
+from .models import Posts, Categorias, Comentarios, Like_comentario, Like_post
+from .forms import CategoriasForm, PostForm, ComentForm
 from django.views.generic import FormView, CreateView, ListView, DetailView, UpdateView, DeleteView
 
 
@@ -52,7 +52,8 @@ def register(request):
 
 
 def categorias(request):
-    return render(request, 'blog/categorias.html')
+    todas_categorias = Categorias.objects.all()
+    return render(request, 'blog/categorias.html', {"categorias": todas_categorias})
 
 
 # @login_required
@@ -79,57 +80,32 @@ def like_comentario(request, comentario_id):
 # CRUD de Categorías, Posts y Comentarios
 # con CBV
 
-# Filtrar Categorías por Título
-
-
-class ListarCategoriasView(ListView):
-    model = Categorias
-    template_name = 'categorias_list.html'
-    context_object_name = 'categorias'
-    paginate_by = 6
-
-    def get_queryset(self):
-        query = self.request.GET.get("nombre")
-        queryset = super().get_queryset()
-
-        if query:
-            queryset = queryset.filter(nombre__icontains=query)
-
-        return queryset.order_by('nombre')
 
 # Crear Categorías
 
-
 class CrearCategoriasView(CreateView):
     model = Categorias
-    form_class = CategoriaForm
-    template_name = 'categorias/form_categorias.html'
-    success_url = reverse_lazy('listar_categorias')
+    form_class = CategoriasForm
+    template_name = 'blog/form_categorias.html'
+    success_url = reverse_lazy('categorias')
 
-# Leer Categoría
-
-
-class LeerCategoriasView(DetailView):
-    model = Categorias
-    context_object_name = 'categorias'
-    template_name = 'categorias/leer_categorias.html'
 
 # Editar Categoría
 
 
 class EditarCategoriasView(UpdateView):
     model = Categorias
-    form_class = CategoriaForm
-    template_name = "categorias/form_categorias.html"
-    success_url = reverse_lazy("lista_categorias")
+    form_class = CategoriasForm
+    template_name = "blog/form_categorias.html"
+    success_url = reverse_lazy('categorias')
 
 # Eliminar Categoría
 
 
 class EliminarCategoriasView(DeleteView):
     model = Categorias
-    template_name = "categorias/confirmacion_eliminacion.html"
-    success_url = reverse_lazy("lista_categorias")
+    template_name = "blog/form_eliminar.html"
+    success_url = reverse_lazy("categorias")
 
 # Filtrar Posts por Título
 
@@ -156,24 +132,16 @@ class CrearPostsView(CreateView):
     model = Posts
     form_class = PostForm
     template_name = 'posts/form_posts.html'
-    success_url = reverse_lazy('lista_posts')
-
-# Leer Posts
-
-
-class DetallePostsView(DetailView):
-    model = Posts
-    context_object_name = 'Posts'
-    template_name = 'posts/detalle_posts.html'
+    success_url = reverse_lazy('posts')
 
 # Editar Posts
 
 
-class ActualizarPostsView(UpdateView):
+class EditarPostsView(UpdateView):
     model = Posts
     form_class = PostForm
     template_name = "posts/form_posts.html"
-    success_url = reverse_lazy("lista_posts")
+    success_url = reverse_lazy("posts")
 
 # Eliminar Posts
 
@@ -206,7 +174,7 @@ class ListarComentariosView(ListView):
 
 class CrearComentariosView(CreateView):
     model = Comentarios
-    form_class = CategoriaForm
+    form_class = ComentForm
     template_name = 'comentarios/form_comentarios.html'
     success_url = reverse_lazy('lista_comentarios')
 

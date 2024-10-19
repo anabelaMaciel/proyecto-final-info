@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.forms import ModelForm
 from django import forms
 from .models import Comentarios, Categorias, Posts
-from django.http import request
 
 # En nuestra clase Meta definimos el modelo, con el cual va a interactuar nuestro formulario
 # y los campos que vamos a permitir que completen los usuarios
@@ -10,7 +9,7 @@ from django.http import request
 
 # Formulario de Categorias
 
-class CategoriaForm(forms.ModelForm):
+class CategoriasForm(forms.ModelForm):
     class Meta:
         model = Categorias
         fields = ['nombre', 'imagen']
@@ -21,14 +20,14 @@ def listar_categorias(request):
 
     # Manejar el formulario si es que se envía
     if request.method == 'POST':
-        form = CategoriaForm(request.POST)
+        form = CategoriasForm(request.POST)
         if form.is_valid():
             # Guardar el nuevo objeto de categoría
             form.save()
             # Recuperar todas las categorías solo si se ha enviado el formulario
             categorias = Categorias.objects.all()
     else:
-        form = CategoriaForm()
+        form = CategoriasForm()
 
     return render(request, 'listar_categorias.html', {'form': form, 'categorias': categorias})
 
