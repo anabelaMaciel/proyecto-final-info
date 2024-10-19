@@ -17,12 +17,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from . import views
+from .views import LeerCategoriasView, ListarCategoriasView, CrearCategoriasView
 
 urlpatterns = [
     path('', views.home, name='blog-home'),
     path('about/', views.about_us, name='about-us'),
     path('like/<int:post_id>/', views.like_post, name='like_post'),
-    path('like/<int:comentario_id>/', views.like_comentario, name='like_comentario'),
+    path('like/<int:comentario_id>/',
+         views.like_comentario, name='like_comentario'),
 
     path('blog/', views.blog, name='blog'),
     path('blog/<str:url>/', views.noticia, name='noticia'),
@@ -31,5 +33,13 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     path('register/', views.register, name='register'),
     path('categorias/', views.categorias, name='categorias'),
+    # Listar Categorias
+    path('categorias/lista', ListarCategoriasView.as_view(),
+         name='listar_categorias'),
+    # Leer Categorias
+    path('<int:pk>/', LeerCategoriasView.as_view(), name='leer_categoria'),
+    # Crear Categorias
+    path('crear/', CrearCategoriasView.as_view(), name='crear_categoria'),
+
 
 ]

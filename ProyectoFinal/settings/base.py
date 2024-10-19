@@ -60,7 +60,7 @@ ROOT_URLCONF = 'ProyectoFinal.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(os.path.dirname(BASE_DIR), 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -122,7 +122,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 STATIC_URL = 'static/'
 STATICFILE_DIRS = (os.path.join(os.path.dirname(BASE_DIR), 'static'),)
-STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'staticfiles')
+
 
 # Media = imagenes/audios/videos que vayan surgiendo o creciendo a lo largo de la ejecucion.(por formulario)
 MEDIA_URL = '/media/'

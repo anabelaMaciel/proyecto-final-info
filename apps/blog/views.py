@@ -3,7 +3,6 @@ from django.contrib.auth.decorators import login_required
 from django.db.models.query import QuerySet
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
-from django.http import JsonResponse
 from .models import Posts, Categorias, Comentarios, Like_comentario, Like_post, Usuario_personalizado
 from .forms import CategoriaForm, PostForm, ComentForm
 from django.views.generic import FormView, CreateView, ListView, DetailView, UpdateView, DeleteView
@@ -56,7 +55,7 @@ def categorias(request):
     return render(request, 'blog/categorias.html')
 
 
-@login_required
+# @login_required
 def like_post(request, post_id):
     post = get_object_or_404(Posts, id=post_id)
     like, created = Like_post.objects.get_or_create(
@@ -67,7 +66,7 @@ def like_post(request, post_id):
     return HttpResponseRedirect(reverse('noticia', args=[post.slug]) + '#like_post')
 
 
-@login_required
+# @login_required
 def like_comentario(request, comentario_id):
     comentario = get_object_or_404(Comentarios, id=comentario_id)
     like, created = Like_comentario.objects.get_or_create(
@@ -85,18 +84,18 @@ def like_comentario(request, comentario_id):
 
 class ListarCategoriasView(ListView):
     model = Categorias
-    template_name = 'categorias/lista_categorias.html'
+    template_name = 'categorias_list.html'
     context_object_name = 'categorias'
     paginate_by = 6
 
     def get_queryset(self):
-        query = self.request.GET.get("name")
+        query = self.request.GET.get("nombre")
         queryset = super().get_queryset()
 
         if query:
-            queryset = queryset.filter(titulo__icontains=query)
+            queryset = queryset.filter(nombre__icontains=query)
 
-        return queryset.order_by('name')
+        return queryset.order_by('nombre')
 
 # Crear Categorías
 
@@ -105,20 +104,20 @@ class CrearCategoriasView(CreateView):
     model = Categorias
     form_class = CategoriaForm
     template_name = 'categorias/form_categorias.html'
-    success_url = reverse_lazy('lista_categorias')
+    success_url = reverse_lazy('listar_categorias')
 
 # Leer Categoría
 
 
-class DetalleCategoriasView(DetailView):
+class LeerCategoriasView(DetailView):
     model = Categorias
     context_object_name = 'categorias'
-    template_name = 'categorias/detalle_categorias.html'
+    template_name = 'categorias/leer_categorias.html'
 
 # Editar Categoría
 
 
-class ActualizarCategoriasView(UpdateView):
+class EditarCategoriasView(UpdateView):
     model = Categorias
     form_class = CategoriaForm
     template_name = "categorias/form_categorias.html"
