@@ -17,8 +17,8 @@ def about_us(request):
 
 
 def blog(request):
-    posts = Posts.objects.all()
-    return render(request, 'blog/blog.html', {'posts': posts})
+    todos_posts = Posts.objects.all()
+    return render(request, 'blog/blog.html', {'posts': todos_posts})
 
 
 def noticia(request, url):
@@ -107,23 +107,6 @@ class EliminarCategoriasView(DeleteView):
     template_name = "blog/form_eliminar.html"
     success_url = reverse_lazy("categorias")
 
-# Filtrar Posts por Título
-
-
-class ListarPostsView(ListView):
-    model = Posts
-    template_name = 'posts/lista_posts.html'
-    context_object_name = 'posts'
-    paginate_by = 6
-
-    def get_queryset(self):
-        query = self.request.GET.get("titulo")
-        queryset = super().get_queryset()
-
-        if query:
-            queryset = queryset.filter(titulo__icontains=query)
-
-        return queryset.order_by('titulo')
 
 # Crear Posts
 
@@ -131,8 +114,8 @@ class ListarPostsView(ListView):
 class CrearPostsView(CreateView):
     model = Posts
     form_class = PostForm
-    template_name = 'posts/form_posts.html'
-    success_url = reverse_lazy('posts')
+    template_name = 'blog/form_posts.html'
+    success_url = reverse_lazy('blog')
 
 # Editar Posts
 
@@ -140,15 +123,15 @@ class CrearPostsView(CreateView):
 class EditarPostsView(UpdateView):
     model = Posts
     form_class = PostForm
-    template_name = "posts/form_posts.html"
-    success_url = reverse_lazy("posts")
+    template_name = "blog/form_posts.html"
+    success_url = reverse_lazy("blog")
 
 # Eliminar Posts
 
 
 class EliminarPostsView(DeleteView):
     model = Posts
-    template_name = "posts/confirmacion_eliminacion.html"
+    template_name = "blog/form_eliminar.html"
     success_url = reverse_lazy("lista_posts")
 
 # Filtrar Comentarios por Título
