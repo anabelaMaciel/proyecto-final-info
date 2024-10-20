@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
+from django.db.models import Prefetch
 from django.contrib.auth import authenticate, login
 from django.db.models.query import QuerySet
 from django.http import HttpResponseRedirect
@@ -44,13 +45,11 @@ class ListarPostsView(ListView):
 def noticia(request, url):
     post = get_object_or_404(Posts, slug=url)
     
-    coms = Comentarios.objects.filter(post=post)
-    is_like_post = Like_post.objects.filter(post=post, usuario=request.user)
-    total_likes = len(Like_post.objects.filter(post=post))
-
-    if len(is_like_post) == 0:
-        is_like_post = False
-    print(is_like_post)
+    coms = Comentarios.objects.filter(post=post).prefetch_related(
+        Prefetch('likes', queryset=Usuario_personalizado.objects.only('id'))
+    )
+    is_like_post = Like_post.objects.filter(post=post, usuario=request.user).exists()
+    total_likes = Like_post.objects.filter(post=post).count()
 
     return render(request, 'blog/noticia.html', {
         'total_likes': total_likes,
@@ -122,22 +121,22 @@ def like_post(request, post_id):
     return HttpResponseRedirect(reverse('noticia', args=[post.slug]) + '#like_post')
 
 
-# @login_required
-def like_comentario(request, comentario_id):
-    comentario = get_object_or_404(Comentarios, id=comentario_id)
-    like, created = Like_comentario.objects.get_or_create(
-        comentario=comentario, usuario=request.user)
-
-    if not created:
-        like.delete()
-    return HttpResponseRedirect(reverse('noticia', args=[comentario.post.slug]))
-
 # CRUD de Categorías, Posts y Comentarios
 # con CBV
 
+@login_required
+def like_comentario(request, comentario_id):
+    comentario = get_object_or_404(Comentarios, id=comentario_id)
+    user = request.user
+    
+    if user in comentario.likes.all():
+        comentario.likes.remove(user)
+    else:
+        comentario.likes.add(user)
+    
+    return redirect(reverse('noticia', kwargs={'url': comentario.post.slug}))
 
 # Crear Categorías
-
 class CrearCategoriasView(CreateView):
     model = Categorias
     form_class = CategoriasForm
@@ -208,35 +207,40 @@ class ListarComentariosView(ListView):
         return queryset.order_by('titulo')
 
 # Crear Comentarios
-
-
 class CrearComentariosView(CreateView):
     model = Comentarios
     form_class = ComentForm
-    template_name = 'comentarios/form_comentarios.html'
-    success_url = reverse_lazy('lista_comentarios')
+    template_name = 'blog/form_coment.html'
 
-# Leer Comentarios
+    def form_valid(self, form):
+        form.instance.usuario = self.request.user
+        post_id = self.request.POST.get('post')
+        form.instance.post = get_object_or_404(Posts, id=post_id)
+        return super().form_valid(form)
 
-
-class DetalleComentariosView(DetailView):
-    model = Comentarios
-    context_object_name = 'comentarios'
-    template_name = 'comentarios/detalle_comentarios.html'
+    def get_success_url(self):
+        return reverse('noticia', kwargs={'url': self.object.post.slug})
 
 # Editar Comentarios
-
-
-class ActualizarComentariosView(UpdateView):
+class EditarComentariosView(UpdateView):
     model = Comentarios
     form_class = ComentForm
-    template_name = "comentarios/form_comentarios.html"
-    success_url = reverse_lazy("lista_comentarios")
+    template_name = "blog/form_coment.html"
+
+    def form_valid(self, form):
+        form.instance.usuario = self.request.user
+        post_id = self.request.POST.get('post')
+        form.instance.post = get_object_or_404(Posts, id=post_id)
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('noticia', kwargs={'url': self.object.post.slug})
+
 
 # Eliminar Comentario
-
-
 class EliminarComentariosView(DeleteView):
     model = Comentarios
-    template_name = "comentarios/confirmacion_eliminacion.html"
-    success_url = reverse_lazy("lista_comentarios")
+    template_name = "blog/form_eliminar.html"
+
+    def get_success_url(self):
+        return reverse('noticia', kwargs={'url': self.object.post.slug})

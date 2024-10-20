@@ -5,11 +5,9 @@ import sys
 
 def main():
     """Run administrative tasks."""
-    # Define the settings module paths
     local_settings_path = 'ProyectoFinal/settings/local.py'
     base_settings_path = 'ProyectoFinal/settings/base.py'
 
-    # Check if local.py exists
     if os.path.isfile(local_settings_path):
         os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ProyectoFinal.settings.local')
     else:

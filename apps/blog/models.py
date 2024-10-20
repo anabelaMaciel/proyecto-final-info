@@ -62,8 +62,6 @@ class Posts(models.Model):
         super().delete()
 
 # Like_post
-
-
 class Like_post(models.Model):
     post = models.ForeignKey(Posts, on_delete=models.CASCADE)
     usuario = models.ForeignKey(
@@ -81,13 +79,16 @@ class Like_post(models.Model):
 # Comentarios
 class Comentarios(models.Model):
     post = models.ForeignKey(Posts, on_delete=models.CASCADE)
-    usuario = models.ForeignKey(
-        Usuario_personalizado, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(Usuario_personalizado, on_delete=models.CASCADE)
     contenido = models.TextField(max_length=500)
     fecha_comentario = models.DateField(auto_now_add=True)
+    likes = models.ManyToManyField(Usuario_personalizado, related_name='comment_likes', blank=True)
 
     def __str__(self):
         return self.contenido
+
+    def total_likes(self):
+        return self.likes.count()
 
 # Like_comentario
 

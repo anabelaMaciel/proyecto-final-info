@@ -7,8 +7,12 @@
     
     {% if grupo_colaborador %}
     <div class="d-flex mt-2">
-        <a class="mx-1 btn btn-info rounded-pill d-flex align-items-center" href="{% url 'editar_post' post.id %}"><i class="fa fa-outdent mx-2" aria-hidden="true"></i> EDITAR</a>
-        <a class="mx-1 btn btn-danger rounded-pill d-flex align-items-center" href="{% url 'eliminar_post' post.id %}"><i class="fa fa-trash mx-2" aria-hidden="true"></i> ELIMINAR</a>
+        <a class="mx-1 btn btn-info rounded-pill d-flex align-items-center" href="{% url 'editar_post' post.id %}">
+            <i class="fa fa-edit mx-2" aria-hidden="true"></i> EDITAR
+        </a>
+        <a class="mx-1 btn btn-danger rounded-pill d-flex align-items-center" href="{% url 'eliminar_post' post.id %}">
+            <i class="fa fa-trash mx-2" aria-hidden="true"></i> ELIMINAR
+        </a>
     </div>
     {% endif %}
 </div>
@@ -23,9 +27,8 @@
 
 <div>{{ post.cuerpo|safe }}</div>
 
-<!-- Botón de like para el post -->
 <div class="my-3" id="like_post">
-    <form href="#like_post" action="{% url 'like_post' post.id %}" method="post">
+    <form action="{% url 'like_post' post.id %}" method="post">
         {% csrf_token %}
         <button type="submit" class="btn btn-outline-primary">
             {% if is_like_post %}
@@ -41,42 +44,48 @@
 <hr>
 
 <div class="max-w-4xl mx-auto p-4">
-    <h2 class="text-xl font-semibold mb-4">Seccion de comentarios</h2>
+    <h2 class="text-xl font-semibold mb-4">Sección de comentarios</h2>
+    
+    <form method="post" action="{% url 'crear_coment' %}" class="mb-4">
+        {% csrf_token %}
+        <div class="input-group">
+            <input name="contenido" rows="2" class="form-control" placeholder="Escribe un comentario..." required />
+            <input type="hidden" name="post" value="{{ post.id }}">
+            <input type="hidden" name="usuario" value="{{ request.user.id }}">
+            <button type="submit" class="btn btn-primary">
+                <i class="fa fa-paper-plane" aria-hidden="true"></i>
+            </button>
+        </div>
+    </form>
+
     {% for comentario in comentarios %}
-        <div class="mb-8">
-            <div class="flex items-start mb-4">
-                <div class="d-flex align-items-center">
-                    <i class="fas fa-user-circle text-3xl text-blue-600 mr-2"></i>
-                    <div class="text-sm text-gray-600 ms-2">{{ comentario.usuario.username }} - {{ comentario.fecha_comentario }}</div>
+        <div class="card mb-3">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-user-circle text-primary me-2"></i>
+                        <span class="text-muted">{{ comentario.usuario.username }} - {{ comentario.fecha_comentario }}</span>
+                    </div>
+                    <div>
+                        <a href="{% url 'editar_coment' pk=comentario.id %}" class="btn btn-sm btn-primary me-2">
+                            <i class="fa fa-edit" aria-hidden="true"></i>
+                        </a>
+                        <a href="{% url 'eliminar_coment' pk=comentario.id %}" class="btn btn-sm btn-danger">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </a>
+                    </div>
                 </div>
-                <div class="mt-3">
-                    <small class="text-base mt-3">
-                        {{ comentario.contenido }}
-                    </small>
-                </div>
-            </div>
-            
-            <!-- Botón de like para el comentario -->
-            <div class="my-2">
-                <form action="{% url 'like_comentario' comentario.id %}" method="post">
+                <p class="card-text text-black">{{ comentario.contenido }}</p>
+                
+                <form action="{% url 'like_comentario' comentario.id %}" method="post" class="mt-2">
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-outline-secondary">
-                        {% if user.is_authenticated and user in comentario.like_comentario_set.all %}
-                            Deshacer Me gusta
-                        {% else %}
-                            Me gusta
-                        {% endif %}
-                        ({{ comentario.total_likes }})
+                    <button type="submit" class="btn btn-sm {% if user in comentario.likes.all %}btn-danger{% else %}btn-outline-secondary{% endif %}">
+                        <i class="fa fa-heart" aria-hidden="true"></i>
+                        <span class="ms-1">{{ comentario.total_likes }}</span>
                     </button>
                 </form>
             </div>
-
-            <div class="flex items-center text-gray-600">
-                <i class="mx-1 far fa-heart mr-2"></i>
-                <i class="mx-1 far fa-comment"></i>
-            </div>
         </div>
-        <hr>
     {% endfor %}
 </div>
 {% endblock %}

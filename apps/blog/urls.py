@@ -17,14 +17,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from . import views
-from .views import ListarPostsView, EditarCategoriasView, CrearCategoriasView, EliminarCategoriasView, CrearPostsView, EditarPostsView, EliminarPostsView
+from .views import CrearComentariosView, ListarPostsView, EditarComentariosView, EliminarComentariosView, EditarCategoriasView, CrearCategoriasView, EliminarCategoriasView, CrearPostsView, EditarPostsView, EliminarPostsView
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('', views.home, name='blog-home'),
     path('about/', views.about_us, name='about-us'),
     path('like/<int:post_id>/', views.like_post, name='like_post'),
-    path('like/<int:comentario_id>/', views.like_comentario, name='like_comentario'),
+    path('like/comentario/<int:comentario_id>/', views.like_comentario, name='like_comentario'),
     
     # CRUD operations for posts
     path('blog/', ListarPostsView.as_view(), name='blog'),
@@ -43,4 +43,9 @@ urlpatterns = [
     path('categorias/crear/', CrearCategoriasView.as_view(), name='crear_categoria'),
     path('categorias/editar/<int:pk>/', EditarCategoriasView.as_view(), name='editar_categoria'),
     path('categorias/eliminar/<int:pk>/', EliminarCategoriasView.as_view(), name='eliminar_categoria'),
+
+    # CRUD Comentarios
+    path('comentario/crear/', CrearComentariosView.as_view(), name='crear_coment'),
+    path('comentario/editar/<int:pk>/', EditarComentariosView.as_view(), name='editar_coment'),
+    path('comentario/eliminar/<int:pk>/', EliminarComentariosView.as_view(), name='eliminar_coment'),
 ]
