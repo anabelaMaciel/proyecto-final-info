@@ -38,6 +38,12 @@ def noticia(request, url):
         'comentarios': coms
     })
 
+# def listar_noticias(request):
+#     category = categorias.GET.get('categoria')
+#     if category:
+#         noticias = Posts.objects.filter(categoria_nombre = category)
+#     else:
+#         noticias = Posts.objects.all()    
 
 def contactanos(request):
     return render(request, 'blog/contactanos.html')
