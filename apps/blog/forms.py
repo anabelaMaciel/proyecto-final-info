@@ -46,4 +46,4 @@ class PostForm(ModelForm):
 class ComentForm(ModelForm):
     class Meta:
         model = Comentarios
-        fields = ['usuario', 'contenido']
+        fields = ['usuario', 'post', 'contenido',]

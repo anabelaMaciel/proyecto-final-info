@@ -199,30 +199,24 @@ class ListarComentariosView(ListView):
 class CrearComentariosView(CreateView):
     model = Comentarios
     form_class = ComentForm
-    template_name = 'comentarios/form_comentarios.html'
-    success_url = reverse_lazy('lista_comentarios')
+    template_name = 'blog/form_coment.html'
+    success_url = reverse_lazy("blog")
 
-# Leer Comentarios
-
-
-class DetalleComentariosView(DetailView):
-    model = Comentarios
-    context_object_name = 'comentarios'
-    template_name = 'comentarios/detalle_comentarios.html'
 
 # Editar Comentarios
 
 
-class ActualizarComentariosView(UpdateView):
+class EditarComentariosView(UpdateView):
     model = Comentarios
     form_class = ComentForm
-    template_name = "comentarios/form_comentarios.html"
-    success_url = reverse_lazy("lista_comentarios")
+    template_name = "blog/form_coment.html"
+    success_url = reverse_lazy("blog")
+
 
 # Eliminar Comentario
 
 
 class EliminarComentariosView(DeleteView):
     model = Comentarios
-    template_name = "comentarios/confirmacion_eliminacion.html"
-    success_url = reverse_lazy("lista_comentarios")
+    template_name = "blog/form_eliminar.html"
+    success_url = reverse_lazy("blog")

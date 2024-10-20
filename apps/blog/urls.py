@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from . import views
-from .views import EditarCategoriasView, CrearCategoriasView, EliminarCategoriasView, CrearPostsView, EditarPostsView, EliminarPostsView
+from .views import CrearComentariosView, EditarComentariosView, EliminarComentariosView, EditarCategoriasView, CrearCategoriasView, EliminarCategoriasView, CrearPostsView, EditarPostsView, EliminarPostsView
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -58,5 +58,15 @@ urlpatterns = [
     # ELIMINAR post
     path('blog/eliminar/<int:pk>', EliminarPostsView.as_view(),
          name='eliminar_post'),
+
+    path('comentario/crear/', CrearComentariosView.as_view(), name='crear_coment'),
+
+    # EDITAR post
+    path('comentario/editar/',
+         EditarComentariosView.as_view(), name='editar_coment'),
+
+    # ELIMINAR post
+    path('comentario/eliminar/', EliminarComentariosView.as_view(),
+         name='eliminar_coment'),
 
 ]

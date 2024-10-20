@@ -73,11 +73,20 @@
                 <h5>{{ post.titulo }}</h5>
             </div>
             <div class="btnEditarPost">
-                <a class="btn btn-success" href="{% url 'editar_post' post.id %}">EDITAR</a>
+                <a class="btn btn-success" href="{% url 'editar_post' post.id %}">EDITAR POST</a>
             </div>
             <div class="btnEliminarPost">
-                <a class="btn btn-success" href="{% url 'eliminar_post' post.id %}">ELIMINAR</a>
+                <a class="btn btn-success" href="{% url 'eliminar_post' post.id %}">ELIMINAR POST</a>
             </div>
+        </div>
+        <div class="btnCrearComentario">
+            <a class="btn btn-success" href="{% url 'crear_coment' %}"><i class="fa fa-plus" aria-hidden="true"></i> CREAR NUEVO COMENTARIO</a>
+        </div>
+        <div class="btnEditarComentario">
+            <a class="btn btn-success" href="{% url 'editar_coment' %}">EDITAR COMENTARIO</a>
+        </div>
+        <div class="btnEliminarComentario">
+            <a class="btn btn-success" href="{% url 'eliminar_coment'%}">ELIMINAR COMENTARIO</a>
         </div>
 </div>
 {% endblock %}
