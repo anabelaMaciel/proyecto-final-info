@@ -9,7 +9,9 @@
         text-decoration: none !important;
     }
 </style>
-#BOTON DE CREAR POST 
+<div class="btnCrearPost">
+    <a class="btn btn-success" href="{% url 'crear_post' %}">CREAR</a>
+</div>
 <div class="d-flex flex-wrap">
     {% for post in posts %}
         <a href="{{ post.slug }}">

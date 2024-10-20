@@ -43,7 +43,8 @@ def noticia(request, url):
 #     if category:
 #         noticias = Posts.objects.filter(categoria_nombre = category)
 #     else:
-#         noticias = Posts.objects.all()    
+#         noticias = Posts.objects.all()
+
 
 def contactanos(request):
     return render(request, 'blog/contactanos.html')
@@ -137,8 +138,8 @@ class EditarPostsView(UpdateView):
 
 class EliminarPostsView(DeleteView):
     model = Posts
-    template_name = "blog/form_eliminar.html"
-    success_url = reverse_lazy("lista_posts")
+    template_name = "form_eliminar.html"
+    success_url = reverse_lazy("blog")
 
 # Filtrar Comentarios por Título
 

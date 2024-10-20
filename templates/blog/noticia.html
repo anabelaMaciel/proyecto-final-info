@@ -68,5 +68,18 @@
         </div>
         <hr>
     {% endfor %}
+    {% for post in posts %}
+        <div class="col-md-4">
+            <div class="category-card" style="background-image: url('{{post.imagen.url}}');">
+                <h5>{{ post.titulo }}</h5>
+            </div>
+            <div class="btnEditarPost">
+                <a class="btn btn-success" href="{% url 'editar_post' post.id %}">EDITAR</a>
+            </div>
+            <div class="btnEliminarPost">
+                <a class="btn btn-success" href="{% url 'eliminar_post' post.id %}">ELIMINAR</a>
+            </div>
+        </div>
+    {% endfor %}
 </div>
 {% endblock %}

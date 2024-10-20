@@ -39,8 +39,8 @@ class Posts(models.Model):
     cuerpo = models.TextField(null=False)
     categorias = models.ForeignKey(
         Categorias, on_delete=models.SET_NULL, null=True, default='sin categoria')
-    usuario = models.ForeignKey(
-        Usuario_personalizado, on_delete=models.CASCADE)
+  #  usuario = models.ForeignKey(
+    # Usuario_personalizado, on_delete=models.CASCADE)
     imagen = models.ImageField(
         null=True, blank=True, upload_to='news', default='static/post_default.png')
     fecha_creacion = models.DateField(auto_now_add=True)

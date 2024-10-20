@@ -27,6 +27,8 @@ urlpatterns = [
          views.like_comentario, name='like_comentario'),
 
     path('blog/', views.blog, name='blog'),
+    path('blog/crear/', CrearPostsView.as_view(),
+         name='crear_post'),  # Nueva url para CREAR
     path('blog/<str:url>/', views.noticia, name='noticia'),
 
     path('contactanos/', views.contactanos, name='contactanos'),
@@ -48,7 +50,7 @@ urlpatterns = [
          name='eliminar_categoria'),
 
     # CREAR post
-    path('blog/crear/', CrearPostsView.as_view(), name='crear_post'),
+
 
     # EDITAR post
     path('blog/editar/<int:pk>',
