@@ -23,6 +23,15 @@
     {% endif %}
 
 </div>
+<div class="col-md-12 mt-3">
+    <div class="btn-group" role="group" aria-label="Filtros de orden">
+        <a href="?orden=ascendente{% if request.GET.categoria %}&categoria={{ request.GET.categoria }}{% endif %}" class="btn btn-secondary">Orden Ascendente</a>
+        <a href="?orden=descendente{% if request.GET.categoria %}&categoria={{ request.GET.categoria }}{% endif %}" class="btn btn-secondary">Orden Descendente</a>
+        <a href="?orden=antiguedad{% if request.GET.categoria %}&categoria={{ request.GET.categoria }}{% endif %}" class="btn btn-secondary">Más Antiguas</a>
+        <a href="?orden=recientes{% if request.GET.categoria %}&categoria={{ request.GET.categoria }}{% endif %}" class="btn btn-secondary">Más Recientes</a>
+    </div>
+</div>
+
 <hr>
 
 <div class="d-flex flex-wrap">

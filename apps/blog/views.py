@@ -30,15 +30,28 @@ class ListarPostsView(ListView):
         queryset = Posts.objects.all()
         categoria = self.request.GET.get('categoria')
         search_query = self.request.GET.get('q')
-        
-        # Aca filtramos por categorias, es para cuando venimos de "Categorias"
+        orden = self.request.GET.get('orden')  # Nuevo parámetro para el orden
+
+        # Filtramos por categorías si venimos de "Categorias"
         if categoria:
             queryset = queryset.filter(categorias__nombre=categoria)
         
-        # Aca buscamos por titulo, es para el buscador
+        # Buscamos por título si hay un término en el buscador
         if search_query:
-            queryset = queryset.filter(titulo__icontains=search_query)  
-        
+            queryset = queryset.filter(titulo__icontains=search_query)
+
+        # Ordenamos según el parámetro 'orden'
+        if orden == 'ascendente':
+            queryset = queryset.order_by('titulo')
+        elif orden == 'descendente':
+            queryset = queryset.order_by('-titulo')
+        elif orden == 'antiguedad':
+            queryset = queryset.order_by('fecha_creacion')
+        elif orden == 'recientes':
+            queryset = queryset.order_by('-fecha_creacion')
+        else:
+            queryset = queryset.order_by('-fecha_creacion')  # Orden por defecto: más recientes
+
         return queryset
 
 def noticia(request, url):
