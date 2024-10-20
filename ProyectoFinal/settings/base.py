@@ -16,7 +16,6 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
@@ -28,6 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Rutas de redireccino para despues de registro, login
+LOGIN_REDIRECT_URL = 'blog-home'
+LOGOUT_REDIRECT_URL = 'blog-home'
 
 # Application definition
 
@@ -43,7 +45,6 @@ INSTALLED_APPS = [
 ]
 
 AUTH_USER_MODEL = 'blog.Usuario_personalizado'
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

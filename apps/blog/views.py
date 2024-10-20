@@ -1,25 +1,26 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Group
+from django.contrib.auth import authenticate, login
 from django.db.models.query import QuerySet
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
-from .models import Posts, Categorias, Comentarios, Like_comentario, Like_post
+from .models import Posts, Categorias, Comentarios, Like_comentario, Like_post, Usuario_personalizado
 from .forms import CategoriasForm, PostForm, ComentForm
-from django.views.generic import FormView, CreateView, ListView, DetailView, UpdateView, DeleteView
+from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 
+from .forms import UserRegisterForm
+from django.contrib import messages
 
 def home(request):
     return render(request, 'blog/home.html')
 
-
 def about_us(request):
     return render(request, 'blog/about.html')
-
 
 def blog(request):
     todos_posts = Posts.objects.all()
     return render(request, 'blog/blog.html', {'posts': todos_posts})
-
 
 def noticia(request, url):
     post = get_object_or_404(Posts, slug=url)
@@ -49,14 +50,46 @@ def noticia(request, url):
 def contactanos(request):
     return render(request, 'blog/contactanos.html')
 
+def login_view(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        try:
+            user_obj = Usuario_personalizado.objects.get(email=email)
+        except Usuario_personalizado.DoesNotExist:
+            user_obj = None
 
-def login(request):
+        if user_obj:
+            user = authenticate(request, username=user_obj.username, password=password)
+            if user is not None:
+                login(request, user)
+                messages.success(request, 'Logueado con éxito!')
+                return redirect('blog-home')
+        
+        messages.error(request, 'Datos incorrectos.')
     return render(request, 'blog/login.html')
 
-
 def register(request):
-    return render(request, 'blog/register.html')
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.save()
+            
+            group = Group.objects.get(name="Registrado")
+            user.groups.add(group)
+            
+            login(request, user)
+            messages.success(request, 'Cuenta creada con éxito!')
+            return redirect('blog-home')
+        else:
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f'{field}: {error}')
+    else:
+        form = UserRegisterForm()
 
+    return render(request, 'blog/register.html', {'form': form})
 
 def categorias(request):
     todas_categorias = Categorias.objects.all()

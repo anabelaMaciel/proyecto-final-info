@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from . import views
 from .views import EditarCategoriasView, CrearCategoriasView, EliminarCategoriasView, CrearPostsView, EditarPostsView, EliminarPostsView
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('', views.home, name='blog-home'),
@@ -32,11 +33,12 @@ urlpatterns = [
     path('blog/<str:url>/', views.noticia, name='noticia'),
 
     path('contactanos/', views.contactanos, name='contactanos'),
-    path('login/', views.login, name='login'),
+    path('login/', views.login_view, name='login'),
     path('register/', views.register, name='register'),
     path('categorias/', views.categorias, name='categorias'),
 
 
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 
     # CREAR Categoria
     path('categorias/crear/', CrearCategoriasView.as_view(), name='crear_categoria'),

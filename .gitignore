@@ -1,6 +1,7 @@
 *.log
 *.pot
 *.pyc
+media/imagenes
 djangoenv/
 djangovenv/
 __pycache__/
