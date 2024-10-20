@@ -41,8 +41,9 @@ class ListarPostsView(ListView):
         return queryset
 
 
-def noticia(request, id):
-    post = Posts.objects.get(id=id)
+def noticia(request, url):
+    post = get_object_or_404(Posts, slug=url)
+    
     coms = Comentarios.objects.filter(post=post)
     is_like_post = Like_post.objects.filter(post=post, usuario=request.user)
     total_likes = len(Like_post.objects.filter(post=post))

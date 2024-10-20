@@ -37,7 +37,7 @@ class UserRegisterForm(UserCreationForm):
 class PostForm(ModelForm):
     class Meta:
         model = Posts
-        fields = ['titulo', 'subtitulo', 'cuerpo',
+        fields = ['slug', 'titulo', 'subtitulo', 'cuerpo',
                   'categorias', 'imagen', 'usuario']
 
 # Formulario de Comentarios

@@ -1,7 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<h1>Noticias - {{ post.titulo }}</h1>
+
+<div class="d-flex justify-content-between">
+    <h1>Noticias - {{ post.titulo }}</h1>
+    
+    {% if grupo_colaborador %}
+    <div class="d-flex mt-2">
+        <a class="mx-1 btn btn-info rounded-pill d-flex align-items-center" href="{% url 'editar_post' post.id %}"><i class="fa fa-outdent mx-2" aria-hidden="true"></i> EDITAR</a>
+        <a class="mx-1 btn btn-danger rounded-pill d-flex align-items-center" href="{% url 'eliminar_post' post.id %}"><i class="fa fa-trash mx-2" aria-hidden="true"></i> ELIMINAR</a>
+    </div>
+    {% endif %}
+</div>
 
 <div class="d-flex justify-content-center align-items-center w-100 my-5">
     {% if post.imagen %}
@@ -68,16 +78,5 @@
         </div>
         <hr>
     {% endfor %}
-        <div class="col-md-4">
-            <div class="category-card" style="background-image: url('{{post.imagen.url}}');">
-                <h5>{{ post.titulo }}</h5>
-            </div>
-            <div class="btnEditarPost">
-                <a class="btn btn-success" href="{% url 'editar_post' post.id %}">EDITAR</a>
-            </div>
-            <div class="btnEliminarPost">
-                <a class="btn btn-success" href="{% url 'eliminar_post' post.id %}">ELIMINAR</a>
-            </div>
-        </div>
 </div>
 {% endblock %}

@@ -10,18 +10,24 @@
     }
 </style>
 
-<form class="form-inline col-md-4 col-sm-12 pb-5 d-flex my-2 my-lg-0" method="get" action="{% url 'blog' %}">
-    <input class="form-control mr-sm-2 mx-4" type="search" name="q" placeholder="Buscar..." aria-label="Buscar" value="{{ request.GET.q }}">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-</form>
+<div class="col-md-12 d-flex">
+    <form class="form-inline col-md-4 col-sm-12 d-flex my-2 my-lg-0" method="get" action="{% url 'blog' %}">
+        <input class="form-control mr-sm-2 mx-4" type="search" name="q" placeholder="Buscar..." aria-label="Buscar" value="{{ request.GET.q }}">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+    </form>
+    
+    {% if grupo_colaborador %}
+        <div class="btnCrearPost ms-auto">
+            <a class="btn btn-success" href="{% url 'crear_post' %}"><i class="fa fa-plus" aria-hidden="true"></i> CREAR NUEVA NOTICIA</a>
+        </div>
+    {% endif %}
 
-<div class="btnCrearPost">
-    <a class="btn btn-success" href="{% url 'crear_post' %}">CREAR</a>
 </div>
+<hr>
 
 <div class="d-flex flex-wrap">
     {% for post in posts %}
-        <a href="{% url 'noticia' post.id %}">
+        <a href="{% url 'noticia' post.slug %}">
             <div class="card bg-dark verde-lima mt-0 m-3" style="width: 18rem;">
                 <div class="w-100 bg-black d-flex">
                     {% if post.imagen %}

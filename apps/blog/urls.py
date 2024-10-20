@@ -24,37 +24,23 @@ urlpatterns = [
     path('', views.home, name='blog-home'),
     path('about/', views.about_us, name='about-us'),
     path('like/<int:post_id>/', views.like_post, name='like_post'),
-    path('like/<int:comentario_id>/',
-         views.like_comentario, name='like_comentario'),
+    path('like/<int:comentario_id>/', views.like_comentario, name='like_comentario'),
     
-    #LISTAR noticias
-    path('blog/', ListarPostsView.as_view(), name='blog'),  
-    
+    # CRUD operations for posts
+    path('blog/', ListarPostsView.as_view(), name='blog'),
+    path('blog/crear/', CrearPostsView.as_view(), name='crear_post'),
+    path('blog/editar/<int:pk>/', EditarPostsView.as_view(), name='editar_post'),
+    path('blog/eliminar/<int:pk>/', EliminarPostsView.as_view(), name='eliminar_post'),
     path('blog/<str:url>/', views.noticia, name='noticia'),
-
-    path('blog/crear/', CrearPostsView.as_view(), name='crear_post'),  # Nueva url para CREAR
 
     path('contactanos/', views.contactanos, name='contactanos'),
     path('login/', views.login_view, name='login'),
     path('register/', views.register, name='register'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-    # MOSTRAR Categorias
+    
+    # CRUD operations for categories
     path('categorias/', views.categorias, name='categorias'),
-    # CREAR Categoria
     path('categorias/crear/', CrearCategoriasView.as_view(), name='crear_categoria'),
-
-    # EDITAR categoria
-    path('categorias/editar/<int:pk>',
-         EditarCategoriasView.as_view(), name='editar_categoria'),
-
-    # ELIMINAR Categoria
-    path('categorias/eliminar/<int:pk>', EliminarCategoriasView.as_view(),
-         name='eliminar_categoria'),
-
-    # EDITAR post
-    path('blog/editar/<int:pk>',
-         EditarPostsView.as_view(), name='editar_post'),
-
-    # ELIMINAR post
-    path('blog/eliminar/<int:pk>', EliminarPostsView.as_view(), name='eliminar_post'),   
+    path('categorias/editar/<int:pk>/', EditarCategoriasView.as_view(), name='editar_categoria'),
+    path('categorias/eliminar/<int:pk>/', EliminarCategoriasView.as_view(), name='eliminar_categoria'),
 ]
