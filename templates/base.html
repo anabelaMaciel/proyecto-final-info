@@ -165,23 +165,18 @@
             display: flex;
             flex-direction: column; 
             align-items: center; 
-            margin-left: 220px;
             margin-bottom: 20px; 
         }
 
         .team-member {
             text-align: center; 
-            margin: 30px; 
         }
-        
 
         .team-member img {
             width: 200px; 
             height: 200px; 
             object-fit: cover; 
             border-radius: 10px; 
-            margin-right: 30px;
-            margin-left: 30px;
         }
        
         .row {
@@ -196,7 +191,6 @@
 
         .team-section {
             text-align: center;
-            padding: 50px 0;
         }
 
         .team-section h2 {
@@ -231,8 +225,6 @@
             padding: 10px;
             font-size: 16px;
             border-radius: 20px;
-            margin-top: 20px;
-            margin-right: 200px;
         }
     </style>
 </head>
@@ -241,27 +233,27 @@
 
     <header class="header-bg">
         <div class="container d-flex flex-wrap justify-content-between align-items-center">
-            <a href="/" class="text-white h3 font-weight-bold">
+            <a href="/" class="d-flex text-white h3 font-weight-bold justify-content-center mx-auto mx-md-0">
                 <img class="mt-3" src="{% static 'blog/images/Icono_TF_blanco.ico' %}" alt="Logo de X TECH" width="65" height="auto">
             </a>
-            <nav class="d-flex small flex-wrap align-items-center">
-                <a class="text-white mx-3" href="/">
+            <nav class="d-flex small flex-wrap align-items-center justify-content-center">
+                <a class="text-white p-2 mx-3" href="/">
                     <small>Home</small>
                 </a>
-                <a class="text-white mx-3" href="/about">
+                <a class="text-white p-2 mx-3" href="/about">
                     <small>Conocenos</small>
                 </a>
-                <a class="text-white mx-3" href="/blog">
+                <a class="text-white p-2 mx-3" href="/blog">
                     <small>Blog</small>
                 </a>
-                <a class="text-white mx-3" href="/contactanos">
+                <a class="text-white p-2 mx-3" href="/contactanos">
                     <small>Contacto</small>
                 </a>
-                <a class="text-white mx-3" href="/categorias">
+                <a class="text-white p-2 mx-3" href="/categorias">
                     <small>Categorías</small>
                 </a>
             </nav>
-            <div class="d-flex flex-wrap align-items-center">
+            <div class="d-flex flex-wrap align-items-center justify-content-center my-3 my-md-0">
                 <a href="{% url 'login' %}" class="btn rounded-pill verde-lima px-4 btn-success mx-2 my-1">
                     <b class="small">INICIAR SESION</b>
                 </a>
@@ -289,7 +281,7 @@
             <div class="glass-effect p-5">
                 <div class="col-md-12">
 
-                    <div class="row mb-0 mb-md-0">
+                    <div class="row  mb-0 mb-md-0">
                         <div class="text-white h4 font-weight-bold mb-3">
                         <a href="/">    
                             <img class="mt-3" src="{% static 'blog/images/Logo_TF_blanco.png' %}" alt="Logo de X TECH" width="130" height="auto">
@@ -297,7 +289,7 @@
                         </div>
                     </div>
 
-                    <div class="row mb-4 mb-md-0 small">
+                    <div class="row  mb-4 mb-md-0 small">
                         <div class="col-md-3 mt-3">
                             <small><b>MENU</b></small>
                             <hr class="my-4" />
@@ -377,10 +369,6 @@
                     <div class="d-flex justify-content-end">
                         <a class="text-white mx-2" href="https://www.facebook.com/profile.php?id=61566988810266" target="_blank">
                             <i class="h3 fab fa-facebook">
-                            </i>
-                        </a>
-                        <a class="text-white mx-2" href="#">
-                            <i class="h3 fab fa-instagram">
                             </i>
                         </a>
                         <a class="text-white mx-2" href="https://www.linkedin.com/groups/13112033/" target="_blank">
