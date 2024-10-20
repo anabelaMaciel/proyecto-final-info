@@ -1,24 +1,20 @@
 from typing import Any
 from django.db import models
-from django.contrib.auth.models import AbstractUser
-from django.contrib.auth.models import UserManager
-
+from django.contrib.auth.models import AbstractUser, UserManager, BaseUserManager
 
 # Create your models here.
 # Categorias
 class Categorias(models.Model):
     nombre = models.CharField(max_length=40, null=False)
-    imagen = models.ImageField(upload_to='imagenes/', null=False, blank=False, default='static/post_default.png')
-    
+    imagen = models.ImageField(
+        upload_to='imagenes/', null=False, blank=False, default='static/post_default.png')
 
     def __str__(self):
         return self.nombre
 
-
 # Usuario
 class Usuario_personalizado(AbstractUser):
     fecha_registro = models.DateField(auto_now_add=True)
-
     objects = UserManager()
 
     class Meta:
@@ -27,9 +23,10 @@ class Usuario_personalizado(AbstractUser):
         ordering = ['username']
 
     def __str__(self):
-        return self.username 
+        return self.username
 
 # Post
+
 class Posts(models.Model):
     slug = models.CharField(max_length=40, null=True, unique=True)
     titulo = models.CharField(max_length=40, null=False)
@@ -88,6 +85,8 @@ class Comentarios(models.Model):
         return self.contenido
 
 # Like_comentario
+
+
 class Like_comentario(models.Model):
     comentario = models.ForeignKey(Comentarios, on_delete=models.CASCADE)
     usuario = models.ForeignKey(

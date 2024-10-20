@@ -62,51 +62,27 @@
         <h2 class="category-title">Explorar categorías</h2>
     </div>
     <div class="row g-3">
-        <div class="col-md-4">
-            <div class="category-card" style="background-image: url('https://placehold.co/300x200');">
-                <h5>Startups y Emprendimiento</h5>
+        {% if grupo_colaborador %}
+            <div class="btnCrearCategoria">
+                <a class="btn btn-success" href="{% url 'crear_categoria' %}"><i class="fa fa-plus" aria-hidden="true"></i> CREAR NUEVA CATEGORIA</a>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="category-card" style="background-image: url('https://placehold.co/300x200');">
-                <h5>Realidad Aumentada y Virtual</h5>
+            <hr>
+        {% endif %}
+
+        {% for categoria in categorias %}
+            <div class="col-md-4">
+                <div class="category-card card bg-black" style="background-image: url('{{categoria.imagen.url}}');">
+                    <h5>{{ categoria.nombre }}</h5>
+                </div>
+                
+                {% if grupo_colaborador %}
+                <div class="d-flex mt-2">
+                    <a class="mx-1 btn btn-info rounded-pill" href="{% url 'editar_categoria' categoria.id %}"><i class="fa fa-outdent" aria-hidden="true"></i> EDITAR</a>
+                    <a class="mx-1 btn btn-danger rounded-pill" href="{% url 'eliminar_categoria' categoria.id %}"><i class="fa fa-trash" aria-hidden="true"></i> ELIMINAR</a>
+                </div>
+                {% endif %}
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="category-card" style="background-image: url('https://placehold.co/300x200');">
-                <h5>Desarrollo de Software</h5>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="category-card" style="background-image: url('https://placehold.co/300x200');">
-                <h5>Ciberseguridad</h5>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="category-card" style="background-image: url('https://placehold.co/300x200');">
-                <h5>Tendencias Futuras</h5>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="category-card" style="background-image: url('https://placehold.co/300x200');">
-                <h5>Inteligencia Artificial</h5>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="category-card" style="background-image: url('https://placehold.co/300x200');">
-                <h5>Gadgets y Dispositivos</h5>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="category-card" style="background-image: url('https://placehold.co/300x200');">
-                <h5>Tecnología Verde</h5>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="category-card" style="background-image: url('https://placehold.co/300x200');">
-                <h5>Novedades Tecnológicas</h5>
-            </div>
-        </div>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}

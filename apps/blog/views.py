@@ -1,26 +1,26 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Group
+from django.contrib.auth import authenticate, login
 from django.db.models.query import QuerySet
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
-from django.http import JsonResponse
 from .models import Posts, Categorias, Comentarios, Like_comentario, Like_post, Usuario_personalizado
-from .forms import CategoriaForm, PostForm, ComentForm
-from django.views.generic import FormView, CreateView, ListView, DetailView, UpdateView, DeleteView
+from .forms import CategoriasForm, PostForm, ComentForm
+from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 
+from .forms import UserRegisterForm
+from django.contrib import messages
 
 def home(request):
     return render(request, 'blog/home.html')
 
-
 def about_us(request):
     return render(request, 'blog/about.html')
 
-
 def blog(request):
-    posts = Posts.objects.all()
-    return render(request, 'blog/blog.html', {'posts': posts})
-
+    todos_posts = Posts.objects.all()
+    return render(request, 'blog/blog.html', {'posts': todos_posts})
 
 def noticia(request, url):
     post = get_object_or_404(Posts, slug=url)
@@ -49,20 +49,53 @@ def noticia(request, url):
 def contactanos(request):
     return render(request, 'blog/contactanos.html')
 
+def login_view(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        try:
+            user_obj = Usuario_personalizado.objects.get(email=email)
+        except Usuario_personalizado.DoesNotExist:
+            user_obj = None
 
-def login(request):
+        if user_obj:
+            user = authenticate(request, username=user_obj.username, password=password)
+            if user is not None:
+                login(request, user)
+                messages.success(request, 'Logueado con éxito!')
+                return redirect('blog-home')
+        
+        messages.error(request, 'Datos incorrectos.')
     return render(request, 'blog/login.html')
 
-
 def register(request):
-    return render(request, 'blog/register.html')
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.save()
+            
+            group = Group.objects.get(name="Registrado")
+            user.groups.add(group)
+            
+            login(request, user)
+            messages.success(request, 'Cuenta creada con éxito!')
+            return redirect('blog-home')
+        else:
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f'{field}: {error}')
+    else:
+        form = UserRegisterForm()
 
+    return render(request, 'blog/register.html', {'form': form})
 
 def categorias(request):
-    return render(request, 'blog/categorias.html')
+    todas_categorias = Categorias.objects.all()
+    return render(request, 'blog/categorias.html', {"categorias": todas_categorias})
 
 
-@login_required
+# @login_required
 def like_post(request, post_id):
     post = get_object_or_404(Posts, id=post_id)
     like, created = Like_post.objects.get_or_create(
@@ -73,7 +106,7 @@ def like_post(request, post_id):
     return HttpResponseRedirect(reverse('noticia', args=[post.slug]) + '#like_post')
 
 
-@login_required
+# @login_required
 def like_comentario(request, comentario_id):
     comentario = get_object_or_404(Comentarios, id=comentario_id)
     like, created = Like_comentario.objects.get_or_create(
@@ -86,75 +119,33 @@ def like_comentario(request, comentario_id):
 # CRUD de Categorías, Posts y Comentarios
 # con CBV
 
-# Filtrar Categorías por Título
-
-
-class ListarCategoriasView(ListView):
-    model = Categorias
-    template_name = 'categorias/lista_categorias.html'
-    context_object_name = 'categorias'
-    paginate_by = 6
-
-    def get_queryset(self):
-        query = self.request.GET.get("name")
-        queryset = super().get_queryset()
-
-        if query:
-            queryset = queryset.filter(titulo__icontains=query)
-
-        return queryset.order_by('name')
 
 # Crear Categorías
 
-
 class CrearCategoriasView(CreateView):
     model = Categorias
-    form_class = CategoriaForm
-    template_name = 'categorias/form_categorias.html'
-    success_url = reverse_lazy('lista_categorias')
+    form_class = CategoriasForm
+    template_name = 'blog/form_categorias.html'
+    success_url = reverse_lazy('categorias')
 
-# Leer Categoría
-
-
-class DetalleCategoriasView(DetailView):
-    model = Categorias
-    context_object_name = 'categorias'
-    template_name = 'categorias/detalle_categorias.html'
 
 # Editar Categoría
 
 
-class ActualizarCategoriasView(UpdateView):
+class EditarCategoriasView(UpdateView):
     model = Categorias
-    form_class = CategoriaForm
-    template_name = "categorias/form_categorias.html"
-    success_url = reverse_lazy("lista_categorias")
+    form_class = CategoriasForm
+    template_name = "blog/form_categorias.html"
+    success_url = reverse_lazy('categorias')
 
 # Eliminar Categoría
 
 
 class EliminarCategoriasView(DeleteView):
     model = Categorias
-    template_name = "categorias/confirmacion_eliminacion.html"
-    success_url = reverse_lazy("lista_categorias")
+    template_name = "blog/form_eliminar.html"
+    success_url = reverse_lazy("categorias")
 
-# Filtrar Posts por Título
-
-
-class ListarPostsView(ListView):
-    model = Posts
-    template_name = 'posts/lista_posts.html'
-    context_object_name = 'posts'
-    paginate_by = 6
-
-    def get_queryset(self):
-        query = self.request.GET.get("titulo")
-        queryset = super().get_queryset()
-
-        if query:
-            queryset = queryset.filter(titulo__icontains=query)
-
-        return queryset.order_by('titulo')
 
 # Crear Posts
 
@@ -162,32 +153,24 @@ class ListarPostsView(ListView):
 class CrearPostsView(CreateView):
     model = Posts
     form_class = PostForm
-    template_name = 'posts/form_posts.html'
-    success_url = reverse_lazy('lista_posts')
-
-# Leer Posts
-
-
-class DetallePostsView(DetailView):
-    model = Posts
-    context_object_name = 'Posts'
-    template_name = 'posts/detalle_posts.html'
+    template_name = 'blog/form_posts.html'
+    success_url = reverse_lazy('blog')
 
 # Editar Posts
 
 
-class ActualizarPostsView(UpdateView):
+class EditarPostsView(UpdateView):
     model = Posts
     form_class = PostForm
-    template_name = "posts/form_posts.html"
-    success_url = reverse_lazy("lista_posts")
+    template_name = "blog/form_posts.html"
+    success_url = reverse_lazy("blog")
 
 # Eliminar Posts
 
 
 class EliminarPostsView(DeleteView):
     model = Posts
-    template_name = "posts/confirmacion_eliminacion.html"
+    template_name = "blog/form_eliminar.html"
     success_url = reverse_lazy("lista_posts")
 
 # Filtrar Comentarios por Título
@@ -213,7 +196,7 @@ class ListarComentariosView(ListView):
 
 class CrearComentariosView(CreateView):
     model = Comentarios
-    form_class = CategoriaForm
+    form_class = ComentForm
     template_name = 'comentarios/form_comentarios.html'
     success_url = reverse_lazy('lista_comentarios')
 
