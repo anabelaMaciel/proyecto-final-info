@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, redirect, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from django.db.models import Prefetch
@@ -7,8 +7,10 @@ from django.db.models.query import QuerySet
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from .models import Posts, Categorias, Comentarios, Like_comentario, Like_post, Usuario_personalizado
-from .forms import CategoriasForm, PostForm, ComentForm
+from .forms import CategoriasForm, PostForm, ComentForm, ContactanosForm
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
+from django.core.mail import send_mail
+
 
 from .forms import UserRegisterForm
 from django.contrib import messages
@@ -21,6 +23,7 @@ def home(request):
 def about_us(request):
     return render(request, 'blog/about.html')
 
+
 class ListarPostsView(ListView):
     model = Posts
     template_name = 'blog/blog.html'
@@ -30,29 +33,31 @@ class ListarPostsView(ListView):
         queryset = Posts.objects.all()
         categoria = self.request.GET.get('categoria')
         search_query = self.request.GET.get('q')
-        
+
         # Aca filtramos por categorias, es para cuando venimos de "Categorias"
         if categoria:
             queryset = queryset.filter(categorias__nombre=categoria)
-        
+
         # Aca buscamos por titulo, es para el buscador
         if search_query:
-            queryset = queryset.filter(titulo__icontains=search_query)  
-        
+            queryset = queryset.filter(titulo__icontains=search_query)
+
         return queryset
+
 
 def noticia(request, url):
     post = get_object_or_404(Posts, slug=url)
-    
+
     coms = Comentarios.objects.filter(post=post).prefetch_related(
         Prefetch('likes', queryset=Usuario_personalizado.objects.only('id'))
     )
-    
+
     if request.user.is_authenticated:
-        is_like_post = Like_post.objects.filter(post=post, usuario=request.user).exists()
+        is_like_post = Like_post.objects.filter(
+            post=post, usuario=request.user).exists()
     else:
         is_like_post = False
-    
+
     total_likes = Like_post.objects.filter(post=post).count()
 
     return render(request, 'blog/noticia.html', {
@@ -63,8 +68,36 @@ def noticia(request, url):
         'user': request.user
     })
 
-def contactanos(request):
-    return render(request, 'blog/contactanos.html')
+
+"""def contactanos(request):
+    return render(request, 'blog/contactanos.html')"""
+
+
+def contactanos_view(request):
+    if request.method == 'POST':
+        form = ContactanosForm(request.POST)
+        if form.is_valid():
+            # Procesar la información del formulario
+            nombre = form.cleaned_data['nombre']
+            email = form.cleaned_data['email']
+            asunto = form.cleaned_data['mensaje']
+
+            # Enviar un correo electrónico
+            send_mail(
+                f'Mensaje de {nombre}',  # Asunto
+                asunto,               # Cuerpo del mensaje
+                email,                 # Correo del remitente
+                ['tecnofilos.xtech@hotmail.com'],  # Correo del destinatario
+            )
+
+            # Redirigir a una página de éxito
+            return redirect('contact_success')
+
+    else:
+        form = ContactanosForm()
+
+    return render(request, 'form_contacto.html', {'form': form})
+
 
 def login_view(request):
     if request.method == 'POST':
@@ -133,15 +166,17 @@ def like_post(request, post_id):
 def like_comentario(request, comentario_id):
     comentario = get_object_or_404(Comentarios, id=comentario_id)
     user = request.user
-    
+
     if user in comentario.likes.all():
         comentario.likes.remove(user)
     else:
         comentario.likes.add(user)
-    
+
     return redirect(reverse('noticia', kwargs={'url': comentario.post.slug}))
 
 # Crear Categorías
+
+
 class CrearCategoriasView(CreateView):
     model = Categorias
     form_class = CategoriasForm
@@ -212,6 +247,8 @@ class ListarComentariosView(ListView):
         return queryset.order_by('titulo')
 
 # Crear Comentarios
+
+
 class CrearComentariosView(CreateView):
     model = Comentarios
     form_class = ComentForm
@@ -227,6 +264,8 @@ class CrearComentariosView(CreateView):
         return reverse('noticia', kwargs={'url': self.object.post.slug})
 
 # Editar Comentarios
+
+
 class EditarComentariosView(UpdateView):
     model = Comentarios
     form_class = ComentForm
