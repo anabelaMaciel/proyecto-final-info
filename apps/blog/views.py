@@ -12,8 +12,10 @@ from django.views.generic import CreateView, ListView, DetailView, UpdateView, D
 from .forms import UserRegisterForm
 from django.contrib import messages
 
+
 def home(request):
     return render(request, 'blog/home.html')
+
 
 def about_us(request):
     return render(request, 'blog/about.html')
@@ -38,8 +40,9 @@ class ListarPostsView(ListView):
         
         return queryset
 
-def noticia(request, url):
-    post = get_object_or_404(Posts, slug=url)
+
+def noticia(request, id):
+    post = Posts.objects.get(id=id)
     coms = Comentarios.objects.filter(post=post)
     is_like_post = Like_post.objects.filter(post=post, usuario=request.user)
     total_likes = len(Like_post.objects.filter(post=post))
@@ -68,14 +71,16 @@ def login_view(request):
             user_obj = None
 
         if user_obj:
-            user = authenticate(request, username=user_obj.username, password=password)
+            user = authenticate(
+                request, username=user_obj.username, password=password)
             if user is not None:
                 login(request, user)
                 messages.success(request, 'Logueado con éxito!')
                 return redirect('blog-home')
-        
+
         messages.error(request, 'Datos incorrectos.')
     return render(request, 'blog/login.html')
+
 
 def register(request):
     if request.method == 'POST':
@@ -83,10 +88,10 @@ def register(request):
         if form.is_valid():
             user = form.save(commit=False)
             user.save()
-            
+
             group = Group.objects.get_or_create(name="Registrado")
             user.groups.add(group)
-            
+
             login(request, user)
             messages.success(request, 'Cuenta creada con éxito!')
             return redirect('blog-home')
@@ -98,6 +103,7 @@ def register(request):
         form = UserRegisterForm()
 
     return render(request, 'blog/register.html', {'form': form})
+
 
 def categorias(request):
     todas_categorias = Categorias.objects.all()
@@ -180,7 +186,7 @@ class EditarPostsView(UpdateView):
 class EliminarPostsView(DeleteView):
     model = Posts
     template_name = "blog/form_eliminar.html"
-    success_url = reverse_lazy("lista_posts")
+    success_url = reverse_lazy("blog")
 
 # Filtrar Comentarios por Título
 

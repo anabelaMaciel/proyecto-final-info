@@ -15,9 +15,13 @@
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
 </form>
 
+<div class="btnCrearPost">
+    <a class="btn btn-success" href="{% url 'crear_post' %}">CREAR</a>
+</div>
+
 <div class="d-flex flex-wrap">
     {% for post in posts %}
-        <a href="{{ post.slug }}">
+        <a href="{% url 'noticia' post.id %}">
             <div class="card bg-dark verde-lima mt-0 m-3" style="width: 18rem;">
                 <div class="w-100 bg-black d-flex">
                     {% if post.imagen %}
