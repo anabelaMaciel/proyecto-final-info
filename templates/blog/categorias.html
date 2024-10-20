@@ -67,8 +67,8 @@
         </div>
         {% for categoria in categorias %}
         <div class="col-md-4">
-            <div class="category-card" style="background-image: url('{{categoria.imagen.url}}');">
-                <h5>{{ categoria.nombre }}</h5>
+            <div><a href="{% url 'listar_noticias' %}?categoria={{categoria.nombre}}" class="category-card" style="background-image: url('{{categoria.imagen.url}}');">
+                <h5>{{ categoria.nombre }}</h5></a>
             </div>
             <div class="btnEditarCategoria">
                 <a class="btn btn-success" href="{% url 'editar_categoria' categoria.id %}">EDITAR</a>

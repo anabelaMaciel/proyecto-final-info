@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from . import views
-from .views import EditarCategoriasView, CrearCategoriasView, EliminarCategoriasView
+from .views import EditarCategoriasView, CrearCategoriasView, EliminarCategoriasView, ListarPostsView
 
 urlpatterns = [
     path('', views.home, name='blog-home'),
@@ -46,6 +46,9 @@ urlpatterns = [
     # ELIMINAR Categoria
     path('categorias/eliminar/<int:pk>', EliminarCategoriasView.as_view(),
          name='eliminar_categoria'),
+
+    #LISTAR noticias
+    path('blog/', ListarPostsView.as_view(), name='listar_noticias'),     
 
 
 ]
