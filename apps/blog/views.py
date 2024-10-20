@@ -12,18 +12,22 @@ from django.views.generic import CreateView, ListView, DetailView, UpdateView, D
 from .forms import UserRegisterForm
 from django.contrib import messages
 
+
 def home(request):
     return render(request, 'blog/home.html')
 
+
 def about_us(request):
     return render(request, 'blog/about.html')
+
 
 def blog(request):
     todos_posts = Posts.objects.all()
     return render(request, 'blog/blog.html', {'posts': todos_posts})
 
-def noticia(request, url):
-    post = get_object_or_404(Posts, slug=url)
+
+def noticia(request, id):
+    post = Posts.objects.get(id=id)
     coms = Comentarios.objects.filter(post=post)
     is_like_post = Like_post.objects.filter(post=post, usuario=request.user)
     total_likes = len(Like_post.objects.filter(post=post))
@@ -39,16 +43,10 @@ def noticia(request, url):
         'comentarios': coms
     })
 
-# def listar_noticias(request):
-#     category = categorias.GET.get('categoria')
-#     if category:
-#         noticias = Posts.objects.filter(categoria_nombre = category)
-#     else:
-#         noticias = Posts.objects.all()
-
 
 def contactanos(request):
     return render(request, 'blog/contactanos.html')
+
 
 def login_view(request):
     if request.method == 'POST':
@@ -60,14 +58,16 @@ def login_view(request):
             user_obj = None
 
         if user_obj:
-            user = authenticate(request, username=user_obj.username, password=password)
+            user = authenticate(
+                request, username=user_obj.username, password=password)
             if user is not None:
                 login(request, user)
                 messages.success(request, 'Logueado con éxito!')
                 return redirect('blog-home')
-        
+
         messages.error(request, 'Datos incorrectos.')
     return render(request, 'blog/login.html')
+
 
 def register(request):
     if request.method == 'POST':
@@ -75,10 +75,10 @@ def register(request):
         if form.is_valid():
             user = form.save(commit=False)
             user.save()
-            
+
             group = Group.objects.get(name="Registrado")
             user.groups.add(group)
-            
+
             login(request, user)
             messages.success(request, 'Cuenta creada con éxito!')
             return redirect('blog-home')
@@ -90,6 +90,7 @@ def register(request):
         form = UserRegisterForm()
 
     return render(request, 'blog/register.html', {'form': form})
+
 
 def categorias(request):
     todas_categorias = Categorias.objects.all()
@@ -171,7 +172,7 @@ class EditarPostsView(UpdateView):
 
 class EliminarPostsView(DeleteView):
     model = Posts
-    template_name = "form_eliminar.html"
+    template_name = "blog/form_eliminar.html"
     success_url = reverse_lazy("blog")
 
 # Filtrar Comentarios por Título

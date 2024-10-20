@@ -4,6 +4,8 @@ from django.contrib.auth.models import AbstractUser, UserManager, BaseUserManage
 
 # Create your models here.
 # Categorias
+
+
 class Categorias(models.Model):
     nombre = models.CharField(max_length=40, null=False)
     imagen = models.ImageField(
@@ -13,6 +15,8 @@ class Categorias(models.Model):
         return self.nombre
 
 # Usuario
+
+
 class Usuario_personalizado(AbstractUser):
     fecha_registro = models.DateField(auto_now_add=True)
     objects = UserManager()
@@ -27,6 +31,7 @@ class Usuario_personalizado(AbstractUser):
 
 # Post
 
+
 class Posts(models.Model):
     slug = models.CharField(max_length=40, null=True, unique=True)
     titulo = models.CharField(max_length=40, null=False)
@@ -34,8 +39,8 @@ class Posts(models.Model):
     cuerpo = models.TextField(null=False)
     categorias = models.ForeignKey(
         Categorias, on_delete=models.SET_NULL, null=True, default='sin categoria')
-  #  usuario = models.ForeignKey(
-    # Usuario_personalizado, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(
+        Usuario_personalizado, on_delete=models.CASCADE)
     imagen = models.ImageField(
         null=True, blank=True, upload_to='news', default='static/post_default.png')
     fecha_creacion = models.DateField(auto_now_add=True)

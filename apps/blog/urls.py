@@ -30,16 +30,16 @@ urlpatterns = [
     path('blog/', views.blog, name='blog'),
     path('blog/crear/', CrearPostsView.as_view(),
          name='crear_post'),  # Nueva url para CREAR
-    path('blog/<str:url>/', views.noticia, name='noticia'),
+    # path('blog/<str:url>/', views.noticia, name='noticia'),
+    # VER RUTA DESPUES DEL BLOG/
+    path('blog/<int:id>/', views.noticia, name='noticia'),
 
     path('contactanos/', views.contactanos, name='contactanos'),
     path('login/', views.login_view, name='login'),
     path('register/', views.register, name='register'),
-    path('categorias/', views.categorias, name='categorias'),
-
-
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-
+    # MOSTRAR Categorias
+    path('categorias/', views.categorias, name='categorias'),
     # CREAR Categoria
     path('categorias/crear/', CrearCategoriasView.as_view(), name='crear_categoria'),
 
@@ -51,9 +51,6 @@ urlpatterns = [
     path('categorias/eliminar/<int:pk>', EliminarCategoriasView.as_view(),
          name='eliminar_categoria'),
 
-    # CREAR post
-
-
     # EDITAR post
     path('blog/editar/<int:pk>',
          EditarPostsView.as_view(), name='editar_post'),
@@ -61,6 +58,5 @@ urlpatterns = [
     # ELIMINAR post
     path('blog/eliminar/<int:pk>', EliminarPostsView.as_view(),
          name='eliminar_post'),
-
 
 ]
