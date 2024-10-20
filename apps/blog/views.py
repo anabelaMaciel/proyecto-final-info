@@ -76,7 +76,7 @@ def register(request):
             user = form.save(commit=False)
             user.save()
 
-            group = Group.objects.get(name="Registrado")
+            group = Group.objects.get_or_create(name="Registrado")
             user.groups.add(group)
 
             login(request, user)
