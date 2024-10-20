@@ -41,21 +41,26 @@ class ListarPostsView(ListView):
         
         return queryset
 
-
 def noticia(request, url):
     post = get_object_or_404(Posts, slug=url)
     
     coms = Comentarios.objects.filter(post=post).prefetch_related(
         Prefetch('likes', queryset=Usuario_personalizado.objects.only('id'))
     )
-    is_like_post = Like_post.objects.filter(post=post, usuario=request.user).exists()
+    
+    if request.user.is_authenticated:
+        is_like_post = Like_post.objects.filter(post=post, usuario=request.user).exists()
+    else:
+        is_like_post = False
+    
     total_likes = Like_post.objects.filter(post=post).count()
 
     return render(request, 'blog/noticia.html', {
         'total_likes': total_likes,
         'is_like_post': is_like_post,
         'post': post,
-        'comentarios': coms
+        'comentarios': coms,
+        'user': request.user
     })
 
 def contactanos(request):

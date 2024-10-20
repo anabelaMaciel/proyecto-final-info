@@ -6,14 +6,14 @@
     <h1>Noticias - {{ post.titulo }}</h1>
     
     {% if grupo_colaborador %}
-    <div class="d-flex mt-2">
-        <a class="mx-1 btn btn-info rounded-pill d-flex align-items-center" href="{% url 'editar_post' post.id %}">
-            <i class="fa fa-edit mx-2" aria-hidden="true"></i> EDITAR
-        </a>
-        <a class="mx-1 btn btn-danger rounded-pill d-flex align-items-center" href="{% url 'eliminar_post' post.id %}">
-            <i class="fa fa-trash mx-2" aria-hidden="true"></i> ELIMINAR
-        </a>
-    </div>
+        <div class="d-flex mt-2">
+            <a class="mx-1 btn btn-info rounded-pill d-flex align-items-center" href="{% url 'editar_post' post.id %}">
+                <i class="fa fa-edit mx-2" aria-hidden="true"></i> EDITAR
+            </a>
+            <a class="mx-1 btn btn-danger rounded-pill d-flex align-items-center" href="{% url 'eliminar_post' post.id %}">
+                <i class="fa fa-trash mx-2" aria-hidden="true"></i> ELIMINAR
+            </a>
+        </div>
     {% endif %}
 </div>
 
@@ -28,7 +28,7 @@
 <div>{{ post.cuerpo|safe }}</div>
 
 <div class="my-3" id="like_post">
-    <form action="{% url 'like_post' post.id %}" method="post">
+    <form action="{% if user.is_authenticated %} {% url 'like_post' post.id %} {% endif %}" method="post">
         {% csrf_token %}
         <button type="submit" class="btn btn-outline-primary">
             {% if is_like_post %}
@@ -46,17 +46,19 @@
 <div class="max-w-4xl mx-auto p-4">
     <h2 class="text-xl font-semibold mb-4">Sección de comentarios</h2>
     
-    <form method="post" action="{% url 'crear_coment' %}" class="mb-4">
-        {% csrf_token %}
-        <div class="input-group">
-            <input name="contenido" rows="2" class="form-control" placeholder="Escribe un comentario..." required />
-            <input type="hidden" name="post" value="{{ post.id }}">
-            <input type="hidden" name="usuario" value="{{ request.user.id }}">
-            <button type="submit" class="btn btn-primary">
-                <i class="fa fa-paper-plane" aria-hidden="true"></i>
-            </button>
-        </div>
-    </form>
+    {% if user.is_authenticated %}
+        <form method="post" action="{% url 'crear_coment' %}" class="mb-4">
+            {% csrf_token %}
+            <div class="input-group">
+                <input name="contenido" rows="2" class="form-control" placeholder="Escribe un comentario..." required />
+                <input type="hidden" name="post" value="{{ post.id }}">
+                <input type="hidden" name="usuario" value="{{ request.user.id }}">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                </button>
+            </div>
+        </form>
+    {% endif %}
 
     {% for comentario in comentarios %}
         <div class="card mb-3">
@@ -66,24 +68,30 @@
                         <i class="fas fa-user-circle text-primary me-2"></i>
                         <span class="text-muted">{{ comentario.usuario.username }} - {{ comentario.fecha_comentario }}</span>
                     </div>
-                    <div>
-                        <a href="{% url 'editar_coment' pk=comentario.id %}" class="btn btn-sm btn-primary me-2">
-                            <i class="fa fa-edit" aria-hidden="true"></i>
-                        </a>
-                        <a href="{% url 'eliminar_coment' pk=comentario.id %}" class="btn btn-sm btn-danger">
-                            <i class="fa fa-trash" aria-hidden="true"></i>
-                        </a>
-                    </div>
+
+                    {% if user.is_authenticated %}
+                        <div>
+                            <a href="{% url 'editar_coment' pk=comentario.id %}" class="btn btn-sm btn-primary me-2">
+                                <i class="fa fa-edit" aria-hidden="true"></i>
+                            </a>
+                            <a href="{% url 'eliminar_coment' pk=comentario.id %}" class="btn btn-sm btn-danger">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    {% endif %}
                 </div>
                 <p class="card-text text-black">{{ comentario.contenido }}</p>
                 
-                <form action="{% url 'like_comentario' comentario.id %}" method="post" class="mt-2">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-sm {% if user in comentario.likes.all %}btn-danger{% else %}btn-outline-secondary{% endif %}">
-                        <i class="fa fa-heart" aria-hidden="true"></i>
-                        <span class="ms-1">{{ comentario.total_likes }}</span>
-                    </button>
-                </form>
+                {% if user.is_authenticated %}
+                    <form action="{% url 'like_comentario' comentario.id %}" method="post" class="mt-2">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-sm {% if user in comentario.likes.all %}btn-danger{% else %}btn-outline-secondary{% endif %}">
+                            <i class="fa fa-heart" aria-hidden="true"></i>
+                            <span class="ms-1">{{ comentario.total_likes }}</span>
+                        </button>
+                    </form>
+                {% endif %}
+
             </div>
         </div>
     {% endfor %}
