@@ -37,15 +37,37 @@
         }
 
         .verde-lima {
-            border-color: #88B702 !important;
-            background-color: #88B702 !important;
-        }
-        
-        .verde-lima-transparent {
-            color: #88B702 !important;
+            background-color: #88B702 !important; 
+            color: white !important;
+    }
+
+        .verde-lima:hover {
+            background-color: #66A500 !important; 
+            color: #FFFFFF !important; 
             border-color: #88B702 !important; 
         }
 
+        .verde-lima-transparent {
+            color: #88B702 !important; 
+            border-color: #88B702 !important; 
+    }
+
+        .static-separator {
+            border-radius: 30px; 
+            text-decoration: none; 
+            background-color: #66A500; 
+            color: white; 
+            padding: 10px 20px; 
+            pointer-events: none; 
+        }
+        
+        .static-separator:hover {
+            background-color: #66A500; 
+            color: white; 
+            text-decoration: none; 
+            cursor: default; 
+        }
+        
         .header-bg {
             background-color: #000000b0;
         }
@@ -67,6 +89,7 @@
             backdrop-filter: blur(4.8px);
             -webkit-backdrop-filter: blur(4.8px);
             border: 1px solid rgba(255, 255, 255, 0.06);
+        
         }
 
         .glass-effect-back {
@@ -210,7 +233,7 @@
             border-radius: 20px;
             margin-top: 20px;
             margin-right: 200px;
-            }
+        }
     </style>
 </head>
 
@@ -218,9 +241,9 @@
 
     <header class="header-bg">
         <div class="container d-flex flex-wrap justify-content-between align-items-center">
-            <div class="text-white h3 font-weight-bold">
+            <a href="/" class="text-white h3 font-weight-bold">
                 <img class="mt-3" src="{% static 'blog/images/Icono_TF_blanco.ico' %}" alt="Logo de X TECH" width="65" height="auto">
-            </div>
+            </a>
             <nav class="d-flex small flex-wrap align-items-center">
                 <a class="text-white mx-3" href="/">
                     <small>Home</small>
@@ -239,9 +262,9 @@
                 </a>
             </nav>
             <div class="d-flex flex-wrap align-items-center">
-                <button class="btn rounded-pill verde-lima px-4 btn-success mx-2 my-1">
+                <a href="{% url 'login' %}" class="btn rounded-pill verde-lima px-4 btn-success mx-2 my-1">
                     <b class="small">INICIAR SESION</b>
-                </button>
+                </a>
                 <a href="{% url 'register' %}" class="btn rounded-pill verde-lima-transparent px-4 btn-transparent mx-2 my-1">
                     <b class="small">REGISTRARSE</b>
                 </a>
@@ -268,7 +291,9 @@
 
                     <div class="row mb-0 mb-md-0">
                         <div class="text-white h4 font-weight-bold mb-3">
-                        <img class="mt-3" src="{% static 'blog/images/Logo_TF_blanco.png' %}" alt="Logo de X TECH" width="130" height="auto">
+                        <a href="/">    
+                            <img class="mt-3" src="{% static 'blog/images/Logo_TF_blanco.png' %}" alt="Logo de X TECH" width="130" height="auto">
+                        </a>    
                         </div>
                     </div>
 
@@ -279,29 +304,29 @@
                             <ul class="list-unstyled row">
                                 <div class="col-md-6">
                                     <li>
-                                        <a class="text-gray-400" href="/">
+                                        <a class="text-white" href="/">
                                             Home
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="text-gray-400" href="about">
+                                        <a class="text-white" href="{% url 'about-us' %}">
                                             Conocenos
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="text-gray-400" href="/categorias">
+                                        <a class="text-white" href="{% url 'categorias' %}">
                                             Categorías
                                         </a>
                                     </li>
                                 </div>
                                 <div class="col-md-6">
                                     <li>
-                                        <a class="text-gray-400" href="/blog">
+                                        <a class="text-white" href="{% url 'blog' %}">
                                             Blog
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="text-gray-400" href="/contactanos">
+                                        <a class="text-white" href="{% url 'contactanos' %}">
                                             Contacto
                                         </a>
                                     </li>
@@ -326,10 +351,10 @@
                                 <i class="h2 mx-3 fas fa-envelope text-white mr-2">
                                 </i>
                                 <div>
-                                    <span>Mail:</span>
-                                    <small>
-                                        tecnofilos.xtech@gmail.com
-                                    </small>
+                                    <span>E-mail:</span>
+                                    <a href="mailto:tecnofilos.xtech@hotmail.com">
+                                        tecnofilos.xtech@hotmail.com
+                                    </a>
                                 </div>
 
                                 <div class="vr mx-3 my-auto" style="height: 50px"></div>
@@ -350,15 +375,15 @@
                     </div>
 
                     <div class="d-flex justify-content-end">
-                        <a class="text-gray-400 mx-2" href="#">
+                        <a class="text-white mx-2" href="https://www.facebook.com/profile.php?id=61566988810266" target="_blank">
                             <i class="h3 fab fa-facebook">
                             </i>
                         </a>
-                        <a class="text-gray-400 mx-2" href="#">
+                        <a class="text-white mx-2" href="#">
                             <i class="h3 fab fa-instagram">
                             </i>
                         </a>
-                        <a class="text-gray-400 mx-2" href="#">
+                        <a class="text-white mx-2" href="https://www.linkedin.com/groups/13112033/" target="_blank">
                             <i class="h3 fab fa-linkedin">
                             </i>
                         </a>
@@ -366,18 +391,12 @@
 
                     <hr />
                     <small class="row text-center text-gray-600 mt-4">
-                        © 2024 BlogTech. All rights reserved.
+                        © 2024  TECNÓFILOS. Todos los derechos reservados.
                     </small>
-
                 </div>
             </div>
         </div>
     </footer>
-
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
 </body>
 
 </html>
