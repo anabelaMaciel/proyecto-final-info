@@ -18,9 +18,25 @@ def home(request):
 def about_us(request):
     return render(request, 'blog/about.html')
 
-def blog(request):
-    todos_posts = Posts.objects.all()
-    return render(request, 'blog/blog.html', {'posts': todos_posts})
+class ListarPostsView(ListView):
+    model = Posts
+    template_name = 'blog/blog.html'
+    context_object_name = 'posts'
+
+    def get_queryset(self):
+        queryset = Posts.objects.all()
+        categoria = self.request.GET.get('categoria')
+        search_query = self.request.GET.get('q')
+        
+        # Aca filtramos por categorias, es para cuando venimos de "Categorias"
+        if categoria:
+            queryset = queryset.filter(categorias__nombre=categoria)
+        
+        # Aca buscamos por titulo, es para el buscador
+        if search_query:
+            queryset = queryset.filter(titulo__icontains=search_query)  
+        
+        return queryset
 
 def noticia(request, url):
     post = get_object_or_404(Posts, slug=url)
@@ -38,13 +54,6 @@ def noticia(request, url):
         'post': post,
         'comentarios': coms
     })
-
-# def listar_noticias(request):
-#     category = categorias.GET.get('categoria')
-#     if category:
-#         noticias = Posts.objects.filter(categoria_nombre = category)
-#     else:
-#         noticias = Posts.objects.all()    
 
 def contactanos(request):
     return render(request, 'blog/contactanos.html')

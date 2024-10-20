@@ -9,7 +9,12 @@
         text-decoration: none !important;
     }
 </style>
-#BOTON DE CREAR POST 
+
+<form class="form-inline col-md-4 col-sm-12 pb-5 d-flex my-2 my-lg-0" method="get" action="{% url 'blog' %}">
+    <input class="form-control mr-sm-2 mx-4" type="search" name="q" placeholder="Buscar..." aria-label="Buscar" value="{{ request.GET.q }}">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+</form>
+
 <div class="d-flex flex-wrap">
     {% for post in posts %}
         <a href="{{ post.slug }}">
@@ -34,7 +39,6 @@
                 </div>
             </div>
         </a>
-        #BOTONES EDITAR ELIMINAR #CAMBIAR URL AND ID 
     {% endfor %}
 </div>
 

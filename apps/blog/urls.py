@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from . import views
-from .views import EditarCategoriasView, CrearCategoriasView, EliminarCategoriasView, CrearPostsView, EditarPostsView, EliminarPostsView
+from .views import ListarPostsView, EditarCategoriasView, CrearCategoriasView, EliminarCategoriasView, CrearPostsView, EditarPostsView, EliminarPostsView
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -26,8 +26,10 @@ urlpatterns = [
     path('like/<int:post_id>/', views.like_post, name='like_post'),
     path('like/<int:comentario_id>/',
          views.like_comentario, name='like_comentario'),
-
-    path('blog/', views.blog, name='blog'),
+    
+    #LISTAR noticias
+    path('blog/', ListarPostsView.as_view(), name='blog'),  
+    
     path('blog/<str:url>/', views.noticia, name='noticia'),
 
     path('contactanos/', views.contactanos, name='contactanos'),
@@ -58,7 +60,5 @@ urlpatterns = [
 
     # ELIMINAR post
     path('blog/eliminar/<int:pk>', EliminarPostsView.as_view(),
-         name='eliminar_post'),
-
-
+         name='eliminar_post'),   
 ]
