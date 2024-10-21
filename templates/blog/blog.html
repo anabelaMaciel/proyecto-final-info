@@ -23,12 +23,22 @@
     {% endif %}
 
 </div>
+
 <div class="col-md-12 mt-3">
-    <div class="btn-group p-2 mx-3" role="group" aria-label="Filtros de orden" style="gap: 200px;">
-        <a href="?orden=ascendente{% if request.GET.categoria %}&categoria={{ request.GET.categoria }}{% endif %}" class="btn btn-secondary rounded">Orden Ascendente</a>
-        <a href="?orden=descendente{% if request.GET.categoria %}&categoria={{ request.GET.categoria }}{% endif %}" class="btn btn-secondary rounded">Orden Descendente</a>
-        <a href="?orden=antiguedad{% if request.GET.categoria %}&categoria={{ request.GET.categoria }}{% endif %}" class="btn btn-secondary rounded">Más Antiguas</a>
-        <a href="?orden=recientes{% if request.GET.categoria %}&categoria={{ request.GET.categoria }}{% endif %}" class="btn btn-secondary rounded">Más Recientes</a>
+    <div class="mx-3">
+        <form method="get" action="{% url 'blog' %}" class="d-flex align-items-center">
+            <label for="ordenSelect" class="me-2">Ordenar por:</label>
+            <select id="ordenSelect" name="orden" class="form-select" style="width: auto;" onchange="this.form.submit()">
+                <option value="">Seleccionar orden</option>
+                <option value="ascendente"{% if request.GET.orden == 'ascendente' %} selected{% endif %}>Orden Ascendente</option>
+                <option value="descendente"{% if request.GET.orden == 'descendente' %} selected{% endif %}>Orden Descendente</option>
+                <option value="antiguedad"{% if request.GET.orden == 'antiguedad' %} selected{% endif %}>Más Antiguas</option>
+                <option value="recientes"{% if request.GET.orden == 'recientes' %} selected{% endif %}>Más Recientes</option>
+            </select>
+            {% if request.GET.categoria %}
+                <input type="hidden" name="categoria" value="{{ request.GET.categoria }}">
+            {% endif %}
+        </form>
     </div>
 </div>
 
