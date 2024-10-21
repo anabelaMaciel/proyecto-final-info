@@ -30,15 +30,28 @@ class ListarPostsView(ListView):
         queryset = Posts.objects.all()
         categoria = self.request.GET.get('categoria')
         search_query = self.request.GET.get('q')
-        
-        # Aca filtramos por categorias, es para cuando venimos de "Categorias"
+        orden = self.request.GET.get('orden')  # Nuevo parámetro para el orden
+
+        # Filtramos por categorías si venimos de "Categorias"
         if categoria:
             queryset = queryset.filter(categorias__nombre=categoria)
         
-        # Aca buscamos por titulo, es para el buscador
+        # Buscamos por título si hay un término en el buscador
         if search_query:
-            queryset = queryset.filter(titulo__icontains=search_query)  
-        
+            queryset = queryset.filter(titulo__icontains=search_query)
+
+        # Ordenamos según el parámetro 'orden'
+        if orden == 'ascendente':
+            queryset = queryset.order_by('titulo')
+        elif orden == 'descendente':
+            queryset = queryset.order_by('-titulo')
+        elif orden == 'antiguedad':
+            queryset = queryset.order_by('fecha_creacion')
+        elif orden == 'recientes':
+            queryset = queryset.order_by('-fecha_creacion')
+        else:
+            queryset = queryset.order_by('-fecha_creacion')  # Orden por defecto: más recientes
+
         return queryset
 
 def noticia(request, url):
@@ -86,7 +99,6 @@ def login_view(request):
         messages.error(request, 'Datos incorrectos.')
     return render(request, 'blog/login.html')
 
-
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
@@ -94,7 +106,7 @@ def register(request):
             user = form.save(commit=False)
             user.save()
 
-            group = Group.objects.get_or_create(name="Registrado")
+            group, created = Group.objects.get_or_create(name="Registrado")
             user.groups.add(group)
 
             login(request, user)
@@ -109,11 +121,9 @@ def register(request):
 
     return render(request, 'blog/register.html', {'form': form})
 
-
 def categorias(request):
     todas_categorias = Categorias.objects.all()
     return render(request, 'blog/categorias.html', {"categorias": todas_categorias})
-
 
 # @login_required
 def like_post(request, post_id):
