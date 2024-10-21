@@ -1,21 +1,18 @@
 from typing import Any
 from django import forms
-from .models import Eventos
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
+from apps.blog.models import Usuario_personalizado
 
 
 class SignUpForm(UserCreationForm):
     class Meta:
-        model = User
+        model = Usuario_personalizado
         fields = ('username',
                   'email',
                   'password1',
                   'password2'
-        )
-
-
-
+                  )
 
     """ def clean(self):
         data = super().clean()
@@ -26,11 +23,11 @@ class SignUpForm(UserCreationForm):
             raise forms.ValidationError('Las contraseñas no coinciden')
 
         return data"""
-        
+
+
 class EventoForm(forms.ModelForm):
-    
+
     class Meta:
         model = Eventos
-        fields = ['titulo','descripcion','fecha','ubicacion']
-        widgets = {'fecha': forms.DateInput(attrs={'type':'date'}),}
-
+        fields = ['titulo', 'descripcion', 'fecha', 'ubicacion']
+        widgets = {'fecha': forms.DateInput(attrs={'type': 'date'}), }

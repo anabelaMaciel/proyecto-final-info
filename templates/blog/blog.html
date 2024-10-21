@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    a:hover {
+        color: unset !important;
+        opacity: 0.8 !important;
+        text-decoration: none !important;
+    }
+</style>
+
+<div class="col-md-12 d-flex">
+    <form class="form-inline col-md-4 col-sm-12 d-flex my-2 my-lg-0" method="get" action="{% url 'blog' %}">
+        <input class="form-control mr-sm-2 mx-4" type="search" name="q" placeholder="Buscar..." aria-label="Buscar" value="{{ request.GET.q }}">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+    </form>
+    
+    {% if grupo_colaborador %}
+        <div class="btnCrearPost ms-auto">
+            <a class="btn btn-success" href="{% url 'crear_post' %}"><i class="fa fa-plus" aria-hidden="true"></i> CREAR NUEVA NOTICIA</a>
+        </div>
+    {% endif %}
+
+</div>
+
+<div class="col-md-12 mt-3">
+    <div class="mx-3">
+        <form method="get" action="{% url 'blog' %}" class="d-flex align-items-center">
+            <label for="ordenSelect" class="me-2">Ordenar por:</label>
+            <select id="ordenSelect" name="orden" class="form-select" style="width: auto;" onchange="this.form.submit()">
+                <option value="">Seleccionar orden</option>
+                <option value="ascendente"{% if request.GET.orden == 'ascendente' %} selected{% endif %}>Orden Ascendente</option>
+                <option value="descendente"{% if request.GET.orden == 'descendente' %} selected{% endif %}>Orden Descendente</option>
+                <option value="antiguedad"{% if request.GET.orden == 'antiguedad' %} selected{% endif %}>Más Antiguas</option>
+                <option value="recientes"{% if request.GET.orden == 'recientes' %} selected{% endif %}>Más Recientes</option>
+            </select>
+            {% if request.GET.categoria %}
+                <input type="hidden" name="categoria" value="{{ request.GET.categoria }}">
+            {% endif %}
+        </form>
+    </div>
+</div>
+
+<hr>
+
+<div class="d-flex flex-wrap">
+    {% for post in posts %}
+        <a href="{% url 'noticia' post.slug %}">
+            <div class="card bg-dark verde-lima mt-0 m-3" style="width: 18rem;">
+                <div class="w-100 bg-black d-flex">
+                    {% if post.imagen %}
+                        <img style="width: 100%; height: 150px;" class="card-img-top mx-auto" src="{{ post.imagen.url }}" alt="..." height="auto">
+                    {% else %}
+                        <img style="width: 100%; height: 150px;" class="card-img-top mx-auto" src="{% static 'post_default.png' %}" alt="..." height="auto">
+                    {% endif %}
+                </div>
+
+                <div class="card-body">
+                    <h5 class="card-title">{{ post.titulo }}</h5>
+                    <p class="card-text">{{ post.subtitulo }}</p>
+                </div>
+
+                <hr>
+                <div class="d-flex flex-column">
+                    <small class="card-title mx-3 small"><b>{{ post.usuario.username }}</b></small>
+                    <small class="card-title mx-3 small">{{ post.fecha_actualizacion }}</small>
+                </div>
+            </div>
+        </a>
+    {% endfor %}
+</div>
+
+{% endblock %}

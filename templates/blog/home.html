@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+<style>
+    body {
+        background-image: url("/static/blog/images/portada.png");
+        background-size: contain;
+        background-color: black;
+        background-blend-mode: soft-light;
+    }
+</style>
+
+<div class="container-fluid">
+    <section class="full-screen-header text-white text-start pb-5">
+        <div class="container">
+            <h4 class="text-light fw-bold col-md-4">BIENVENIDO AL RINCÓN DE LAS NOTICIAS TECH, QUE DISFRUTES</h4>
+            <p class="lead text-light fw-bold col-md-3 mt-5">Mantente al día con las últimas novedades.</p>
+            <a style="background-color: #1a1a1a87;" href="{% url 'blog' %}"
+                class="btn btn-transparent rounded-pill verde-lima-transparent text-light mt-3"><small class="small">IR ALLI</small></a>
+        </div>
+    </section>
+    <div class="line-with-button my-5">
+        <div class="lime-line left my-5"></div>
+        <a href="#blog" class="static-separator">Todo sobre el mundo tech en un solo lugar</a>
+        <div class="lime-line right"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <div class="card bg-dark text-white h-100">
+                <img src="{% static 'blog/images/VR.jpg'%}" alt="Realidad Virtual">
+                <div class="card-body">
+                    <h5 class="card-title">¡Bienvenidos a la realidad virtual! 👩‍💻</h5>
+                    <p class="card-text">La realidad virtual (VR) es una tecnología que sumerge a los usuarios en entornos 3D simulados, permitiendo la interacción mediante dispositivos como gafas y controladores.</p>
+                    <a href="blog/bienvenidos/" class="btn btn-secondary">Leer más</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 mb-3">
+            <div class="card bg-dark text-white h-100">
+                <img src="{% static 'blog/images/ciberseguridad.jpg' %}" alt="ciberseguridad">
+                <div class="card-body">
+                    <h5 class="card-title">Ciberseguridad</h5>
+                    <p class="card-text">Ciberseguridad: Sexting, Grooming, Ciberbullying y Ransomware
+                        El sexting, grooming, ciberbullying y ransomware son riesgos digitales que afectan la privacidad y seguridad en línea. La prevención, educación y uso responsable de la tecnología son clave para protegerse y minimizar estas amenazas.
+                        </p>
+                    <a href="#" class="btn btn-secondary">Leer más</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 mb-3">
+            <div class="card bg-dark text-white h-100">
+                <img src="{% static 'blog/images/robotica..png' %}" alt="robotica">
+                <div class="card-body">
+                    <h5 class="card-title">Por primera vez, la UNNE y el Informatorio se unen para un proyecto formativo destinado a las infancias, acercándolos a la tecnología y programación mediante el Aprendizaje Basado en Proyectos, con el apoyo del Campus Virtual de TICMAS para el seguimiento de los alumnos.</p>
+                    <a href="#" class="btn btn-secondary">Leer más</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card bg-dark text-white h-100">
+                <img src="{% static 'blog/images/Ia.jpg'%}" alt="IA">
+                <div class="card-body">
+                    <h5 class="card-title">IA! 👩‍💻</h5>
+                    <p class="card-text">La inteligencia artificial (IA) es la creación de sistemas informáticos capaces de realizar tareas que normalmente requieren inteligencia humana.</p>
+                    <a href="#" class="btn btn-secondary">Leer más</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+    <div class="container py-5 text-center text-white" style="background-color: #1a1a1a;">
+        <h3>Disfruta de ser parte de nuestro blog</h3>
+        <p class="lead">Únete ahora, haciendo click aquí</p>
+        <a href="{% url 'register' %}" class="btn rounded-pill verde-lima px-4 btn-success mx-2 my-1">REGÍSTRATE</a>
+    </div>
+    <div class="container py-5">
+        <h2 class="text-center text-white mb-5">Conoce a nuestro team</h2>
+        <html>
+
+        <head>
+            <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+                integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet" />
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+        </head>
+
+        <body class=div_conocenos>
+            <div class="team-section">
+                <div class="d-flex flex-wrap justify-content-center w-100">
+                    <div class="col-md-3 team-member">
+                        <img src="{% static 'blog/images/Nico.png' %}" alt="Nico" data-bs-toggle="tooltip"
+                            title="Nicolas">
+                    </div>
+                    <div class="col-md-3 team-member">
+                        <img src="{% static 'blog/images/Pablo.png' %}" alt="Pablo" data-bs-toggle="tooltip"
+                            title="Pablo">
+                    </div>
+                    <div class="col-md-3 team-member">
+                        <img src="{% static 'blog/images/Inna.png' %}" alt="Inna" data-bs-toggle="tooltip"
+                            title="Eduina">
+                    </div>
+                    <div class="col-md-3 team-member">
+                        <img src="{% static 'blog/images/Robert.png' %}" alt="Robert" data-bs-toggle="tooltip"
+                            title="Roberto">
+                    </div>
+                    <div class="col-md-3 team-member">
+                        <img src="{% static 'blog/images/Cami.png' %}" alt="Cami" data-bs-toggle="tooltip"
+                            title="Camila">
+                    </div>
+                    <div class="col-md-3 team-member">
+                        <img src="{% static 'blog/images/Dario.png' %}" alt="Dario" data-bs-toggle="tooltip"
+                            title="Dario">
+                    </div>
+                    <div class="col-md-3 team-member">
+                        <img src="{% static 'blog/images/Yo.png' %}" alt="Tu Nombre" data-bs-toggle="tooltip"
+                            title="Anabela">
+                    </div>
+                    <div class="col-md-3 team-member">
+                        <img src="{% static 'blog/images/Ille.png' %}" alt="Ille" data-bs-toggle="tooltip"
+                            title="Ileana">
+                    </div>
+                </div>
+                <div class="conocenos d-flex justify-content-center">
+                    <a class="btn rounded-pill verde-lima px-4 btn-success mx-2 my-1" href="{% url 'about-us' %}">CONOCENOS</a>
+                </div>
+        </body>
+
+        </html>
+
+        {% endblock %}
