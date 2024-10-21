@@ -99,7 +99,6 @@ def login_view(request):
         messages.error(request, 'Datos incorrectos.')
     return render(request, 'blog/login.html')
 
-
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
@@ -107,7 +106,7 @@ def register(request):
             user = form.save(commit=False)
             user.save()
 
-            group = Group.objects.get_or_create(name="Registrado")
+            group, created = Group.objects.get_or_create(name="Registrado")
             user.groups.add(group)
 
             login(request, user)
@@ -122,11 +121,9 @@ def register(request):
 
     return render(request, 'blog/register.html', {'form': form})
 
-
 def categorias(request):
     todas_categorias = Categorias.objects.all()
     return render(request, 'blog/categorias.html', {"categorias": todas_categorias})
-
 
 # @login_required
 def like_post(request, post_id):
