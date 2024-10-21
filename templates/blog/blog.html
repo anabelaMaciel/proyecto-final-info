@@ -24,11 +24,11 @@
 
 </div>
 <div class="col-md-12 mt-3">
-    <div class="btn-group" role="group" aria-label="Filtros de orden">
-        <a href="?orden=ascendente{% if request.GET.categoria %}&categoria={{ request.GET.categoria }}{% endif %}" class="btn btn-secondary">Orden Ascendente</a>
-        <a href="?orden=descendente{% if request.GET.categoria %}&categoria={{ request.GET.categoria }}{% endif %}" class="btn btn-secondary">Orden Descendente</a>
-        <a href="?orden=antiguedad{% if request.GET.categoria %}&categoria={{ request.GET.categoria }}{% endif %}" class="btn btn-secondary">Más Antiguas</a>
-        <a href="?orden=recientes{% if request.GET.categoria %}&categoria={{ request.GET.categoria }}{% endif %}" class="btn btn-secondary">Más Recientes</a>
+    <div class="btn-group p-2 mx-3" role="group" aria-label="Filtros de orden" style="gap: 200px;">
+        <a href="?orden=ascendente{% if request.GET.categoria %}&categoria={{ request.GET.categoria }}{% endif %}" class="btn btn-secondary rounded">Orden Ascendente</a>
+        <a href="?orden=descendente{% if request.GET.categoria %}&categoria={{ request.GET.categoria }}{% endif %}" class="btn btn-secondary rounded">Orden Descendente</a>
+        <a href="?orden=antiguedad{% if request.GET.categoria %}&categoria={{ request.GET.categoria }}{% endif %}" class="btn btn-secondary rounded">Más Antiguas</a>
+        <a href="?orden=recientes{% if request.GET.categoria %}&categoria={{ request.GET.categoria }}{% endif %}" class="btn btn-secondary rounded">Más Recientes</a>
     </div>
 </div>
 
