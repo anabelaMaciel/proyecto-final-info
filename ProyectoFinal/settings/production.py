@@ -9,9 +9,11 @@ ALLOWED_HOSTS = ['Technofilos.pythonanywhere.com']
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(os.path.dirname(BASE_DIR) , 'prod.db'),
+        'NAME': os.path.join(os.path.dirname(BASE_DIR), 'prod.db'),
     }
 }
+
+AUTH_USER_MODEL = 'blog.Usuario_personalizado'
 
 TEMPLATES = [
     {
