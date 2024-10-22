@@ -46,12 +46,13 @@ class PostForm(ModelForm):
 class ComentForm(ModelForm):
     class Meta:
         model = Comentarios
-        fields = ['usuario', 'post', 'contenido',]
+        fields = ['contenido',]
 
 # Formulario de Contactanos
 
 
 class ContactanosForm(forms.Form):
-    nombre = forms.CharField(max_length=100, label='Nombre')
+    name = forms.CharField(max_length=100, label='Nombre')
     email = forms.EmailField(label='Correo electrónico')
-    asunto = forms.CharField(widget=forms.Textarea, label='Mensaje')
+    # Asegúrate de usar 'message' aquí
+    message = forms.CharField(widget=forms.Textarea, label='Mensaje')

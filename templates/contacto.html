@@ -38,25 +38,23 @@
 <body>
     <div class="contact-form">
         <h2 class="text-center">Ponte en contacto con nosotros</h2>
-        <form>
+        <form method="POST" action="{% url 'contactanos' %}">
+            {% csrf_token %}
             <div class="mb-3">
                 <label for="name" class="form-label">Nombre y apellido:</label>
-                <input type="text" class="form-control" id="name" placeholder="Ejemplo: Juan Manuel">
+                <input type="text" class="form-control" id="name" name="nombre" placeholder="Ejemplo: Juan Manuel">
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email:</label>
-                <input type="email" class="form-control" id="email" placeholder="Ejemplo: juan.manuel@gmail.com">
+                <input type="email" class="form-control" id="email" name="email" placeholder="Ejemplo: juan.manuel@gmail.com">
             </div>
             <div class="mb-3">
                 <label for="subject" class="form-label">Asunto:</label>
-                <textarea class="form-control" id="subject" rows="4" placeholder="Mensaje aqui"></textarea>
+                <textarea class="form-control" id="subject" name="mensaje" rows="4" placeholder="Mensaje aqui"></textarea>
             </div>
-            <div class="text-end">
-                <button type="submit" class="btn btn-submit">ENVIAR</button>
-            </div>
+            <button type="submit" class="btn btn-submit">ENVIAR</button>
         </form>
     </div>
-    
 </body>
 </html>
 {% endblock %}

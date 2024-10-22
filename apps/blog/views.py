@@ -1,16 +1,14 @@
-from django.shortcuts import render, redirect, get_object_or_404, redirect
+from django.shortcuts import render, redirect, get_object_or_404, redirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from django.db.models import Prefetch
 from django.contrib.auth import authenticate, login
-from django.db.models.query import QuerySet
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
-from .models import Posts, Categorias, Comentarios, Like_comentario, Like_post, Usuario_personalizado
+from .models import Posts, Categorias, Comentarios, Like_post, Usuario_personalizado
 from .forms import CategoriasForm, PostForm, ComentForm, ContactanosForm
-from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
-from django.core.mail import send_mail
-
+from django.views.generic import CreateView, ListView, UpdateView, DeleteView
+from django.core.mail import send_mail, BadHeaderError
 
 from .forms import UserRegisterForm
 from django.contrib import messages
@@ -22,6 +20,10 @@ def home(request):
 
 def about_us(request):
     return render(request, 'blog/about.html')
+
+
+def success(request):
+    return render(request, 'blog/success.html')
 
 
 class ListarPostsView(ListView):
@@ -69,34 +71,32 @@ def noticia(request, url):
     })
 
 
-"""def contactanos(request):
-    return render(request, 'blog/contactanos.html')"""
+def contactanos(request):
+    return render(request, 'blog/contactanos.html')
 
 
 def contactanos_view(request):
     if request.method == 'POST':
         form = ContactanosForm(request.POST)
         if form.is_valid():
-            # Procesar la información del formulario
-            nombre = form.cleaned_data['nombre']
+            name = form.cleaned_data['name']
             email = form.cleaned_data['email']
-            asunto = form.cleaned_data['mensaje']
+            message = form.cleaned_data.get('message', '')
 
-            # Enviar un correo electrónico
-            send_mail(
-                f'Mensaje de {nombre}',  # Asunto
-                asunto,               # Cuerpo del mensaje
-                email,                 # Correo del remitente
-                ['tecnofilos.xtech@hotmail.com'],  # Correo del destinatario
-            )
-
-            # Redirigir a una página de éxito
-            return redirect('contact_success')
-
+            try:
+                send_mail(
+                    f'Mensaje de {name}',
+                    message,
+                    email,
+                    ['tecnofilos.xtech@hotmail.com'],
+                )
+                return redirect('/success')
+            except BadHeaderError:
+                return HttpResponse('Encabezado de correo no válido.')
     else:
         form = ContactanosForm()
 
-    return render(request, 'form_contacto.html', {'form': form})
+    return render(request, 'blog/form_contactanos.html', {'form': form})
 
 
 def login_view(request):

@@ -20,6 +20,7 @@ from . import views
 from .views import contactanos_view, CrearComentariosView, ListarPostsView, EditarComentariosView, EliminarComentariosView, EditarCategoriasView, CrearCategoriasView, EliminarCategoriasView, CrearPostsView, EditarPostsView, EliminarPostsView
 from django.contrib.auth import views as auth_views
 
+
 urlpatterns = [
     path('', views.home, name='blog-home'),
     path('about/', views.about_us, name='about-us'),
@@ -54,8 +55,8 @@ urlpatterns = [
     path('comentario/eliminar/<int:pk>/',
          EliminarComentariosView.as_view(), name='eliminar_coment'),
 
-    path('contactanos/', views.contactanos_view, name='contactanos'),
-    path('contactanos/success/', contactanos_view, name='contactanos_success'),
-
-
+    path('contactanos/',
+         views.contactanos_view, name='contactanos'),
+    path('success/',
+         views.success, name='success'),
 ]
