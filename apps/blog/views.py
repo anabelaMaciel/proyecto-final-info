@@ -35,8 +35,9 @@ class ListarPostsView(ListView):
         queryset = Posts.objects.all()
         categoria = self.request.GET.get('categoria')
         search_query = self.request.GET.get('q')
+        orden = self.request.GET.get('orden')  # Nuevo parámetro para el orden
 
-        # Aca filtramos por categorias, es para cuando venimos de "Categorias"
+        # Filtramos por categorías si venimos de "Categorias"
         if categoria:
             queryset = queryset.filter(categorias__nombre=categoria)
 
@@ -127,7 +128,7 @@ def register(request):
             user = form.save(commit=False)
             user.save()
 
-            group = Group.objects.get_or_create(name="Registrado")
+            group, created = Group.objects.get_or_create(name="Registrado")
             user.groups.add(group)
 
             login(request, user)
@@ -147,8 +148,9 @@ def categorias(request):
     todas_categorias = Categorias.objects.all()
     return render(request, 'blog/categorias.html', {"categorias": todas_categorias})
 
-
 # @login_required
+
+
 def like_post(request, post_id):
     post = get_object_or_404(Posts, id=post_id)
     like, created = Like_post.objects.get_or_create(
