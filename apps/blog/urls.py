@@ -42,9 +42,12 @@ urlpatterns = [
 
     # CRUD operations for categories
     path('categorias/', views.categorias, name='categorias'),
+    # CREAR categoria
     path('categorias/crear/', CrearCategoriasView.as_view(), name='crear_categoria'),
+    # EDITAR Categoria
     path('categorias/editar/<int:pk>/',
          EditarCategoriasView.as_view(), name='editar_categoria'),
+    # ELIMINAR Categoria
     path('categorias/eliminar/<int:pk>/',
          EliminarCategoriasView.as_view(), name='eliminar_categoria'),
 

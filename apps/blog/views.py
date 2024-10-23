@@ -266,21 +266,6 @@ class CrearComentariosView(CreateView):
         return reverse('noticia', kwargs={'url': self.object.post.slug})
 
 
-"""class CrearComentariosView(CreateView):
-    model = Comentarios
-    form_class = ComentForm
-    template_name = 'blog/form_coment.html'
-
-    def form_valid(self, form):
-        form.instance.usuario = self.request.user
-        post_id = self.request.POST.get('post')
-        form.instance.post = get_object_or_404(Posts, id=post_id)
-        return super().form_valid(form)
-
-    def get_success_url(self):
-        return reverse('noticia', kwargs={'url': self.object.post.slug})"""
-
-
 class EditarComentariosView(UpdateView):
     model = Comentarios
     form_class = ComentForm
