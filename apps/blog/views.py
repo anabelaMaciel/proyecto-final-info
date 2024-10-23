@@ -52,9 +52,6 @@ class ListarPostsView(ListView):
         else:
             queryset = queryset.order_by('-fecha_creacion')  # Orden por defecto: más recientes
 
-        for post in queryset:
-            print(post.titulo, post.fecha_creacion)
-
         return queryset
 
 def noticia(request, url):
