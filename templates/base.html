@@ -75,7 +75,7 @@
         }
         
         .header-bg {
-            background-color: #000000b0;
+            background-color: #000000b0; 
         }
         
         .header-super {
@@ -233,7 +233,7 @@
             position: relative;
             width: 100%;
         }
-
+        
         .team-section .team-member img {
             border-radius: 50%;
             width: 150px;
@@ -326,24 +326,35 @@
                             <small><b>MENU</b></small>
                             <hr class="my-4" />
                             <ul class="list-unstyled row">
-                                <nav class="d-flex small flex-wrap align-items-center justify-content-center">
-                                    <a class="text-white p-2 mx-3" href="/">
-                                        <small>Home</small>
-                                    </a>
-                                    <a class="text-white p-2 mx-3" href="/about">
-                                        <small>Conocenos</small>
-                                    </a>
-                                    <a class="text-white p-2 mx-3" href="/blog">
-                                        <small>Blog</small>
-                                    </a>
-                                    <a class="text-white p-2 mx-3" href="/contactanos">
-                                        <small>Contacto</small>
-                                    </a>
-                                    <a class="text-white p-2 mx-3" href="/categorias">
-                                        <small>Categorías</small>
-                                    </a>
-                                </nav>
-                    
+                                <div class="col-md-6">
+                                    <li>
+                                        <a class="text-white" href="/">
+                                            Home
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="text-white" href="{% url 'about-us' %}">
+                                            Conocenos
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="text-white" href="{% url 'categorias' %}">
+                                            Categorías
+                                        </a>
+                                    </li>
+                                </div>
+                                <div class="col-md-6">
+                                    <li>
+                                        <a class="text-white" href="{% url 'blog' %}">
+                                            Blog
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="text-white" href="{% url 'contactanos' %}">
+                                            Contacto
+                                        </a>
+                                    </li>
+                                </div>
                             </ul>
                         </div>
 
@@ -386,6 +397,7 @@
                             </div>
                         </div>
                     </div>
+
 
                     <div class="d-flex justify-content-end">
                         <a class="text-white mx-2" href="https://www.facebook.com/profile.php?id=61566988810266" target="_blank">
