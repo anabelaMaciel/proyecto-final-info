@@ -21,8 +21,10 @@
     {% if post.imagen %}
         <img class="img-fluid rounded" src="{{ post.imagen.url }}" alt="..." height="auto">
     {% else %}
-        <img class="img-fluid rounded" src="{% static 'blog/post_default.png' %}" alt="..." height="auto">
+        <img class="img-fluid rounded" src="{% static 'blog/images/post_default.png' %}" alt="..." height="auto">
     {% endif %}
+
+    
 </div>
 
 <div>{{ post.cuerpo|safe }}</div>
