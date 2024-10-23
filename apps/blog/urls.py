@@ -19,12 +19,14 @@ from django.urls import path
 from . import views
 from .views import CrearComentariosView, ListarPostsView, EditarComentariosView, EliminarComentariosView, EditarCategoriasView, CrearCategoriasView, EliminarCategoriasView, CrearPostsView, EditarPostsView, EliminarPostsView
 from django.contrib.auth import views as auth_views
+from .views import editar_perfil
 
 urlpatterns = [
     path('', views.home, name='blog-home'),
     path('about/', views.about_us, name='about-us'),
     path('like/<int:post_id>/', views.like_post, name='like_post'),
     path('like/comentario/<int:comentario_id>/', views.like_comentario, name='like_comentario'),
+    path('editar-perfil/', editar_perfil, name='editar_perfil'),
     
     # CRUD operations for posts
     path('blog/', ListarPostsView.as_view(), name='blog'),

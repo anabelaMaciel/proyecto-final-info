@@ -9,7 +9,8 @@ from django.urls import reverse, reverse_lazy
 from .models import Posts, Categorias, Comentarios, Like_comentario, Like_post, Usuario_personalizado
 from .forms import CategoriasForm, PostForm, ComentForm
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
-
+from .forms import EditarPerfilForm
+from .models import Usuario_personalizado
 from .forms import UserRegisterForm
 from django.contrib import messages
 
@@ -83,6 +84,9 @@ def contactanos(request):
     return render(request, 'blog/contactanos.html')
 
 def login_view(request):
+    storage = messages.get_messages(request)
+    storage.used = True 
+    
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
@@ -92,15 +96,17 @@ def login_view(request):
             user_obj = None
 
         if user_obj:
-            user = authenticate(
-                request, username=user_obj.username, password=password)
+            user = authenticate(request, username=user_obj.username, password=password)
             if user is not None:
-                login(request, user)
-                messages.success(request, 'Logueado con éxito!')
-                return redirect('blog-home')
+                login(request, user) 
+                return redirect('blog-home')  
+            else:
+                messages.error(request, 'Contraseña incorrecta.')
+        else:
+            messages.error(request, 'No existe un usuario con este correo.')
 
-        messages.error(request, 'Datos incorrectos.')
     return render(request, 'blog/login.html')
+
 
 def register(request):
     if request.method == 'POST':
@@ -138,6 +144,25 @@ def like_post(request, post_id):
         like.delete()
     return HttpResponseRedirect(reverse('noticia', args=[post.slug]) + '#like_post')
 
+#editar perfil
+@login_required  
+def editar_perfil(request):
+    user = request.user  
+
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        imagen_perfil = request.FILES.get('imagen_perfil')  
+        
+        user.username = username
+        user.email = email
+        if imagen_perfil:
+            user.imagen_perfil = imagen_perfil  
+
+        user.save()  
+        return redirect('blog-home') 
+
+    return render(request, 'blog/editar_perfil.html', {'user': user}) 
 
 # CRUD de Categorías, Posts y Comentarios
 # con CBV

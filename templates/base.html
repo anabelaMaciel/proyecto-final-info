@@ -254,47 +254,58 @@
         <span class="badge bg-danger position-absolute">Editor</span>
     {% endif %}
 
-    <header class="{% if grupo_colaborador %} header-super {% else %} header-bg {% endif %}">
-        <div class="container d-flex flex-wrap justify-content-between align-items-center">
-            <a href="/" class="d-flex text-white h3 font-weight-bold justify-content-center mx-auto mx-md-0">
-                <img class="mt-3" src="{% static 'blog/images/Icono_TF_blanco.ico' %}" alt="Logo de X TECH" width="65" height="auto">
+   <header class="{% if grupo_colaborador %} header-super {% else %} header-bg {% endif %}">
+    <div class="container d-flex flex-wrap justify-content-between align-items-center">
+        <a href="/" class="d-flex text-white h3 font-weight-bold justify-content-center mx-auto mx-md-0">
+            <img class="mt-3" src="{% static 'blog/images/Icono_TF_blanco.ico' %}" alt="Logo de X TECH" width="65" height="auto">
+        </a>
+        <nav class="d-flex small flex-wrap align-items-center justify-content-center">
+            <a class="text-white p-2 mx-3" href="/">
+                <small>Home</small>
             </a>
-            <nav class="d-flex small flex-wrap align-items-center justify-content-center">
-                <a class="text-white p-2 mx-3" href="/">
-                    <small>Home</small>
-                </a>
-                <a class="text-white p-2 mx-3" href="/about">
-                    <small>Conocenos</small>
-                </a>
-                <a class="text-white p-2 mx-3" href="/blog">
-                    <small>Blog</small>
-                </a>
-                <a class="text-white p-2 mx-3" href="/contactanos">
-                    <small>Contacto</small>
-                </a>
-                <a class="text-white p-2 mx-3" href="/categorias">
-                    <small>Categorías</small>
-                </a>
-            </nav>
-            <div class="d-flex flex-wrap align-items-center">
-                    {% if user.is_authenticated %}
-                        <form method="post" action="{% url 'logout' %}" class="d-inline">
-                            {% csrf_token %}
-                            <button type="submit" class="btn rounded-pill verde-lima-transparent px-4 btn-transparent mx-2 mt-3">
-                                <b class="small">CERRAR SESION</b>
-                            </button>
-                        </form>
+            <a class="text-white p-2 mx-3" href="/about">
+                <small>Conocenos</small>
+            </a>
+            <a class="text-white p-2 mx-3" href="/blog">
+                <small>Blog</small>
+            </a>
+            <a class="text-white p-2 mx-3" href="/contactanos">
+                <small>Contacto</small>
+            </a>
+            <a class="text-white p-2 mx-3" href="/categorias">
+                <small>Categorías</small>
+            </a>
+        </nav>
+        <div class="d-flex flex-wrap align-items-center">
+            {% if user.is_authenticated %}
+                <div class="d-flex align-items-center">
+                    {% if user.imagen_perfil %}
+                        <img src="{{ user.imagen_perfil.url }}" alt="Imagen de perfil" class="rounded-circle" width="40" height="40">
                     {% else %}
-                        <a href="{% url 'login' %}" class="btn rounded-pill verde-lima px-4 btn-success mx-2 my-1">
-                            <b class="small">INICIAR SESION</b>
-                        </a>
-                        <a href="{% url 'register' %}" class="btn rounded-pill verde-lima-transparent px-4 btn-transparent mx-2 my-1">
-                            <b class="small">REGISTRARSE</b>
-                        </a>
+                        <img src="{% static 'path/to/default-image.jpg' %}" alt="Imagen de perfil predeterminada" class="rounded-circle" width="40" height="40">
                     {% endif %}
-            </div>
+                    <a href="{% url 'editar_perfil' %}" class="btn rounded-pill verde-lima px-4 btn-success mx-2 my-1">
+                        <b class="small">MI CUENTA</b>
+                    </a>
+                </div>
+                <form method="post" action="{% url 'logout' %}" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn rounded-pill verde-lima-transparent px-4 btn-transparent mx-2 mt-3">
+                        <b class="small">CERRAR SESION</b>
+                    </button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}" class="btn rounded-pill verde-lima px-4 btn-success mx-2 my-1">
+                    <b class="small">INICIAR SESION</b>
+                </a>
+                <a href="{% url 'register' %}" class="btn rounded-pill verde-lima-transparent px-4 btn-transparent mx-2 my-1">
+                    <b class="small">REGISTRARSE</b>
+                </a>
+            {% endif %}
         </div>
-    </header>
+    </div>
+</header>
+
 
 
 

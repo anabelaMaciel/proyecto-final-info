@@ -16,7 +16,16 @@ class UserRegisterForm(UserCreationForm):
     class Meta:
         model = Usuario_personalizado
         fields = ['username', 'email', 'password1', 'password2']
+#editar perfil
+class EditarPerfilForm(forms.ModelForm):
+    class Meta:
+        model = Usuario_personalizado
+        fields = ['imagen_perfil']  # El campo que se va a editar
 
+        # Opcional: Puedes agregar widgets o estilos personalizados si lo necesitas
+        widgets = {
+            'imagen_perfil': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+        }
 
 # Formulario de Categorias
 class CategoriasForm(forms.ModelForm):

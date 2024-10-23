@@ -15,10 +15,10 @@ class Categorias(models.Model):
         return self.nombre
 
 # Usuario
-
-
 class Usuario_personalizado(AbstractUser):
     fecha_registro = models.DateField(auto_now_add=True)
+    imagen_perfil = models.ImageField(upload_to='profile_images/', blank=True, null=True)
+
     objects = UserManager()
 
     class Meta:
