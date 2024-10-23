@@ -37,8 +37,11 @@
             font-family: 'Roboto', sans-serif;
             background-color: #000;
             color: #fff;
+            
         }
-
+        nav a small {
+            font-size: 1rem; 
+        }
         .verde-lima {
             background-color: #88B702 !important; 
             color: white !important;
@@ -168,23 +171,48 @@
             font-family: Arial, sans-serif;
         }
 
-         .team-section {
+        .team-section {
             display: flex;
-            flex-direction: column; 
-            align-items: center; 
-            margin-bottom: 20px; 
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 40px;
+            border-radius: 20px;
+            color: white;
         }
-
+        
         .team-member {
-            text-align: center; 
+            text-align: center;
+            margin: 20px; 
         }
-
+        
         .team-member img {
-            width: 200px; 
-            height: 200px; 
-            object-fit: cover; 
-            border-radius: 10px; 
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 50%; 
+            border: 5px solid #fff; 
+            transition: transform 0.3s ease; 
         }
+        
+        .team-member img:hover {
+            transform: scale(1.1); 
+        }
+        
+        .conocenos a {
+            background-color: #aaff00; /* Color del botón */
+            color: #1c1c1c;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 10px 20px;
+            border-radius: 50px;
+            border: none;
+        }
+        
+        .conocenos a:hover {
+            background-color: #88cc00; /* Efecto de hover en el botón */
+        }
+        
        
         .row {
             margin-bottom: 40px; 
