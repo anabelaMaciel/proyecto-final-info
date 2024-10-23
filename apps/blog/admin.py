@@ -5,7 +5,7 @@ class CategoriasAdmin(admin.ModelAdmin):
     list_display = ['nombre', 'imagen']
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ['fecha_creacion', 'fecha_actualizacion', 'usuario', 'categorias', 'subtitulo', 'titulo']
+    list_display = ['fecha_creacion', 'usuario', 'categorias', 'subtitulo', 'titulo']
 
 class Usuario_personalizadoAdmin(admin.ModelAdmin):
     list_display = ['fecha_registro', 'username', 'email', 'is_staff', 'is_superuser']

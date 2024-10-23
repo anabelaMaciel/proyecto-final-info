@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apps.blog',
-    'apps.blog_auth',
 ]
 
 AUTH_USER_MODEL = 'blog.Usuario_personalizado'
@@ -122,7 +121,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'staticfiles')
-STATICFILE_DIRS = (os.path.join(os.path.dirname(BASE_DIR), 'static'), )
+STATICFILE_DIRS = (os.path.join(os.path.dirname(BASE_DIR), 'apps/blog/static'), )
 
 # Media = imagenes/audios/videos que vayan surgiendo o creciendo a lo largo de la ejecucion.(por formulario)
 MEDIA_URL = '/media/'

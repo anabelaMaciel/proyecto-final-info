@@ -31,13 +31,14 @@
             <div class="card bg-dark text-white h-100">
                 <img src="{% static 'blog/images/VR.jpg'%}" alt="Realidad Virtual">
                 <div class="card-body">
-                    <h5 class="card-title">¡Bienvenidos a la realidad virtual! 👩‍💻</h5>
-                    <p class="card-text">La realidad virtual (VR) es una tecnología que sumerge a los usuarios en entornos 3D simulados, permitiendo la interacción mediante dispositivos como gafas y controladores.</p>
-                    <a href="#" class="btn btn-secondary">Leer más</a>
+                    <h5 class="card-title">Realidad virtual </h5>
+                    <p class="card-text">La realidad virtual (VR) es una tecnología que sumerge a los usuarios 
+                        en entornos 3D simulados, permitiendo la interacción mediante dispositivos como gafas y 
+                        controladores.</p>
                 </div>
             </div>
         </div>
-        <div class="col-md-8 mb-3">
+        <div class="col-md-8 mb-3 d-flex">
             <div class="card bg-dark text-white h-100">
                 <img src="{% static 'blog/images/ciberseguridad.jpg' %}" alt="ciberseguridad">
                 <div class="card-body">
@@ -45,37 +46,47 @@
                     <p class="card-text">Ciberseguridad: Sexting, Grooming, Ciberbullying y Ransomware
                         El sexting, grooming, ciberbullying y ransomware son riesgos digitales que afectan la privacidad y seguridad en línea. La prevención, educación y uso responsable de la tecnología son clave para protegerse y minimizar estas amenazas.
                         </p>
-                    <a href="#" class="btn btn-secondary">Leer más</a>
                 </div>
             </div>
         </div>
-        <div class="col-md-8 mb-3">
-            <div class="card bg-dark text-white h-100">
-                <img src="{% static 'blog/images/robotica..png' %}" alt="robotica">
-                <div class="card-body">
-                    <h5 class="card-title">Por primera vez, la UNNE y el Informatorio se unen para un proyecto formativo destinado a las infancias, acercándolos a la tecnología y programación mediante el Aprendizaje Basado en Proyectos, con el apoyo del Campus Virtual de TICMAS para el seguimiento de los alumnos.</p>
-                    <a href="#" class="btn btn-secondary">Leer más</a>
+        
+        <div class="row">
+            <div class="col-md-8 mb-3 h-100">
+                <div class="card bg-dark text-white h-100 d-flex flex-column">
+                    <img src="{% static 'blog/images/robotica..png' %}" alt="robotica" class="card-img-top" style="object-fit: cover; height: 200px;">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Noticias locales</h5>
+                        <p class="card-text">Por primera vez, la UNNE y el Informatorio se unen para un proyecto formativo 
+                            destinado a las infancias, acercándolos a la tecnología y programación mediante el Aprendizaje 
+                            Basado en Proyectos, con el apoyo del Campus Virtual de TICMAS para el seguimiento de los 
+                            alumnos.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-3 h-100">
+                <div class="card bg-dark text-white h-100 d-flex flex-column">
+                    <img src="{% static 'blog/images/Ia.jpg'%}" alt="IA" class="card-img-top" style="object-fit: cover; height: 200px;">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">IA</h5>
+                        <p class="card-text">La inteligencia artificial (IA) es la creación de sistemas 
+                            informáticos capaces de realizar tareas que normalmente 
+                            requieren inteligencia humana.</p>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-4 mb-3">
-            <div class="card bg-dark text-white h-100">
-                <img src="{% static 'blog/images/Ia.jpg'%}" alt="IA">
-                <div class="card-body">
-                    <h5 class="card-title">IA! 👩‍💻</h5>
-                    <p class="card-text">La inteligencia artificial (IA) es la creación de sistemas informáticos capaces de realizar tareas que normalmente requieren inteligencia humana.</p>
-                    <a href="#" class="btn btn-secondary">Leer más</a>
-                </div>
-            </div>
-        </div>
+        
     </div>
     
 </div>
-    <div class="container py-5 text-center text-white" style="background-color: #1a1a1a;">
-        <h3>Disfruta de ser parte de nuestro blog</h3>
-        <p class="lead">Únete ahora, haciendo click aquí</p>
-        <a href="{% url 'register' %}" class="btn rounded-pill verde-lima px-4 btn-success mx-2 my-1">REGÍSTRATE</a>
-    </div>
+    {% if not user.is_authenticated %}
+        <div class="container py-5 text-center text-white bg-dark">
+            <h3>Disfruta de ser parte de nuestro blog</h3>
+            <p class="lead">Únete ahora, haciendo click aquí</p>
+            <a href="{% url 'register' %}" class="btn rounded-pill verde-lima px-4 btn-success mx-2 my-1">REGÍSTRATE</a>
+        </div>
+    {% endif %}
     <div class="container py-5">
         <h2 class="text-center text-white mb-5">Conoce a nuestro team</h2>
         <html>

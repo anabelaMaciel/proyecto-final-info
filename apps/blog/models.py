@@ -9,7 +9,7 @@ from django.contrib.auth.models import AbstractUser, UserManager, BaseUserManage
 class Categorias(models.Model):
     nombre = models.CharField(max_length=40, null=False)
     imagen = models.ImageField(
-        upload_to='imagenes/', null=False, blank=False, default='static/post_default.png')
+        upload_to='imagenes/', null=False, blank=False, default='blog/post_default.png')
 
     def __str__(self):
         return self.nombre
@@ -42,8 +42,8 @@ class Posts(models.Model):
     usuario = models.ForeignKey(
         Usuario_personalizado, on_delete=models.CASCADE)
     imagen = models.ImageField(
-        null=True, blank=True, upload_to='news', default='static/post_default.png')
-    fecha_creacion = models.DateField(auto_now_add=True)
+        null=True, blank=True, upload_to='news', default='blog/post_default.png')
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_actualizacion = models.DateTimeField(auto_now=True)
 
     class Meta:
