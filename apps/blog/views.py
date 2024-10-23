@@ -258,14 +258,27 @@ class CrearComentariosView(CreateView):
 
     def form_valid(self, form):
         form.instance.usuario = self.request.user
-        post_id = self.request.POST.get('post')
+        post_id = self.kwargs['post_id']
         form.instance.post = get_object_or_404(Posts, id=post_id)
         return super().form_valid(form)
 
     def get_success_url(self):
         return reverse('noticia', kwargs={'url': self.object.post.slug})
 
-# Editar Comentarios
+
+"""class CrearComentariosView(CreateView):
+    model = Comentarios
+    form_class = ComentForm
+    template_name = 'blog/form_coment.html'
+
+    def form_valid(self, form):
+        form.instance.usuario = self.request.user
+        post_id = self.request.POST.get('post')
+        form.instance.post = get_object_or_404(Posts, id=post_id)
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('noticia', kwargs={'url': self.object.post.slug})"""
 
 
 class EditarComentariosView(UpdateView):
@@ -274,9 +287,10 @@ class EditarComentariosView(UpdateView):
     template_name = "blog/form_coment.html"
 
     def form_valid(self, form):
+        # Mantener el usuario actual
         form.instance.usuario = self.request.user
-        post_id = self.request.POST.get('post')
-        form.instance.post = get_object_or_404(Posts, id=post_id)
+        # Mantener el post original, no permitir cambiarlo
+        form.instance.post = self.object.post
         return super().form_valid(form)
 
     def get_success_url(self):

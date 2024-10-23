@@ -47,7 +47,7 @@
     <h2 class="text-xl font-semibold mb-4">Sección de comentarios</h2>
     
     {% if user.is_authenticated %}
-        <form method="post" action="{% url 'crear_coment' %}" class="mb-4">
+        <form method="post" action="{% url 'crear_comentario' post.id %}" class="mb-4">
             {% csrf_token %}
             <div class="input-group">
                 <input name="contenido" rows="2" class="form-control" placeholder="Escribe un comentario..." required />
@@ -71,10 +71,10 @@
 
                     {% if user.is_authenticated %}
                         <div>
-                            <a href="{% url 'editar_coment' pk=comentario.id %}" class="btn btn-sm btn-primary me-2">
+                            <a href="{% url 'editar_comentario' pk=comentario.id %}" class="btn btn-sm btn-primary me-2">
                                 <i class="fa fa-edit" aria-hidden="true"></i>
                             </a>
-                            <a href="{% url 'eliminar_coment' pk=comentario.id %}" class="btn btn-sm btn-danger">
+                            <a href="{% url 'eliminar_comentario' pk=comentario.id %}" class="btn btn-sm btn-danger">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </a>
                         </div>

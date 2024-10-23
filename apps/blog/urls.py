@@ -49,14 +49,22 @@ urlpatterns = [
          EliminarCategoriasView.as_view(), name='eliminar_categoria'),
 
     # CRUD Comentarios
-    path('comentario/crear/', CrearComentariosView.as_view(), name='crear_coment'),
-    path('comentario/editar/<int:pk>/',
-         EditarComentariosView.as_view(), name='editar_coment'),
-    path('comentario/eliminar/<int:pk>/',
-         EliminarComentariosView.as_view(), name='eliminar_coment'),
+    # CREAR comentario
+    path('post/<int:post_id>/comentario/crear/',
+         CrearComentariosView.as_view(), name='crear_comentario'),
 
+    # EDITAR comentarios
+    path('comentario/editar/<int:pk>/',
+         EditarComentariosView.as_view(), name='editar_comentario'),
+
+    # ELIMINAR comentario
+    path('comentario/eliminar/<int:pk>/',
+         EliminarComentariosView.as_view(), name='eliminar_comentario'),
+
+    # Formulario de Contactanos
     path('contactanos/',
          views.contactanos_view, name='contactanos'),
+    # Gracias Por Contactarnos
     path('success/',
          views.success, name='success'),
 ]

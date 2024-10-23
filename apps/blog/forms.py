@@ -46,7 +46,7 @@ class PostForm(ModelForm):
 class ComentForm(ModelForm):
     class Meta:
         model = Comentarios
-        fields = ['contenido',]
+        fields = ['contenido']
 
 # Formulario de Contactanos
 
