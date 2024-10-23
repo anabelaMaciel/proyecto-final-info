@@ -31,6 +31,8 @@ class UserRegisterForm(UserCreationForm):
     class Meta:
         model = Usuario_personalizado
         fields = ['username', 'email', 'password1', 'password2']
+
+
 # Formulario de Posts
 
 

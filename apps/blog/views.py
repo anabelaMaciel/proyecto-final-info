@@ -45,6 +45,22 @@ class ListarPostsView(ListView):
         if search_query:
             queryset = queryset.filter(titulo__icontains=search_query)
 
+        # Ordenamos según el parámetro 'orden'
+        if orden == 'ascendente':
+            queryset = queryset.order_by('titulo')
+        elif orden == 'descendente':
+            queryset = queryset.order_by('-titulo')
+        elif orden == 'antiguedad':
+            queryset = queryset.order_by('fecha_creacion')
+        elif orden == 'recientes':
+            queryset = queryset.order_by('-fecha_creacion')
+        else:
+            # Orden por defecto: más recientes
+            queryset = queryset.order_by('-fecha_creacion')
+
+        for post in queryset:
+            print(post.titulo, post.fecha_creacion)
+
         return queryset
 
 
