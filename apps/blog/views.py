@@ -84,9 +84,6 @@ def contactanos(request):
     return render(request, 'blog/contactanos.html')
 
 def login_view(request):
-    storage = messages.get_messages(request)
-    storage.used = True 
-    
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
@@ -98,14 +95,15 @@ def login_view(request):
         if user_obj:
             user = authenticate(request, username=user_obj.username, password=password)
             if user is not None:
-                login(request, user) 
-                return redirect('blog-home')  
+                login(request, user)
+                return redirect('blog-home')
             else:
                 messages.error(request, 'Contraseña incorrecta.')
         else:
             messages.error(request, 'No existe un usuario con este correo.')
 
     return render(request, 'blog/login.html')
+
 
 
 def register(request):
@@ -119,7 +117,7 @@ def register(request):
             user.groups.add(group)
 
             login(request, user)
-            messages.success(request, 'Cuenta creada con éxito!')
+            messages.success(request, 'Cuenta creada con éxito!') 
             return redirect('blog-home')
         else:
             for field, errors in form.errors.items():
@@ -129,6 +127,7 @@ def register(request):
         form = UserRegisterForm()
 
     return render(request, 'blog/register.html', {'form': form})
+
 
 def categorias(request):
     todas_categorias = Categorias.objects.all()
