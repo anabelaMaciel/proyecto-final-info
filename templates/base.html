@@ -276,24 +276,25 @@
                 <small>Categorías</small>
             </a>
         </nav>
-        <div class="d-flex flex-wrap align-items-center">
+        <div class="d-flex flex-wrap align-items-center justify-content-end">
             {% if user.is_authenticated %}
-                <div class="d-flex align-items-center">
-                    {% if user.imagen_perfil %}
-                        <img src="{{ user.imagen_perfil.url }}" alt="Imagen de perfil" class="rounded-circle" width="40" height="40">
-                    {% else %}
-                        <img src="{% static 'path/to/default-image.jpg' %}" alt="Imagen de perfil predeterminada" class="rounded-circle" width="40" height="40">
-                    {% endif %}
-                    <a href="{% url 'editar_perfil' %}" class="btn rounded-pill verde-lima px-4 btn-success mx-2 my-1">
-                        <b class="small">MI CUENTA</b>
-                    </a>
-                </div>
-                <form method="post" action="{% url 'logout' %}" class="d-inline">
+                <form method="post" action="{% url 'logout' %}" class="d-inline mx-2">
                     {% csrf_token %}
                     <button type="submit" class="btn rounded-pill verde-lima-transparent px-4 btn-transparent mx-2 mt-3">
                         <b class="small">CERRAR SESION</b>
                     </button>
                 </form>
+        
+                <div class="d-flex align-items-center mx-2">
+                    {% if user.imagen_perfil %}
+                        <img src="{{ user.imagen_perfil.url }}" alt="Imagen de perfil" class="rounded-circle" width="40" height="40">
+                    {% else %}
+                        <img src="{% static 'path/to/default-image.jpg' %}" alt="Imagen de perfil predeterminada" class="rounded-circle" width="40" height="40">
+                    {% endif %}
+                    <a href="{% url 'editar_perfil' %}" class="btn rounded-pill verde-lima px-2 btn-success mx-2 my-2 d-flex align-items-center" style="font-size: 0.9em; line-height: 1.2;">
+                        <b class="small">Mi cuenta</b>
+                    </a>
+                </div>
             {% else %}
                 <a href="{% url 'login' %}" class="btn rounded-pill verde-lima px-4 btn-success mx-2 my-1">
                     <b class="small">INICIAR SESION</b>
@@ -303,7 +304,9 @@
                 </a>
             {% endif %}
         </div>
-    </div>
+        
+        
+        
 </header>
 
 
@@ -311,7 +314,6 @@
 
     <main class="container py-5">
         {% block content %}
-        <!-- Contenido específico de cada página -->
         {% endblock %}
     </main>
 

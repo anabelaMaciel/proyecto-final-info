@@ -1,27 +1,40 @@
 {% extends "base.html" %}
-
 {% block content %}
-<h1>Editar Perfil</h1>
-<form method="POST" enctype="multipart/form-data" style="background-color: #1c1c1c; padding: 20px; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);">
-    {% csrf_token %}
-    <div class="mb-3">
-        <label for="username" class="form-label" style="color: #fff;">Nombre de usuario:</label>
-        <input type="text" class="form-control" id="username" name="username" value="{{ user.username }}" required
-               style="background-color: #333; color: #fff; border: none; border-radius: 5px; padding: 10px;">
-    </div>
-    <div class="mb-3">
-        <label for="email" class="form-label" style="color: #fff;">Correo:</label>
-        <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" required
-               style="background-color: #333; color: #fff; border: none; border-radius: 5px; padding: 10px;">
-    </div>
-    <div class="mb-3">
-        <label for="imagen_perfil" class="form-label" style="color: #fff;">Imagen de perfil:</label>
-        <input type="file" class="form-control" id="imagen_perfil" name="imagen_perfil"
-               style="background-color: #333; color: #fff; border: none; border-radius: 5px; padding: 10px;">
-    </div>
-    <button type="submit" class="btn rounded-pill verde-lima-transparent px-4 btn-transparent mx-2 my-1">
-        Guardar Cambios
-    </button>
-</form>
+
+<div style="display: flex; justify-content: center; align-items: center; min-height: 70vh;">
+    <form method="POST" enctype="multipart/form-data" style="background-color: #1c1c1c; padding: 20px; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); max-width: 400px; margin: auto;">
+        {% csrf_token %}
+        <h2 style="text-align: center; color: #fff;">Editar Perfil</h2>
+        {% if messages %}
+            <div>
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <div class="mb-3">
+            <label for="username" class="form-label" style="color: #fff;">Nombre de usuario:</label>
+            <input type="text" class="form-control" id="username" name="username" value="{{ user.username }}" required
+                   style="width: 100%; border-radius: 10px; background-color: #333; color: #fff; border: none; padding: 10px;">
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label" style="color: #fff;">Correo:</label>
+            <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" required
+                   style="width: 100%; border-radius: 10px; background-color: #333; color: #fff; border: none; padding: 10px;">
+        </div>
+        <div class="mb-3">
+            <label for="imagen_perfil" class="form-label" style="color: #fff;">Imagen de perfil:</label>
+            <input type="file" class="form-control" id="imagen_perfil" name="imagen_perfil"
+                   style="width: 100%; border-radius: 10px; background-color: #333; color: #fff; border: none; padding: 10px;">
+        </div>
+        <div style="text-align: center;">
+            <button type="submit" class="btn rounded-pill verde-lima-transparent px-4 btn-transparent mx-2 my-1">
+                Guardar Cambios
+            </button>
+        </div>
+    </form>
+</div>
 
 {% endblock %}

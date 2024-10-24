@@ -116,9 +116,9 @@ def register(request):
             group, created = Group.objects.get_or_create(name="Registrado")
             user.groups.add(group)
 
-            login(request, user)
-            messages.success(request, 'Cuenta creada con éxito!') 
-            return redirect('blog-home')
+            login(request, user) 
+            messages.success(request, '¡Cuenta creada con éxito!')
+            return redirect('blog-home')  
         else:
             for field, errors in form.errors.items():
                 for error in errors:
@@ -143,7 +143,6 @@ def like_post(request, post_id):
         like.delete()
     return HttpResponseRedirect(reverse('noticia', args=[post.slug]) + '#like_post')
 
-#editar perfil
 @login_required  
 def editar_perfil(request):
     user = request.user  
@@ -159,9 +158,10 @@ def editar_perfil(request):
             user.imagen_perfil = imagen_perfil  
 
         user.save()  
-        return redirect('blog-home') 
+        messages.success(request, '¡Perfil actualizado con éxito!') 
+        return redirect('editar_perfil')  
 
-    return render(request, 'blog/editar_perfil.html', {'user': user}) 
+    return render(request, 'blog/editar_perfil.html', {'user': user})
 
 # CRUD de Categorías, Posts y Comentarios
 # con CBV

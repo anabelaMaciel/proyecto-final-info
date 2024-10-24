@@ -26,7 +26,7 @@ urlpatterns = [
     path('about/', views.about_us, name='about-us'),
     path('like/<int:post_id>/', views.like_post, name='like_post'),
     path('like/comentario/<int:comentario_id>/', views.like_comentario, name='like_comentario'),
-    path('editar-perfil/', editar_perfil, name='editar_perfil'),
+    path('editar-perfil/', views.editar_perfil, name='editar_perfil'),
     
     # CRUD operations for posts
     path('blog/', ListarPostsView.as_view(), name='blog'),
