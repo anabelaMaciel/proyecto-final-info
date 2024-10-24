@@ -285,16 +285,20 @@
                     </button>
                 </form>
         
-                <div class="d-flex align-items-center mx-2">
-                    {% if user.imagen_perfil %}
-                        <img src="{{ user.imagen_perfil.url }}" alt="Imagen de perfil" class="rounded-circle" width="40" height="40">
-                    {% else %}
-                        <img src="{% static 'path/to/default-image.jpg' %}" alt="Imagen de perfil predeterminada" class="rounded-circle" width="40" height="40">
-                    {% endif %}
-                    <a href="{% url 'editar_perfil' %}" class="btn rounded-pill verde-lima px-2 btn-success mx-2 my-2 d-flex align-items-center" style="font-size: 0.9em; line-height: 1.2;">
-                        <b class="small">Mi cuenta</b>
+                <button title="Mi perfil" type="button" style="width: 50px; height: 50px" class="d-flex p-0 m-0 rounded-circle align-items-center mx-auto my-3">
+                    <a href="{% url 'editar_perfil' %}">
+                        {% if user.imagen_perfil %}
+                            <img src="{{ user.imagen_perfil.url }}" alt="Imagen de perfil" class="img-fluid rounded-circle">
+                        {% else %}
+                            <img src="{% static 'path/to/default-image.jpg' %}" alt="Imagen de perfil predeterminada" class="img-fluid rounded-circle">
+                        {% endif %}
                     </a>
-                </div>
+                    <a href="{% url 'editar_perfil' %}" class="position-absolute mt-4 ms-1">
+                        <small class="mt-4">
+                            <span class="badge text-black verde-lima mt-4">Perfil</span>
+                        </small>
+                    </a>
+                </button>
             {% else %}
                 <a href="{% url 'login' %}" class="btn rounded-pill verde-lima px-4 btn-success mx-2 my-1">
                     <b class="small">INICIAR SESION</b>
