@@ -143,25 +143,23 @@ def like_post(request, post_id):
         like.delete()
     return HttpResponseRedirect(reverse('noticia', args=[post.slug]) + '#like_post')
 
-@login_required  
 def editar_perfil(request):
-    user = request.user  
-
     if request.method == 'POST':
-        username = request.POST.get('username')
-        email = request.POST.get('email')
-        imagen_perfil = request.FILES.get('imagen_perfil')  
-        
-        user.username = username
-        user.email = email
-        if imagen_perfil:
-            user.imagen_perfil = imagen_perfil  
+        user = request.user
+        user.username = request.POST['username']
+        user.email = request.POST['email']
 
-        user.save()  
-        messages.success(request, '¡Perfil actualizado con éxito!') 
-        return redirect('editar_perfil')  
+        if request.POST.get('quitar_imagen'):
+            user.imagen_perfil.delete()  
+        elif 'imagen_perfil' in request.FILES:
+            user.imagen_perfil = request.FILES['imagen_perfil']
 
-    return render(request, 'blog/editar_perfil.html', {'user': user})
+        user.save()
+        messages.success(request, 'Perfil actualizado con éxito.')
+        return redirect('editar_perfil')
+
+    return render(request, 'blog/editar_perfil.html')
+
 
 # CRUD de Categorías, Posts y Comentarios
 # con CBV
