@@ -19,31 +19,31 @@
         }
         .form-control {
             background-color: #222;
-            border: none;
-            color: #ccc;
-            border-radius: 20px;
+            color: #8bc34a;
+            border-radius: 5px; /* Menos redondeado */
+            border: 2px solid #8bc34a;
         }
         .form-control::placeholder {
             color: #666;
         }
         .btn-submit {
             background-color: #0c0c0c;
-            color: #000;
-            border: #000;
-            border-radius: 20px;
+            color: #8bc34a;
+            border: 2px solid #8bc34a;
+            border-radius: 5px; /* Menos redondeado */
             padding: 10px 20px;
         }
     </style>
 </head>
 <body>
-    <div class="ContactoForm">
+    <div class="contact-form">
         <h2 class="text-center">Ponte en contacto con nosotros</h2>
         <form method="POST" action="{% url 'contactanos' %}">
             {% csrf_token %}
-            {{form}}
-           <button type="submit" class="btn btn-primary">
-            <i class="fa fa-paper-plane" aria-hidden="true"></i>
-        </button>
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-transparent rounded-pill verde-lima-transparent text-light mt-3">
+                <b class="small">ENVIAR</b>
+            </button>
         </form>
     </div>
 </body>
