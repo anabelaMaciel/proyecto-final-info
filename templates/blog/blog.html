@@ -3,6 +3,12 @@
 {% block content %}
 
 <style>
+    body {
+        background-image: url('https://png.pngtree.com/background/20230416/original/pngtree-website-technology-line-dark-background-picture-image_2443641.jpg');
+        background-size: cover;
+        background-blend-mode: multiply;
+    }
+
     a:hover {
         color: unset;
         opacity: 0.8;
@@ -52,7 +58,7 @@
 
 <hr>
 
-<div class="d-flex flex-wrap">
+<div class="d-flex justify-content-center flex-wrap">
     {% for post in posts %}
         <a href="{% url 'noticia' post.slug %}">
             <div class="card bg-dark verde-lima mt-0 m-3" style="width: 18rem;">
