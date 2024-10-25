@@ -6,12 +6,14 @@ from django.contrib import messages
 from django.db.models import Prefetch
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
-from django.views.generic import CreateView, ListView, UpdateView, DeleteView
+from .models import Posts, Categorias, Comentarios, Like_comentario, Like_post, Usuario_personalizado
+from .forms import CategoriasForm, PostForm, ComentForm,ContactoForm,UserRegisterForm
+from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 from django.core.mail import send_mail, BadHeaderError
-from django.conf import settings
-
-from .models import Posts, Categorias, Comentarios, Like_post, Usuario_personalizado
-from .forms import CategoriasForm, PostForm, ComentForm, ContactoForm, UserRegisterForm
+from .forms import EditarPerfilForm
+from .models import Usuario_personalizado
+from .forms import UserRegisterForm
+from django.contrib import messages
 
 
 # Vistas de la aplicación
@@ -124,14 +126,15 @@ def login_view(request):
             user_obj = None
 
         if user_obj:
-            user = authenticate(
-                request, username=user_obj.username, password=password)
+            user = authenticate(request, username=user_obj.username, password=password)
             if user is not None:
                 login(request, user)
-                messages.success(request, 'Logueado con éxito!')
                 return redirect('blog-home')
+            else:
+                messages.error(request, 'Contraseña incorrecta.')
+        else:
+            messages.error(request, 'No existe un usuario con este correo.')
 
-        messages.error(request, 'Datos incorrectos.')
     return render(request, 'blog/login.html')
 
 
@@ -145,9 +148,9 @@ def register(request):
             group, created = Group.objects.get_or_create(name="Registrado")
             user.groups.add(group)
 
-            login(request, user)
-            messages.success(request, 'Cuenta creada con éxito!')
-            return redirect('blog-home')
+            login(request, user) 
+            messages.success(request, '¡Cuenta creada con éxito!')
+            return redirect('blog-home')  
         else:
             for field, errors in form.errors.items():
                 for error in errors:
@@ -171,6 +174,23 @@ def like_post(request, post_id):
     if not created:
         like.delete()
     return HttpResponseRedirect(reverse('noticia', args=[post.slug]) + '#like_post')
+
+def editar_perfil(request):
+    if request.method == 'POST':
+        user = request.user
+        user.username = request.POST['username']
+        user.email = request.POST['email']
+
+        if request.POST.get('quitar_imagen'):
+            user.imagen_perfil.delete()  
+        elif 'imagen_perfil' in request.FILES:
+            user.imagen_perfil = request.FILES['imagen_perfil']
+
+        user.save()
+        messages.success(request, 'Perfil actualizado con éxito.')
+        return redirect('editar_perfil')
+
+    return render(request, 'blog/editar_perfil.html')
 
 
 @login_required
