@@ -14,8 +14,7 @@ from pathlib import Path
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -28,6 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Rutas de redireccino para despues de registro, login
+LOGIN_REDIRECT_URL = 'blog-home'
+LOGOUT_REDIRECT_URL = 'blog-home'
 
 # Application definition
 
@@ -38,9 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'apps.home',
-    'apps.categorias',
+    'apps.blog',
 ]
+
+AUTH_USER_MODEL = 'blog.Usuario_personalizado'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -57,7 +60,7 @@ ROOT_URLCONF = 'ProyectoFinal.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -114,15 +117,24 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
-STATIC_URL = 'static/'
-STATICFILE_DIRS = (os.path.join(os.path.dirname(BASE_DIR), 'static'),)
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'staticfiles')
+STATICFILE_DIRS = (os.path.join(
+    os.path.dirname(BASE_DIR), 'apps/blog/static'), )
 
 # Media = imagenes/audios/videos que vayan surgiendo o creciendo a lo largo de la ejecucion.(por formulario)
-MEDIA = '/media'
-MEDIA_ROOT = (os.path.join(os.path.dirname(BASE_DIR), 'media'))
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media')
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.googlemail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'tecnofilosinformatorio@gmail.com'
+EMAIL_HOST_PASSWORD = 'yqen mtxk cmdv kxzm'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

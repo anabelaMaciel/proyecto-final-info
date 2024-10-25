@@ -1,13 +1,14 @@
 *.log
 *.pot
 *.pyc
+media/imagenes
+media/news
 djangoenv/
 djangovenv/
 __pycache__/
 local_settings.py
 *.db
 *.sqlite3-journal
-media
 *.py[cod]
 *$py.class
 *.so

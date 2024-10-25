@@ -1,0 +1,423 @@
+{% load static %}
+{% load colaborador_tags %}
+
+{% has_group user "Registrado" as grupo_registrado %}
+{% has_group user "Colaborador" as grupo_colaborador %}
+
+<html lang="es-ar">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link rel="icon" href="{% static 'blog/images/iconoTFverde.ico' %}">
+    <title>
+        Tecnófilos
+    </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet" />
+    <style>
+        a {
+            color: whitesmoke !important;
+            text-decoration: none !important;
+        }
+
+        a:hover {
+            color: #88B702 !important;
+            text-decoration: underline !important;
+        }
+
+        hr {
+            background-color: whitesmoke;
+            color: whitesmoke;
+            opacity: 0.5;
+        }
+        nav a small {
+            font-size: 1rem; 
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #000;
+            color: #fff;
+        }
+
+        .verde-lima {
+            background-color: #88B702 !important; 
+            color: white !important;
+    }
+
+        .verde-lima:hover {
+            background-color: #66A500 !important; 
+            color: #FFFFFF !important; 
+            border-color: #88B702 !important; 
+        }
+
+        .verde-lima-transparent {
+            color: #88B702 !important; 
+            border-color: #88B702 !important; 
+    }
+
+        .static-separator {
+            border-radius: 30px; 
+            text-decoration: none; 
+            background-color: #66A500; 
+            color: white; 
+            padding: 10px 20px; 
+            pointer-events: none; 
+        }
+        
+        .static-separator:hover {
+            background-color: #66A500; 
+            color: white; 
+            text-decoration: none; 
+            cursor: default; 
+        }
+        
+        .header-bg {
+            background-color: #000000b0; 
+        }
+        
+        .header-super {
+            background-color: #7d925bc0 !important;
+        }
+
+        .custom-card {
+            display: flex;
+        }
+
+        .btn-transparent {
+            background-color: transparent;
+            border: 2px solid #28a745;
+            color: #28a745;
+        }
+
+        .glass-effect {
+            background: rgb(89 89 89 / 36%);
+            border-radius: 10px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(4.8px);
+            -webkit-backdrop-filter: blur(4.8px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        
+        }
+
+        .glass-effect-back {
+            background-color: #5151513b;
+            background: rgb(141 141 141 / 36%);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(4.8px);
+            -webkit-backdrop-filter: blur(4.8px);
+        }
+
+        .card-img-top {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+
+        /*esto es el body del html principal*/
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+        /*linea verde lima del html*/
+        .line-with-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .lime-line {
+            height: 5px;
+            background-color: #A8FF00;
+            flex-grow: 1;
+        }
+
+        .lime-line.left {
+            margin-right: 20px;
+        }
+
+        .lime-line.right {
+            margin-left: 20px;
+        }
+
+        .btn-lime {
+            background-color: #A8FF00;
+            color: black;
+            border-radius: 50px;
+            padding: 10px 20px;
+            font-weight: bold;
+            text-decoration: none;
+            white-space: nowrap;
+            z-index: 1;
+        }
+
+        .btn-lime:hover {
+            background-color: #0c0c0c;
+            text-decoration: none;
+        }
+
+        body {
+            background-color: #0d0d0d;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        .team-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 40px;
+            border-radius: 20px;
+            color: white;
+        }
+        
+        .team-member {
+            text-align: center;
+            margin: 20px; 
+        }
+        
+        .team-member img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 50%; 
+            border: 5px solid #fff; 
+            transition: transform 0.3s ease; 
+        }
+        
+        .team-member img:hover {
+            transform: scale(1.1); 
+        }
+        
+        .row {
+            margin-bottom: 40px; 
+        }
+
+        .div_conocenos {
+            background-color: #0d0d0d;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        .team-section {
+            text-align: center;
+        }
+
+        .team-section h2 {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        .team-section .team-member {
+            display: inline-block;
+            margin: 10px;
+        }
+        
+        
+        footer {
+            flex-shrink: 0; 
+            text-align: center;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            position: relative;
+            width: 100%;
+        }
+        
+        .team-section .team-member img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+        }
+        .conocenos {
+            background-color: transparent;
+            color:  #A8FF00;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    {% if grupo_colaborador %}
+        <span class="badge bg-danger position-absolute">Editor</span>
+    {% endif %}
+
+    <header class="{% if grupo_colaborador %} header-super {% else %} header-bg {% endif %}">
+        <div class="container d-flex flex-wrap justify-content-between align-items-center">
+            <a href="/" class="d-flex text-white h3 font-weight-bold justify-content-center mx-auto mx-md-0">
+                <img class="mt-3" src="{% static 'blog/images/Icono_TF_blanco.ico' %}" alt="Logo de X TECH" width="65" height="auto">
+            </a>
+            <nav class="d-flex small flex-wrap align-items-center justify-content-center">
+                <a class="text-white p-2 mx-3" href="/">
+                    <small>Home</small>
+                </a>
+                <a class="text-white p-2 mx-3" href="/about">
+                    <small>Conocenos</small>
+                </a>
+                <a class="text-white p-2 mx-3" href="/blog">
+                    <small>Blog</small>
+                </a>
+                <a class="text-white p-2 mx-3" href="/contactanos">
+                    <small>Contacto</small>
+                </a>
+                <a class="text-white p-2 mx-3" href="/categorias">
+                    <small>Categorías</small>
+                </a>
+            </nav>
+            <div class="d-flex flex-wrap align-items-center">
+                    {% if user.is_authenticated %}
+                        <form method="post" action="{% url 'logout' %}" class="d-inline">
+                            {% csrf_token %}
+                            <button type="submit" class="btn rounded-pill verde-lima-transparent px-4 btn-transparent mx-2 mt-3">
+                                <b class="small">CERRAR SESION</b>
+                            </button>
+                        </form>
+                    {% else %}
+                        <a href="{% url 'login' %}" class="btn rounded-pill verde-lima px-4 btn-success mx-2 my-1">
+                            <b class="small">INICIAR SESION</b>
+                        </a>
+                        <a href="{% url 'register' %}" class="btn rounded-pill verde-lima-transparent px-4 btn-transparent mx-2 my-1">
+                            <b class="small">REGISTRARSE</b>
+                        </a>
+                    {% endif %}
+            </div>
+        </div>
+    </header>
+
+
+
+    <main class="container py-5">
+        {% block content %}
+        <!-- Contenido específico de cada página -->
+        {% endblock %}
+    </main>
+
+
+    <footer class="bg-gray-800 glass-effect-back text-gray-400 py-5 position-relative" style="overflow: hidden">
+        <img style="bottom: 0; z-index: -10;" class="position-absolute img-fluid"
+            src="{% static 'blog/images/ligths_footer.png' %}" alt="Logo de X TECH" height="auto">
+
+        <div class="container">
+            <div class="glass-effect p-5">
+                <div class="col-md-12">
+
+                    <div class="row  mb-0 mb-md-0">
+                        <div class="text-white h4 font-weight-bold mb-3">
+                        <a href="/">    
+                            <img class="mt-3" src="{% static 'blog/images/Logo_TF_blanco.png' %}" alt="Logo de X TECH" width="130" height="auto">
+                        </a>    
+                        </div>
+                    </div>
+
+                    <div class="row  mb-4 mb-md-0 small">
+                        <div class="col-md-3 mt-3">
+                            <small><b>MENU</b></small>
+                            <hr class="my-4" />
+                            <ul class="list-unstyled row">
+                                <div class="col-md-6">
+                                    <li>
+                                        <a class="text-white" href="/">
+                                            Home
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="text-white" href="{% url 'about-us' %}">
+                                            Conocenos
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="text-white" href="{% url 'categorias' %}">
+                                            Categorías
+                                        </a>
+                                    </li>
+                                </div>
+                                <div class="col-md-6">
+                                    <li>
+                                        <a class="text-white" href="{% url 'blog' %}">
+                                            Blog
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="text-white" href="{% url 'contactanos' %}">
+                                            Contacto
+                                        </a>
+                                    </li>
+                                </div>
+                            </ul>
+                        </div>
+
+                        <div class="d-flex col-md-8">
+                            <div class="d-flex justify-content-center align-items-center mb-2">
+                                <i class="h2 mx-3 fab fa-whatsapp text-white mr-2">
+                                </i>
+                                <div>
+                                    <span>WhatsApp:</span>
+                                    <small>
+                                        +011 4582-0643
+                                    </small>
+                                </div>
+
+                                <div class="vr mx-3 my-auto" style="height: 50px"></div>
+                            </div>
+                            <div class="d-flex justify-content-center align-items-center mb-2">
+                                <i class="h2 mx-3 fas fa-envelope text-white mr-2">
+                                </i>
+                                <div>
+                                    <span>E-mail:</span>
+                                    <a href="mailto:tecnofilos.xtech@hotmail.com">
+                                        tecnofilos.xtech@hotmail.com
+                                    </a>
+                                </div>
+
+                                <div class="vr mx-3 my-auto" style="height: 50px"></div>
+                            </div>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <i class="h2 mx-3 fas fa-map-marker-alt text-white mr-2">
+                                </i>
+                                <div>
+                                    <span>Ubicación:</span>
+                                    <small>
+                                        Resistencia, Chaco. Argentina.
+                                    </small>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="d-flex justify-content-end">
+                        <a class="text-white mx-2" href="https://www.facebook.com/profile.php?id=61566988810266" target="_blank">
+                            <i class="h3 fab fa-facebook">
+                            </i>
+                        </a>
+                        <a class="text-white mx-2" href="https://www.linkedin.com/groups/13112033/" target="_blank">
+                            <i class="h3 fab fa-linkedin">
+                            </i>
+                        </a>
+                    </div>
+
+                    <hr />
+                    <small class="row text-center text-gray-600 mt-4">
+                        © 2024  TECNÓFILOS. Todos los derechos reservados.
+                    </small>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
