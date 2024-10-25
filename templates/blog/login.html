@@ -80,7 +80,10 @@
 
 <div class="main-content">
     <div class="container">
-        <div class="logo">X TECH</div>
+        <a href="/">    
+            <img class="mt-3" src="{% static 'blog/images/Logo_TF_blanco.png' %}" alt="Logo de X TECH" width="130" height="auto">
+        </a>    
+        <br></br>
         <div class="title">Iniciar sesión</div>
         <div class="card mx-auto">
             <form method="POST" action="{% url 'login' %}">
@@ -108,7 +111,7 @@
             </form>
             <div class="mt-3 text-center">
                 <p>¿Olvidaste tu contraseña?</p>
-                <a href="#" class="btn btn-transparent rounded-pill verde-lima-transparent text-light mt-3">Recuperar contraseña</a>
+                <a href="/contactanos" class="btn btn-transparent rounded-pill verde-lima-transparent text-light mt-3">Recuperar contraseña</a>
             </div>
         </div>
     </div>
