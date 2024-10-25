@@ -1,5 +1,5 @@
-# Proyecto final info - Grupo 4
-NUESTROS BLOG
+# PROYECTO FINAL
+NUESTRO BLOG
 
 #
 ![Tecnofilos horizontal](https://github.com/user-attachments/assets/ea21c968-e936-4c17-8947-fb916c24cfe6)
