@@ -6,8 +6,16 @@ TECNOFILOS
 
 # Integrantes
 ### Grupo 4 Comisión 3:
-Ileana Fontana, Roberto Galeano, Anabela Maciel, Pablo Sabadini, Camila Falchini, Dario Merentiel Eduina Dellamea, Nicolas Aguirre
+Ileana Fontana, Roberto Galeano, Anabela Maciel, Pablo Sabadini, Camila Falchini, Dario Merentiel, Eduina Dellamea, Nicolas Aguirre
 
+## Algunas capturas
 #
 ![image](https://github.com/user-attachments/assets/3993cb0b-fa91-441c-af80-04be51582ecc)
+
+#
+![image](https://github.com/user-attachments/assets/e121f045-2c7a-4ceb-a2ec-165274340456)
+
+#
+![image](https://github.com/user-attachments/assets/f95ddc94-2749-4f78-84a7-6ab6beeb0cc3)
+
 
