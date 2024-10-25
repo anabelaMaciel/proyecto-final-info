@@ -289,7 +289,7 @@
                         {% if user.imagen_perfil %}
                             <img src="{{ user.imagen_perfil.url }}" alt="Imagen de perfil" style="width: 50px; height: 50px" class="img-fluid rounded-circle">
                         {% else %}
-                            <img src="{% static 'path/to/default-image.jpg' %}" alt="Imagen de perfil predeterminada" style="width: 50px; height: 50px" class="img-fluid rounded-circle">
+                            <img src="{% static 'blog/images/post_default.png' %}" alt="Imagen de perfil predeterminada" style="width: 50px; height: 50px" class="img-fluid rounded-circle">
                         {% endif %}
                     </a>
                     <a href="{% url 'editar_perfil' %}" style="margin-top: -5px;">

@@ -13,7 +13,6 @@ from .models import Posts, Categorias, Comentarios, Like_comentario, Like_post, 
 from .forms import CategoriasForm, PostForm, ComentForm, ContactoForm, UserRegisterForm, EditarPerfilForm
 
 
-
 # Vistas de la aplicación
 def home(request):
     return render(request, 'blog/home.html')
@@ -26,6 +25,27 @@ def about_us(request):
 def success(request):
     return render(request, 'blog/success.html')
 
+def noticia(request, url):
+    post = get_object_or_404(Posts, slug=url)
+    
+    coms = Comentarios.objects.filter(post=post).prefetch_related(
+        Prefetch('likes', queryset=Usuario_personalizado.objects.only('id'))
+    )
+    
+    if request.user.is_authenticated:
+        is_like_post = Like_post.objects.filter(post=post, usuario=request.user).exists()
+    else:
+        is_like_post = False
+    
+    total_likes = Like_post.objects.filter(post=post).count()
+
+    return render(request, 'blog/noticia.html', {
+        'total_likes': total_likes,
+        'is_like_post': is_like_post,
+        'post': post,
+        'comentarios': coms,
+        'user': request.user
+    })
 
 def contactanos(request):
     return render(request, 'contacto.html')
@@ -186,12 +206,15 @@ class ListarPostsView(ListView):
         search_query = self.request.GET.get('q')
         orden = self.request.GET.get('orden')
 
+        # Filtramos por categorías si venimos de "Categorias"
         if categoria:
             queryset = queryset.filter(categorias__nombre=categoria)
-
+        
+        # Buscamos por título si hay un término en el buscador
         if search_query:
             queryset = queryset.filter(titulo__icontains=search_query)
 
+        # Ordenamos según el parámetro 'orden'
         if orden == 'ascendente':
             queryset = queryset.order_by('titulo')
         elif orden == 'descendente':
@@ -201,7 +224,7 @@ class ListarPostsView(ListView):
         elif orden == 'recientes':
             queryset = queryset.order_by('-fecha_creacion')
         else:
-            queryset = queryset.order_by('-fecha_creacion')
+            queryset = queryset.order_by('-fecha_creacion')  # Orden por defecto: más recientes
 
         return queryset
 

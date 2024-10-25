@@ -42,8 +42,8 @@ class Posts(models.Model):
     usuario = models.ForeignKey(
         Usuario_personalizado, on_delete=models.CASCADE)
     imagen = models.ImageField(
-        null=True, blank=True, upload_to='news', default='blog/post_default.png')
-    fecha_creacion = models.DateTimeField(auto_now_add=True)
+        null=True, blank=True, upload_to='news')
+    fecha_creacion = models.DateTimeField(auto_now_add=True, null=True)
     fecha_actualizacion = models.DateTimeField(auto_now=True)
 
     class Meta:

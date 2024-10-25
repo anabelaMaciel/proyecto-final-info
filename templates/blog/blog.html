@@ -60,7 +60,7 @@
                     {% if post.imagen %}
                         <img style="width: 100%; height: 150px;" class="card-img-top mx-auto" src="{{ post.imagen.url }}" alt="..." height="auto">
                     {% else %}
-                        <img style="width: 100%; height: 150px;" class="card-img-top mx-auto" src="{% static 'blog/post_default.png' %}" alt="Default image" height="auto">
+                        <img style="width: 100%; height: 150px;" class="card-img-top mx-auto" src="{% static 'blog/images/post_default.png' %}" alt="Default image" height="auto">
                     {% endif %}
                 </div>
 
@@ -72,7 +72,7 @@
                 <hr>
                 <div class="d-flex flex-column">
                     <small class="card-title mx-3 small"><b>{{ post.usuario.username }}</b></small>
-                    <small class="card-title mx-3 small">{{ post.fecha_creacion}}</small>
+                    <small class="card-title mx-3 small">{{ post.fecha_creacion }}</small>
                 </div>
             </div>
         </a>
