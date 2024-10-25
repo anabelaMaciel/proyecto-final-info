@@ -65,7 +65,7 @@ urlpatterns = [
          EliminarComentariosView.as_view(), name='eliminar_comentario'),
 
     path('contactanos/',
-         views.contactanos_view, name='contactanos'),
+         views.contacto, name='contactanos'),
     # Gracias Por Contactarnos
     path('success/',
          views.success, name='success'),

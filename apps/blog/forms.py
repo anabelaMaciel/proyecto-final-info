@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.forms import ModelForm
 from django import forms
-from .models import Comentarios, Categorias, Posts
+from .models import Comentarios, Categorias, Posts, Contacto
 
 from .models import Usuario_personalizado
 from django.contrib.auth.forms import UserCreationForm
@@ -50,11 +50,21 @@ class ComentForm(ModelForm):
         model = Comentarios
         fields = ['contenido']
 
-# Formulario de Contactanos
+# Formulario de Contacto
 
 
-class ContactanosForm(forms.Form):
+class ContactoForm(forms.ModelForm):
+    class Meta:
+        model = Contacto
+        fields = ['nombre', 'email', 'asunto', 'mensaje']
+        widgets = {
+            'mensaje': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
+        }
+
+
+"""class ContactanosForm(forms.Form):
     name = forms.CharField(max_length=100, label='Nombre')
     email = forms.EmailField(label='Correo electrónico')
     # Asegúrate de usar 'message' aquí
     message = forms.CharField(widget=forms.Textarea, label='Mensaje')
+"""
