@@ -10,42 +10,96 @@
             color: #fff;
             font-family: Arial, sans-serif;
         }
-        .contact-form {
+
+        .ContactoForm {
             max-width: 600px;
             margin: 100px auto;
             padding: 20px;
             background-color: #111;
             border-radius: 10px;
+            resize: none;
+            
         }
+
+        .ContactoForm h2 {
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: #fff;
+            text-align: center;
+            
+        }
+
         .form-control {
             background-color: #222;
             border: none;
             color: #ccc;
-            border-radius: 20px;
+            border-radius: 10px; 
+            border: 1px solid   #A8FF00; 
+            padding: 10px;
         }
+
         .form-control::placeholder {
             color: #666;
         }
-        .btn-submit {
-            background-color: #0c0c0c;
-            color: #000;
-            border: #000;
-            border-radius: 20px;
-            padding: 10px 20px;
+
+        .form-control:focus {
+            border-color: #28a745;
+            box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
         }
+
+        .btn-submit {
+
+            background-color: #fff;
+            color: #000;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+        
+        }
+        .btn-submit:hover {
+            background-color: #218838;
+        }
+        .ContactoForm span {
+            font-weight: bold; 
+            display: block; 
+            margin-bottom: 0.5rem; 
+        }
+        
     </style>
 </head>
 <body>
     <div class="ContactoForm">
-        <h2 class="text-center">Ponte en contacto con nosotros</h2>
+        <h2>Ponte en contacto con nosotros</h2>
         <form method="POST" action="{% url 'contactanos' %}">
             {% csrf_token %}
-            {{form}}
-           <button type="submit" class="btn btn-primary">
-            <i class="fa fa-paper-plane" aria-hidden="true"></i>
-        </button>
+
+            <div class="mb-3">
+                <span>Nombre</span>
+                {{ form.nombre }}
+            </div>
+
+            <div class="mb-3">
+                <span>Email</span>
+                {{ form.email }}
+            </div>
+
+            <div class="mb-3">
+                <span>Asunto</span>
+                {{ form.asunto }}
+            </div>
+
+            <div class="mb-3">
+                <span>Mensaje</span>
+                {{ form.mensaje }}
+            </div>
+        <div class="text-end">
+            <button type="submit" class=" btn rounded-pill verde-lima-transparent px-4 btn-transparent mx-2 my-1">
+                ENVIAR
+            </button>
+        </div>
         </form>
     </div>
 </body>
+
 </html>
 {% endblock %}

@@ -58,13 +58,15 @@ class ContactoForm(forms.ModelForm):
         model = Contacto
         fields = ['nombre', 'email', 'asunto', 'mensaje']
         widgets = {
-            'mensaje': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
+            'nombre': forms.TextInput(attrs={'placeholder': 'Ejemplo: Irupe Fen', 'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'placeholder': 'Ejemplo:irupefen@gmail.com', 'class': 'form-control'}),
+            'asunto': forms.TextInput(attrs={'placeholder': 'Asunto', 'class': 'form-control'}),
+            'mensaje': forms.Textarea(attrs={
+                'placeholder': 'Ejemplo: Tengo una consulta sobre su servicio...', 
+                'rows': 3,  
+                'class': 'form-control',
+                'style': 'resize:none;'
+            }),
         }
 
 
-"""class ContactanosForm(forms.Form):
-    name = forms.CharField(max_length=100, label='Nombre')
-    email = forms.EmailField(label='Correo electrónico')
-    # Asegúrate de usar 'message' aquí
-    message = forms.CharField(widget=forms.Textarea, label='Mensaje')
-"""
