@@ -121,18 +121,19 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'staticfiles')
-STATICFILE_DIRS = (os.path.join(os.path.dirname(BASE_DIR), 'apps/blog/static'), )
+STATICFILE_DIRS = (os.path.join(
+    os.path.dirname(BASE_DIR), 'apps/blog/static'), )
 
 # Media = imagenes/audios/videos que vayan surgiendo o creciendo a lo largo de la ejecucion.(por formulario)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media')
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp-mail.outlook.com'
+EMAIL_HOST = 'smtp.office365.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'tecnofilos.xtech@hotmail.com'
-EMAIL_HOST_PASSWORD = 'grupo4info2024'
+EMAIL_HOST_PASSWORD = 'jhukfwdhnsvoffrn'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # Default primary key field type

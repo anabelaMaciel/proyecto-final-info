@@ -1,19 +1,19 @@
-from django.shortcuts import render, redirect, get_object_or_404, redirect, HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
+from django.contrib import messages
 from django.db.models import Prefetch
-from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
-from .models import Posts, Categorias, Comentarios, Like_post, Usuario_personalizado
-from .forms import CategoriasForm, PostForm, ComentForm, ContactanosForm
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from django.core.mail import send_mail, BadHeaderError
 
-from .forms import UserRegisterForm
-from django.contrib import messages
+from .models import Posts, Categorias, Comentarios, Like_post, Usuario_personalizado
+from .forms import CategoriasForm, PostForm, ComentForm, ContactanosForm, UserRegisterForm
 
 
+# Vistas de la aplicación
 def home(request):
     return render(request, 'blog/home.html')
 
@@ -24,68 +24,6 @@ def about_us(request):
 
 def success(request):
     return render(request, 'blog/success.html')
-
-
-class ListarPostsView(ListView):
-    model = Posts
-    template_name = 'blog/blog.html'
-    context_object_name = 'posts'
-
-    def get_queryset(self):
-        queryset = Posts.objects.all()
-        categoria = self.request.GET.get('categoria')
-        search_query = self.request.GET.get('q')
-        orden = self.request.GET.get('orden')  # Nuevo parámetro para el orden
-
-        # Filtramos por categorías si venimos de "Categorias"
-        if categoria:
-            queryset = queryset.filter(categorias__nombre=categoria)
-
-        # Aca buscamos por titulo, es para el buscador
-        if search_query:
-            queryset = queryset.filter(titulo__icontains=search_query)
-
-        # Ordenamos según el parámetro 'orden'
-        if orden == 'ascendente':
-            queryset = queryset.order_by('titulo')
-        elif orden == 'descendente':
-            queryset = queryset.order_by('-titulo')
-        elif orden == 'antiguedad':
-            queryset = queryset.order_by('fecha_creacion')
-        elif orden == 'recientes':
-            queryset = queryset.order_by('-fecha_creacion')
-        else:
-            # Orden por defecto: más recientes
-            queryset = queryset.order_by('-fecha_creacion')
-
-        for post in queryset:
-            print(post.titulo, post.fecha_creacion)
-
-        return queryset
-
-
-def noticia(request, url):
-    post = get_object_or_404(Posts, slug=url)
-
-    coms = Comentarios.objects.filter(post=post).prefetch_related(
-        Prefetch('likes', queryset=Usuario_personalizado.objects.only('id'))
-    )
-
-    if request.user.is_authenticated:
-        is_like_post = Like_post.objects.filter(
-            post=post, usuario=request.user).exists()
-    else:
-        is_like_post = False
-
-    total_likes = Like_post.objects.filter(post=post).count()
-
-    return render(request, 'blog/noticia.html', {
-        'total_likes': total_likes,
-        'is_like_post': is_like_post,
-        'post': post,
-        'comentarios': coms,
-        'user': request.user
-    })
 
 
 def contactanos(request):
@@ -164,8 +102,6 @@ def categorias(request):
     todas_categorias = Categorias.objects.all()
     return render(request, 'blog/categorias.html', {"categorias": todas_categorias})
 
-# @login_required
-
 
 def like_post(request, post_id):
     post = get_object_or_404(Posts, id=post_id)
@@ -176,9 +112,6 @@ def like_post(request, post_id):
         like.delete()
     return HttpResponseRedirect(reverse('noticia', args=[post.slug]) + '#like_post')
 
-
-# CRUD de Categorías, Posts y Comentarios
-# con CBV
 
 @login_required
 def like_comentario(request, comentario_id):
@@ -192,17 +125,15 @@ def like_comentario(request, comentario_id):
 
     return redirect(reverse('noticia', kwargs={'url': comentario.post.slug}))
 
-# Crear Categorías
 
+# CRUD de Categorías, Posts y Comentarios con CBV
 
+# Categorías
 class CrearCategoriasView(CreateView):
     model = Categorias
     form_class = CategoriasForm
     template_name = 'blog/form_categorias.html'
     success_url = reverse_lazy('categorias')
-
-
-# Editar Categoría
 
 
 class EditarCategoriasView(UpdateView):
@@ -211,8 +142,6 @@ class EditarCategoriasView(UpdateView):
     template_name = "blog/form_categorias.html"
     success_url = reverse_lazy('categorias')
 
-# Eliminar Categoría
-
 
 class EliminarCategoriasView(DeleteView):
     model = Categorias
@@ -220,7 +149,36 @@ class EliminarCategoriasView(DeleteView):
     success_url = reverse_lazy("categorias")
 
 
-# Crear Posts
+# Posts
+class ListarPostsView(ListView):
+    model = Posts
+    template_name = 'blog/blog.html'
+    context_object_name = 'posts'
+
+    def get_queryset(self):
+        queryset = Posts.objects.all()
+        categoria = self.request.GET.get('categoria')
+        search_query = self.request.GET.get('q')
+        orden = self.request.GET.get('orden')
+
+        if categoria:
+            queryset = queryset.filter(categorias__nombre=categoria)
+
+        if search_query:
+            queryset = queryset.filter(titulo__icontains=search_query)
+
+        if orden == 'ascendente':
+            queryset = queryset.order_by('titulo')
+        elif orden == 'descendente':
+            queryset = queryset.order_by('-titulo')
+        elif orden == 'antiguedad':
+            queryset = queryset.order_by('fecha_creacion')
+        elif orden == 'recientes':
+            queryset = queryset.order_by('-fecha_creacion')
+        else:
+            queryset = queryset.order_by('-fecha_creacion')
+
+        return queryset
 
 
 class CrearPostsView(CreateView):
@@ -229,8 +187,6 @@ class CrearPostsView(CreateView):
     template_name = 'blog/form_posts.html'
     success_url = reverse_lazy('blog')
 
-# Editar Posts
-
 
 class EditarPostsView(UpdateView):
     model = Posts
@@ -238,17 +194,14 @@ class EditarPostsView(UpdateView):
     template_name = "blog/form_posts.html"
     success_url = reverse_lazy("blog")
 
-# Eliminar Posts
-
 
 class EliminarPostsView(DeleteView):
     model = Posts
     template_name = "blog/form_eliminar.html"
     success_url = reverse_lazy("blog")
 
-# Filtrar Comentarios por Título
 
-
+# Comentarios
 class ListarComentariosView(ListView):
     model = Comentarios
     template_name = 'comentarios/lista_comentarios.html'
@@ -263,8 +216,6 @@ class ListarComentariosView(ListView):
             queryset = queryset.filter(titulo__icontains=query)
 
         return queryset.order_by('titulo')
-
-# Crear Comentarios
 
 
 class CrearComentariosView(CreateView):
@@ -288,9 +239,7 @@ class EditarComentariosView(UpdateView):
     template_name = "blog/form_coment.html"
 
     def form_valid(self, form):
-        # Mantener el usuario actual
         form.instance.usuario = self.request.user
-        # Mantener el post original, no permitir cambiarlo
         form.instance.post = self.object.post
         return super().form_valid(form)
 
@@ -298,10 +247,28 @@ class EditarComentariosView(UpdateView):
         return reverse('noticia', kwargs={'url': self.object.post.slug})
 
 
-# Eliminar Comentario
 class EliminarComentariosView(DeleteView):
     model = Comentarios
     template_name = "blog/form_eliminar.html"
 
     def get_success_url(self):
         return reverse('noticia', kwargs={'url': self.object.post.slug})
+
+
+def noticia(request, url):
+    post = get_object_or_404(Posts, slug=url)
+    coms = Comentarios.objects.filter(post=post).prefetch_related(
+        Prefetch('likes', queryset=Usuario_personalizado.objects.only('id'))
+    )
+
+    is_like_post = Like_post.objects.filter(post=post, usuario=request.user).exists(
+    ) if request.user.is_authenticated else False
+    total_likes = Like_post.objects.filter(post=post).count()
+
+    return render(request, 'blog/noticia.html', {
+        'total_likes': total_likes,
+        'is_like_post': is_like_post,
+        'post': post,
+        'comentarios': coms,
+        'user': request.user
+    })

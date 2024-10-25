@@ -64,7 +64,6 @@ urlpatterns = [
     path('comentario/eliminar/<int:pk>/',
          EliminarComentariosView.as_view(), name='eliminar_comentario'),
 
-    # Formulario de Contactanos
     path('contactanos/',
          views.contactanos_view, name='contactanos'),
     # Gracias Por Contactarnos
