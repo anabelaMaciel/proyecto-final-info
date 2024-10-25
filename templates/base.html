@@ -32,6 +32,9 @@
             color: whitesmoke;
             opacity: 0.5;
         }
+        nav a small {
+            font-size: 1rem; 
+        }
 
         body {
             font-family: 'Roboto', sans-serif;
@@ -72,7 +75,7 @@
         }
         
         .header-bg {
-            background-color: #000000b0;
+            background-color: #000000b0; 
         }
         
         .header-super {
@@ -168,24 +171,34 @@
             font-family: Arial, sans-serif;
         }
 
-         .team-section {
+        .team-section {
             display: flex;
-            flex-direction: column; 
-            align-items: center; 
-            margin-bottom: 20px; 
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 40px;
+            border-radius: 20px;
+            color: white;
         }
-
+        
         .team-member {
-            text-align: center; 
+            text-align: center;
+            margin: 20px; 
         }
-
+        
         .team-member img {
-            width: 200px; 
-            height: 200px; 
-            object-fit: cover; 
-            border-radius: 10px; 
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 50%; 
+            border: 5px solid #fff; 
+            transition: transform 0.3s ease; 
         }
-       
+        
+        .team-member img:hover {
+            transform: scale(1.1); 
+        }
+        
         .row {
             margin-bottom: 40px; 
         }
@@ -220,7 +233,7 @@
             position: relative;
             width: 100%;
         }
-
+        
         .team-section .team-member img {
             border-radius: 50%;
             width: 150px;
@@ -384,6 +397,7 @@
                             </div>
                         </div>
                     </div>
+
 
                     <div class="d-flex justify-content-end">
                         <a class="text-white mx-2" href="https://www.facebook.com/profile.php?id=61566988810266" target="_blank">
