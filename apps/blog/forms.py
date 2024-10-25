@@ -25,6 +25,7 @@ class EditarPerfilForm(forms.ModelForm):
             'imagen_perfil': forms.ClearableFileInput(attrs={'class': 'form-control'}),
         }
 
+
 # Formulario de Categorias
 class CategoriasForm(forms.ModelForm):
     class Meta:
