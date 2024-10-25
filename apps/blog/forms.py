@@ -62,7 +62,7 @@ class ContactoForm(forms.ModelForm):
             'email': forms.EmailInput(attrs={'placeholder': 'Ejemplo:irupefen@gmail.com', 'class': 'form-control'}),
             'asunto': forms.TextInput(attrs={'placeholder': 'Asunto', 'class': 'form-control'}),
             'mensaje': forms.Textarea(attrs={
-                'placeholder': 'Ejemplo: Tengo una consulta sobre su servicio...', 
+                'placeholder': 'Ejemplo: Tengo una consulta sobre el blog...', 
                 'rows': 3,  
                 'class': 'form-control',
                 'style': 'resize:none;'
