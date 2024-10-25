@@ -35,6 +35,42 @@ def contacto(request):
     if request.method == 'POST':
         form = ContactoForm(request.POST)
         if form.is_valid():
+            # Guardar el formulario en la base de datos
+            form.save()
+            # Enviar el correo electrónico
+            nombre = form.cleaned_data['nombre']
+            email = form.cleaned_data['email']
+            asunto = form.cleaned_data['asunto']
+            mensaje = form.cleaned_data['mensaje']
+
+            send_mail(
+                f'Nuevo mensaje de contacto: {asunto}',
+                f'Nombre: {nombre}\nEmail: {email}\n\nMensaje:\n{mensaje}',
+                email,  # De (remitente)
+                ['tecnofilosinformatorio@gmail.com'],  # Para (destinatario)
+                fail_silently=False,
+            )
+            return redirect('success')
+    else:
+        form = ContactoForm()
+
+    data = {
+        'form': form
+    }
+    return render(request, 'contacto.html', data)
+
+
+"""def contacto(request):
+    data = {
+        'form': ContactoForm()
+    }
+    return render(request, 'contacto.html', data)
+
+"""
+"""def contacto(request):
+    if request.method == 'POST':
+        form = ContactoForm(request.POST)
+        if form.is_valid():
             # Guardar el mensaje en la base de datos
             contacto = form.save()
 
@@ -51,7 +87,7 @@ def contacto(request):
     else:
         form = ContactoForm()
 
-    return render(request, 'contacto.html', {'form': form})
+    return render(request, 'contacto.html', {'form': form})"""
 
 
 """def contactanos_view(request):
